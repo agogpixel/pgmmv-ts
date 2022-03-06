@@ -8,7 +8,7 @@ export interface AgtkPlugin<I extends JsonValue = JsonValue> {
 
   getInfo: <C extends AgtkPluginInfoCategory>(category: C) => AgtkPluginInfo<C, I>;
 
-  initialize: (data: I) => void;
+  initialize: (data: I | undefined) => void;
 
   finalize: () => void;
 
