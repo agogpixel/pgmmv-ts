@@ -1,9 +1,9 @@
 {
   "name": "@agogpixel/pgmmv-ts",
   "description": "TypeScript typings for the Pixel Game Maker MV API.",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": "kidthales <kidthales@agogpixel.com>",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/agogpixel/pgmmv-ts"
