@@ -14,7 +14,7 @@ TypeScript typings for the Pixel Game Maker MV API.
 
 ## Getting Started
 
-1. Install the package: npm install --save @agogpixel/pgmmv-ts
+1. Install the package: `npm install --save @agogpixel/pgmmv-ts`
 
 2. Add `@agogpixel/pgmmv-ts` to the types entry in the appropriate `tsconfig.json` file.
 
