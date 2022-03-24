@@ -21,7 +21,7 @@ TypeScript typings for the Pixel Game Maker MV API.
 ```json
 {
     "compilerOptions": {
-        "types": ["@agogpixel/phaser3-ts-utils"]
+        "types": ["@agogpixel/pgmmv-ts"]
     }
 }
 ```
