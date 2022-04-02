@@ -8,8 +8,11 @@ import type {
   AgtkCommandDisappearObjectRecoverConfig,
   AgtkCommandEffectRemoveConfig,
   AgtkCommandEffectShowConfig,
+  AgtkCommandGameSpeedChangeConfig,
+  AgtkCommandImageShowConfig,
   AgtkCommandLayerMoveConfig,
   AgtkCommandMessageShowConfig,
+  AgtkCommandMovieShowConfig,
   AgtkCommandObjectChangeConfig,
   AgtkCommandObjectCreateConfig,
   AgtkCommandObjectFilterEffectConfig,
@@ -17,13 +20,18 @@ import type {
   AgtkCommandObjectLockConfig,
   AgtkCommandObjectMoveConfig,
   AgtkCommandObjectPushPullConfig,
+  AgtkCommandParticleRemoveConfig,
+  AgtkCommandParticleShowConfig,
   AgtkCommandSceneEffectConfig,
   AgtkCommandSceneEffectRemoveConfig,
   AgtkCommandSceneGravityChangeConfig,
   AgtkCommandSceneRotateFlipConfig,
   AgtkCommandScrollMessageShowConfig,
   AgtkCommandSoundPlayConfig,
-  AgtkCommandTemplateMoveConfig
+  AgtkCommandSwitchVariableChangeConfig,
+  AgtkCommandSwitchVariableResetConfig,
+  AgtkCommandTemplateMoveConfig,
+  AgtkCommandTimerConfig
 } from './command-configs';
 import type { AgtkObjectInstanceSwitches } from './switches';
 import type { AgtkObjectInstanceVariables } from './variables';
@@ -281,4 +289,83 @@ export interface AgtkObjectInstance {
   execCommandEffectRemove(
     arg1: AgtkCommandEffectRemoveConfig
   ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Show Particles".
+   *
+   * @param arg1
+   */
+  execCommandParticleShow(
+    arg1: AgtkCommandParticleShowConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Hide Particles".
+   *
+   * @param arg1
+   */
+  execCommandParticleRemove(
+    arg1: AgtkCommandParticleRemoveConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Play Video".
+   *
+   * @param arg1
+   */
+  execCommandMovieShow(
+    arg1: AgtkCommandMovieShowConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Display Image".
+   *
+   * @param arg1
+   */
+  execCommandImageShow(
+    arg1: AgtkCommandImageShowConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Change Switch/Variable".
+   *
+   * @param arg1
+   */
+  execCommandSwitchVariableChange(
+    arg1: AgtkCommandSwitchVariableChangeConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Reset Switch/Variable".
+   *
+   * @param arg1
+   */
+  execCommandSwitchVariableReset(
+    arg1: AgtkCommandSwitchVariableResetConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Change Game Speed".
+   *
+   * @param arg1
+   */
+  execCommandGameSpeedChange(
+    arg1: AgtkCommandGameSpeedChangeConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Timer Function".
+   *
+   * @param arg1
+   */
+  execCommandTimer(
+    arg1: AgtkCommandTimerConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "End Scene".
+   *
+   * @param arg1 Not used.
+   */
+  execCommandSceneTerminate(arg1?: unknown): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
 }
