@@ -365,397 +365,339 @@ export interface CCNode extends CCClass {
    */
   enumerateChildren(name: string, callback: (node: CCNode) => boolean): void;
 
+  /**
+   * Returns an action from the running action list by its tag.
+   * TODO: Implement cc.Action typings...
+   *
+   * @param tag
+   */
+  getActionByTag(tag: number): unknown;
+
+  /**
+   * Returns the CCActionManager object that is used by all actions.
+   * (IMPORTANT: If you set a new cc.ActionManager, then previously created actions are going to be removed.)
+   * TODO: Implement cc.ActionManager typings...
+   */
+  getActionManager(): unknown;
+
+  /**
+   * Returns a copy of the anchor point.
+   * Anchor point is the point around which all transformations and positioning manipulations take place.
+   * It's like a pin in the node where it is "attached" to its parent.
+   * The anchorPoint is normalized, like a percentage. (0,0) means the bottom-left corner and (1,1) means the top-right corner.
+   * But you can use values higher than (1,1) and lower than (0,0) too.
+   * The default anchor point is (0.5,0.5), so it starts at the center of the node.
+   */
+  getAnchorPoint(): CCPoint;
+
+  /**
+   * Returns a copy of the anchor point in absolute pixels.
+   * You can only read it. If you wish to modify it, use setAnchorPoint.
+   */
+  getAnchorPointInPoints(): CCPoint;
+
+  /**
+   * Returns a "local" axis aligned bounding box of the node.
+   * The returned box is relative only to its parent.
+   */
+  getBoundingBox(): CCRect;
+
+  /**
+   * Returns a "world" axis aligned bounding box of the node.
+   */
+  getBoundingBoxToWorld(): CCRect;
+
+  /**
+   * @deprecated since v3.0, no alternative function
+   */
+  getCamera(): null;
+
+  /**
+   * Returns a child from the container given its name
+   *
+   * @param name A name to find the child node.
+   */
+  getChildByName(name: string): CCNode;
+
+  /**
+   * Returns a child from the container given its tag.
+   *
+   * @param aTag An identifier to find the child node.
+   */
+  getChildByTag(aTag: number): CCNode;
+
+  /**
+   * Returns an array of all children
+   * Composing a "tree" structure is a very important feature of CCNode.
+   *
+   * ```
+   * // This sample code traverses all children nodes, and set their position to (0,0)
+   * var allChildren = parent.getChildren();
+   * for(var i = 0; i< allChildren.length; i++) {
+   *   allChildren[i].setPosition(0,0);
+   * }
+   * ```
+   */
+  getChildren(): CCNode[];
+
+  /**
+   * Returns the amount of children.
+   */
+  getChildrenCount(): number;
+
+  /**
+   * Returns the color of Node.
+   */
+  getColor(): CCColor;
+
+  /**
+   * Returns a component identified by the name given.
+   *
+   * @param name The name to search for.
+   */
+  getComponent(name: string): CCComponent;
+
+  /**
+   * Returns a copy the untransformed size of the node.
+   * The contentSize remains the same no matter the node is scaled or rotated.
+   * All nodes has a size. Layer and Scene has the same size of the screen by default.
+   * TODO: Implement cc.Size typings...
+   */
+  getContentSize(): unknown;
+
+  /**
+   * Returns the displayed color of Node, the difference between displayed color
+   * and color is that displayed color is calculated based on color and
+   * parent node's color when cascade color enabled.
+   */
+  getDisplayedColor(): CCColor;
+
+  /**
+   * Returns the displayed opacity of Node, the difference between displayed opacity
+   * and opacity is that displayed opacity is calculated based on opacity and
+   * parent node's opacity when cascade opacity enabled.
+   */
+  getDisplayedOpacity(): number;
+
+  /**
+   * Return the Node's Global Z Order.
+   */
+  getGlobalZOrder(): number;
+
+  /**
+   * Returns the state of OpenGL server side.
+   *
+   * @deprecated since v3.0, no need anymore.
+   */
+  getGLServerState(): number;
+
+  /**
+   * Returns a grid object that is used when applying effects.
+   * This function have been deprecated, please use cc.NodeGrid to run grid actions.
+   * TODO: Implement cc.GridBase typings...
+   *
+   * @deprecated since v3.0, no alternative function.
+   */
+  getGrid(): unknown;
+
+  /**
+   * Returns the local Z order of this node.
+   */
+  getLocalZOrder(): number;
+
+  /**
+   * Returns a string that is used to identify the node.
+   */
+  getName(): string;
+
+  /**
+   * Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
+   * TODO: Implement cc.AffineTransform typings...
+   *
+   * @param ancestor
+   */
+  getNodeToParentTransform(ancestor: CCNode): unknown;
+
+  /**
+   * Returns the world affine transform matrix. The matrix is in Pixels.
+   * TODO: Implement cc.AffineTransform typings...
+   */
+  getNodeToWorldTransform(): unknown;
+
+  /**
+   * Returns the normalized position.
+   */
+  getNormalizedPosition(): CCPoint;
+
+  /**
+   * Returns the numbers of actions that are running plus the ones that
+   * are schedule to run (actions in actionsToAdd and actions arrays).
+   * Composable actions are counted as 1 action. Example:
+   * - If you are running 1 Sequence of 7 actions, it will return 1.
+   * - If you are running 7 Sequences of 2 actions, it will return 7.
+   */
+  getNumberOfRunningActions(): number;
+
+  /**
+   * Returns the opacity of Node.
+   */
+  getOpacity(): number;
+
+  /**
+   * Returns the arrival order, indicates which children should be added previously.
+   */
+  getOrderOfArrival(): number;
+
+  /**
+   * Returns a reference to the parent node.
+   */
+  getParent(): CCNode;
+
+  /**
+   * Returns the matrix that transform parent's space coordinates to the node's (local) space coordinates.
+   * The matrix is in Pixels.
+   * TODO: Implement cc.AffineTransform typings...
+   */
+  getParentToNodeTransform(): unknown;
+
+  /**
+   * Returns a copy of the position (x,y) of the node in cocos2d coordinates.
+   * (0,0) is the left-bottom corner.
+   */
+  getPosition(): CCPoint;
+
+  /**
+   * Returns the x axis position of the node in cocos2d coordinates.
+   */
+  getPositionX(): number;
+
+  /**
+   * Returns the y axis position of the node in cocos2d coordinates.
+   */
+  getPositionY(): number;
+
+  /**
+   * Returns the rotation (angle) of the node in degrees. 0 is the default rotation angle.
+   * Positive values rotate node clockwise.
+   */
+  getRotation(): number;
+
+  /**
+   * Returns the X axis rotation (angle) which represent a horizontal rotational skew of the node in degrees.
+   * 0 is the default rotation angle. Positive values rotate node clockwise (support only in WebGL rendering mode).
+   */
+  getRotationX(): number;
+
+  /**
+   * Returns the Y axis rotation (angle) which represent a vertical rotational skew of the node in degrees.
+   * 0 is the default rotation angle. Positive values rotate node clockwise (support only in WebGL rendering mode).
+   */
+  getRotationY(): number;
+
+  /**
+   * Returns the scale factor of the node.
+   */
+  getScale(): number;
+
+  /**
+   * Returns the scale factor on X axis of this node.
+   */
+  getScaleX(): number;
+
+  /**
+   * Returns the scale factor on Y axis of this node.
+   */
+  getScaleY(): number;
+
+  /**
+   * Returns the cc.Scheduler object used to schedule all "updates" and timers.
+   * TODO: Implement cc.Scheduler typings...
+   */
+  getScheduler(): unknown;
+
+  /**
+   * Return the shader program currently used for this node.
+   * TODO: Implement cc.GLProgram typings...
+   */
+  getShaderProgram(): unknown;
+
+  /**
+   * Returns the skew degrees in X.
+   * The X skew angle of the node in degrees.
+   * This angle describes the shear distortion in the X direction.
+   * Thus, it is the angle between the Y axis and the left edge of the shape.
+   * The default skewX angle is 0. Positive values distort the node in a CW direction.
+   */
+  getSkewX(): number;
+
+  /**
+   * Returns the skew degrees in Y.
+   * The Y skew angle of the node in degrees.
+   * This angle describes the shear distortion in the Y direction.
+   * Thus, it is the angle between the X axis and the bottom edge of the shape
+   * The default skewY angle is 0. Positive values distort the node in a CCW direction.
+   */
+  getSkewY(): number;
+
+  /**
+   * Returns a tag that is used to identify the node easily.
+   *
+   * ```
+   * // You can set tags to node then identify them easily.
+   * // set tags
+   * node1.setTag(TAG_PLAYER);
+   * node2.setTag(TAG_MONSTER);
+   * node3.setTag(TAG_BOSS);
+   * parent.addChild(node1);
+   * parent.addChild(node2);
+   * parent.addChild(node3);
+   * // identify by tags
+   * var allChildren = parent.getChildren();
+   * for(var i = 0; i < allChildren.length; i++){
+   *   switch(node.getTag()) {
+   *     case TAG_PLAYER:
+   *       break;
+   *     case TAG_MONSTER:
+   *       break;
+   *     case TAG_BOSS:
+   *       break;
+   *   }
+   * }
+   * ```
+   */
+  getTag(): number;
+
+  /**
+   * Returns a custom user data pointer.
+   * You can set everything in UserData pointer, a data block, a structure or an object.
+   */
+  getUserData(): Record<string, unknown>;
+
+  /**
+   * Returns a user assigned cocos2d object.
+   * Similar to userData, but instead of holding all kinds of data it can only hold a cocos2d object.
+   */
+  getUserObject(): Record<string, unknown>;
+
+  /**
+   * Returns WebGL Z vertex of this node.
+   */
+  getVertexZ(): number;
+
+  /**
+   * Returns the inverse world affine transform matrix. The matrix is in Pixels.
+   * TODO: Implement cc.AffineTransform typings...
+   */
+  getWorldToNodeTransform(): unknown;
+
+  /**
+   * Returns z order of this node.
+   *
+   * @deprecated since 3.0, please use getLocalZOrder instead.
+   */
+  getZOrder(): number;
+
   /*
-  {cc.Action} getActionByTag(tag)
-Returns an action from the running action list by its tag.
-
-Parameters:
-{Number} tag
-
-Returns:
-    {cc.Action} The action object with the given tag.
-See:
-    cc.Node#getTag and cc.Node#setTag
-
-{cc.ActionManager} getActionManager()
-
-Returns the CCActionManager object that is used by all actions.
-(IMPORTANT: If you set a new cc.ActionManager, then previously created actions are going to be removed.)
-
-Returns:
-    {cc.ActionManager} A CCActionManager object.
-See:
-    cc.Node#setActionManager
-
-{cc.Point} getAnchorPoint()
-
-Returns a copy of the anchor point.
-Anchor point is the point around which all transformations and positioning manipulations take place.
-It's like a pin in the node where it is "attached" to its parent.
-The anchorPoint is normalized, like a percentage. (0,0) means the bottom-left corner and (1,1) means the top-right corner.
-But you can use values higher than (1,1) and lower than (0,0) too.
-The default anchor point is (0.5,0.5), so it starts at the center of the node.
-
-Returns:
-    {cc.Point} The anchor point of node.
-
-{cc.Point} getAnchorPointInPoints()
-Returns a copy of the anchor point in absolute pixels.
-you can only read it. If you wish to modify it, use setAnchorPoint
-
-Returns:
-    {cc.Point} The anchor point in absolute pixels.
-See:
-    cc.Node#getAnchorPoint
-
-{cc.Rect} getBoundingBox()
-Returns a "local" axis aligned bounding box of the node.
-The returned box is relative only to its parent.
-
-Returns:
-    {cc.Rect} The calculated bounding box of the node
-
-{cc.Rect} getBoundingBoxToWorld()
-Returns a "world" axis aligned bounding box of the node.
-
-Returns:
-    {cc.Rect}
-
-{null} getCamera()
-Returns null
-
-Deprecated:
-since v3.0, no alternative function
-Returns:
-    {null}
-
-{cc.Node} getChildByName(name)
-Returns a child from the container given its name
-
-Parameters:
-{String} name
-    A name to find the child node.
-
-Returns:
-    {cc.Node} a CCNode object whose name equals to the input parameter
-
-{cc.Node} getChildByTag(aTag)
-Returns a child from the container given its tag
-
-Parameters:
-{Number} aTag
-    An identifier to find the child node.
-
-Returns:
-    {cc.Node} a CCNode object whose tag equals to the input parameter
-
-{Array} getChildren()
-Returns an array of all children
-Composing a "tree" structure is a very important feature of CCNode
-
- //This sample code traverses all children nodes, and set their position to (0,0)
- var allChildren = parent.getChildren();
- for(var i = 0; i< allChildren.length; i++) {
-     allChildren[i].setPosition(0,0);
- }
-
-Returns:
-    {Array} An array of children
-
-{Number} getChildrenCount()
-Returns the amount of children.
-
-Returns:
-    {Number} The amount of children.
-
-{cc.Color} getColor()
-Returns the color of Node
-
-Returns:
-    {cc.Color}
-
-{cc.Component} getComponent(name)
-Returns a component identified by the name given.
-
-Parameters:
-{String} name
-    The name to search for
-
-Returns:
-    {cc.Component} The component found
-
-{cc.Size} getContentSize()
-
-Returns a copy the untransformed size of the node.
-The contentSize remains the same no matter the node is scaled or rotated.
-All nodes has a size. Layer and Scene has the same size of the screen by default.
-
-Returns:
-    {cc.Size} The untransformed size of the node.
-
-{cc.Color} getDisplayedColor()
-Returns the displayed color of Node, the difference between displayed color and color is that displayed color is calculated based on color and parent node's color when cascade color enabled.
-
-Returns:
-    {cc.Color}
-
-{number} getDisplayedOpacity()
-Returns the displayed opacity of Node, the difference between displayed opacity and opacity is that displayed opacity is calculated based on opacity and parent node's opacity when cascade opacity enabled.
-
-Returns:
-    {number} displayed opacity
-
-{number} getGlobalZOrder()
-Return the Node's Global Z Order.
-
-Returns:
-    {number} The node's global Z order
-
-{Number} getGLServerState()
-Returns the state of OpenGL server side.
-
-Deprecated:
-since v3.0, no need anymore
-Returns:
-    {Number} The state of OpenGL server side.
-
-{cc.GridBase} getGrid()
-
-Returns a grid object that is used when applying effects.
-This function have been deprecated, please use cc.NodeGrid to run grid actions
-
-Deprecated:
-since v3.0, no alternative function
-Returns:
-    {cc.GridBase} A CCGrid object that is used when applying effects
-
-{Number} getLocalZOrder()
-Returns the local Z order of this node.
-
-Returns:
-    {Number} The local (relative to its siblings) Z order.
-
-{string} getName()
-Returns a string that is used to identify the node.
-
-Returns:
-    {string} A string that identifies the node.
-
-{cc.AffineTransform} getNodeToParentTransform(ancestor)
-Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
-The matrix is in Pixels.
-
-Parameters:
-ancestor
-
-Returns:
-    {cc.AffineTransform} The affine transform object
-
-{cc.AffineTransform} getNodeToWorldTransform()
-Returns the world affine transform matrix. The matrix is in Pixels.
-
-Returns:
-    {cc.AffineTransform}
-
-{cc.Point} getNormalizedPosition()
-returns the normalized position
-
-Returns:
-    {cc.Point}
-
-{Number} getNumberOfRunningActions()
-
-Returns the numbers of actions that are running plus the ones that are schedule to run (actions in actionsToAdd and actions arrays).
-Composable actions are counted as 1 action. Example:
-If you are running 1 Sequence of 7 actions, it will return 1.
-If you are running 7 Sequences of 2 actions, it will return 7.
-
-Returns:
-    {Number} The number of actions that are running plus the ones that are schedule to run
-
-{number} getOpacity()
-Returns the opacity of Node
-
-Returns:
-    {number} opacity
-
-{Number} getOrderOfArrival()
-Returns the arrival order, indicates which children should be added previously.
-
-Returns:
-    {Number} The arrival order.
-
-{cc.Node} getParent()
-Returns a reference to the parent node
-
-Returns:
-    {cc.Node} A reference to the parent node
-
-{cc.AffineTransform} getParentToNodeTransform()
-Returns the matrix that transform parent's space coordinates to the node's (local) space coordinates.
-The matrix is in Pixels.
-
-Returns:
-    {cc.AffineTransform}
-
-{cc.Point} getPosition()
-
-Returns a copy of the position (x,y) of the node in cocos2d coordinates. (0,0) is the left-bottom corner.
-
-Returns:
-    {cc.Point} The position (x,y) of the node in OpenGL coordinates
-
-{Number} getPositionX()
-
-Returns the x axis position of the node in cocos2d coordinates.
-
-Returns:
-    {Number}
-
-{Number} getPositionY()
-
-Returns the y axis position of the node in cocos2d coordinates.
-
-Returns:
-    {Number}
-
-{Number} getRotation()
-Returns the rotation (angle) of the node in degrees. 0 is the default rotation angle. Positive values rotate node clockwise.
-
-Returns:
-    {Number} The rotation of the node in degrees.
-
-{Number} getRotationX()
-Returns the X axis rotation (angle) which represent a horizontal rotational skew of the node in degrees.
-0 is the default rotation angle. Positive values rotate node clockwise
-(support only in WebGL rendering mode)
-
-Returns:
-    {Number} The X rotation in degrees.
-
-{Number} getRotationY()
-Returns the Y axis rotation (angle) which represent a vertical rotational skew of the node in degrees.
-0 is the default rotation angle. Positive values rotate node clockwise
-(support only in WebGL rendering mode)
-
-Returns:
-    {Number} The Y rotation in degrees.
-
-{Number} getScale()
-Returns the scale factor of the node.
-
-Returns:
-    {Number} The scale factor
-
-{Number} getScaleX()
-Returns the scale factor on X axis of this node
-
-Returns:
-    {Number} The scale factor on X axis.
-
-{Number} getScaleY()
-Returns the scale factor on Y axis of this node
-
-Returns:
-    {Number} The scale factor on Y axis.
-
-{cc.Scheduler} getScheduler()
-
-Returns the cc.Scheduler object used to schedule all "updates" and timers.
-
-Returns:
-    {cc.Scheduler} A CCScheduler object.
-
-{cc.GLProgram} getShaderProgram()
-Return the shader program currently used for this node
-
-Returns:
-    {cc.GLProgram} The shader program currently used for this node
-
-{Number} getSkewX()
-
-Returns the skew degrees in X
-The X skew angle of the node in degrees.
-This angle describes the shear distortion in the X direction.
-Thus, it is the angle between the Y axis and the left edge of the shape
-The default skewX angle is 0. Positive values distort the node in a CW direction.
-
-Returns:
-    {Number} The X skew angle of the node in degrees.
-
-{Number} getSkewY()
-
-Returns the skew degrees in Y
-The Y skew angle of the node in degrees.
-This angle describes the shear distortion in the Y direction.
-Thus, it is the angle between the X axis and the bottom edge of the shape
-The default skewY angle is 0. Positive values distort the node in a CCW direction.
-
-Returns:
-    {Number} The Y skew angle of the node in degrees.
-
-{Number} getTag()
-Returns a tag that is used to identify the node easily.
-
- //You can set tags to node then identify them easily.
-// set tags
-node1.setTag(TAG_PLAYER);
-node2.setTag(TAG_MONSTER);
-node3.setTag(TAG_BOSS);
-parent.addChild(node1);
-parent.addChild(node2);
-parent.addChild(node3);
-// identify by tags
-var allChildren = parent.getChildren();
-for(var i = 0; i < allChildren.length; i++){
-    switch(node.getTag()) {
-        case TAG_PLAYER:
-            break;
-        case TAG_MONSTER:
-            break;
-        case TAG_BOSS:
-            break;
-    }
-}
-
-Returns:
-    {Number} An integer that identifies the node.
-
-{object} getUserData()
-
-Returns a custom user data pointer
-You can set everything in UserData pointer, a data block, a structure or an object.
-
-Returns:
-    {object} A custom user data pointer
-
-{object} getUserObject()
-Returns a user assigned cocos2d object.
-Similar to userData, but instead of holding all kinds of data it can only hold a cocos2d object
-
-Returns:
-    {object} A user assigned CCObject
-
-{Number} getVertexZ()
-Returns WebGL Z vertex of this node.
-
-Returns:
-    {Number} WebGL Z vertex of this node
-
-{cc.AffineTransform} getWorldToNodeTransform()
-Returns the inverse world affine transform matrix. The matrix is in Pixels.
-
-Returns:
-    {cc.AffineTransform}
-
-{Number} getZOrder()
-Returns z order of this node
-
-Deprecated:
-since 3.0, please use getLocalZOrder instead
-Returns:
-    {Number}
-
 ignoreAnchorPointForPosition(newValue)
 
 Sets whether the anchor point will be ignored when you position this node.
