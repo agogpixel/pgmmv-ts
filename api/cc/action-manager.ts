@@ -1,3 +1,4 @@
+import type { CCAction } from './action';
 import type { CCClass, CCClassNamespace } from './class';
 import type { CCNode } from './node';
 
@@ -26,22 +27,20 @@ export interface CCActionManager extends CCClass {
    * Adds an action with a target. If the target is already present, then the action will be added to the existing target.
    * If the target is not present, a new instance of this target will be created either paused or not, and the action will
    * be added to the newly created target. When the target is paused, the queued actions won't be 'ticked'.
-   * TODO: Define cc.Action typings...
    *
    * @param action
    * @param target
    * @param paused
    */
-  addAction(action: unknown, target: CCNode, paused: boolean): void;
+  addAction(action: CCAction, target: CCNode, paused: boolean): void;
 
   /**
    * Gets an action given its tag an a target.
-   * TODO: Define cc.Action typings...
    *
    * @param tag
    * @param target
    */
-  getActionByTag(tag: number, target: Record<string, unknown>): unknown | null;
+  getActionByTag(tag: number, target: Record<string, unknown>): CCAction | null;
 
   /**
    * Returns the numbers of actions that are running in a certain target.
@@ -74,11 +73,10 @@ export interface CCActionManager extends CCClass {
 
   /**
    * Removes an action given an action reference.
-   * TODO: Define cc.Action typings...
    *
    * @param action
    */
-  removeAction(action: unknown): void;
+  removeAction(action: CCAction): void;
 
   /**
    * Removes an action given its tag and the target.

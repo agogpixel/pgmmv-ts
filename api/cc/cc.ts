@@ -1,3 +1,4 @@
+import type { CCActionNamespace } from './action';
 import type { CCActionManagerNamespace } from './action-manager';
 import type { CCAffineTransformNamespace } from './affine-transform';
 import type { CCClassNamespace } from './class';
@@ -9,6 +10,7 @@ import type { CCRectNamespace } from './rect';
 import type { CCTouchNamespace } from './touch';
 
 export interface cc {
+  Action: CCActionNamespace;
   ActionManager: CCActionManagerNamespace;
   AffineTransform: CCAffineTransformNamespace;
   Class: CCClassNamespace;

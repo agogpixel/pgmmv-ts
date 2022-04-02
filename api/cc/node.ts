@@ -1,3 +1,4 @@
+import { CCAction } from './action';
 import type { CCActionManager } from './action-manager';
 import type { CCAffineTransform } from './affine-transform';
 import type { CCClass, CCClassNamespace } from './class';
@@ -368,11 +369,10 @@ export interface CCNode extends CCClass {
 
   /**
    * Returns an action from the running action list by its tag.
-   * TODO: Implement cc.Action typings...
    *
    * @param tag
    */
-  getActionByTag(tag: number): unknown;
+  getActionByTag(tag: number): CCAction;
 
   /**
    * Returns the CCActionManager object that is used by all actions.
@@ -921,11 +921,10 @@ export interface CCNode extends CCClass {
   /**
    * Executes an action, and returns the action that is executed.
    * The node becomes the action's target. Refer to cc.Action's getTarget()
-   * TODO: Implement cc.Action definition...
    *
    * @param action
    */
-  runAction(action: unknown): unknown;
+  runAction(action: CCAction): CCAction;
 
   /**
    * Schedules a custom selector.
@@ -1371,11 +1370,10 @@ export interface CCNode extends CCClass {
 
   /**
    * Stops and removes an action from the running action list.
-   * TODO: Define cc.Action typings...
    *
    * @param action An action object to be removed.
    */
-  stopAction(action: unknown): void;
+  stopAction(action: CCAction): void;
 
   /**
    * Removes an action from the running action list by its tag.
