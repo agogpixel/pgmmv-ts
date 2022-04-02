@@ -1,3 +1,4 @@
+import { CCAffineTransform } from './affine-transform';
 import type { CCClass, CCClassNamespace } from './class';
 import type { CCColor } from './color';
 import type { CCComponent } from './component';
@@ -512,17 +513,15 @@ export interface CCNode extends CCClass {
 
   /**
    * Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
-   * TODO: Implement cc.AffineTransform typings...
    *
    * @param ancestor
    */
-  getNodeToParentTransform(ancestor: CCNode): unknown;
+  getNodeToParentTransform(ancestor: CCNode): CCAffineTransform;
 
   /**
    * Returns the world affine transform matrix. The matrix is in Pixels.
-   * TODO: Implement cc.AffineTransform typings...
    */
-  getNodeToWorldTransform(): unknown;
+  getNodeToWorldTransform(): CCAffineTransform;
 
   /**
    * Returns the normalized position.
@@ -556,9 +555,8 @@ export interface CCNode extends CCClass {
   /**
    * Returns the matrix that transform parent's space coordinates to the node's (local) space coordinates.
    * The matrix is in Pixels.
-   * TODO: Implement cc.AffineTransform typings...
    */
-  getParentToNodeTransform(): unknown;
+  getParentToNodeTransform(): CCAffineTransform;
 
   /**
    * Returns a copy of the position (x,y) of the node in cocos2d coordinates.
@@ -686,9 +684,8 @@ export interface CCNode extends CCClass {
 
   /**
    * Returns the inverse world affine transform matrix. The matrix is in Pixels.
-   * TODO: Implement cc.AffineTransform typings...
    */
-  getWorldToNodeTransform(): unknown;
+  getWorldToNodeTransform(): CCAffineTransform;
 
   /**
    * Returns z order of this node.
@@ -747,16 +744,15 @@ export interface CCNode extends CCClass {
   /**
    * Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
    * The matrix is in Pixels.
-   * TODO: Implement cc.AffineTransform typings...
    *
    * @deprecated since v3.0, please use getNodeToParentTransform instead
    */
-  nodeToParentTransform(): unknown;
+  nodeToParentTransform(): CCAffineTransform;
 
   /**
    * @deprecated since v3.0, please use getNodeToWorldTransform instead.
    */
-  nodeToWorldTransform(): unknown;
+  nodeToWorldTransform(): CCAffineTransform;
 
   /**
    * Event callback that is invoked every time when CCNode enters the 'stage'.
@@ -789,11 +785,9 @@ export interface CCNode extends CCClass {
   onExitTransitionDidStart(): void;
 
   /**
-   * TODO: Implement cc.AffineTransform typings...
-   *
    * @deprecated since v3.0, please use getParentToNodeTransform instead.
    */
-  parentToNodeTransform(): unknown;
+  parentToNodeTransform(): CCAffineTransform;
 
   /**
    * Pauses all scheduled selectors and actions.
@@ -1028,11 +1022,10 @@ export interface CCNode extends CCClass {
    * // Sets the additional transform to spriteB, spriteB's rotation will based on its pseudo parent i.e. spriteA.
    * spriteB.setAdditionalTransform(t);
    * ```
-   * TODO: Define cc.AffineTransform typings...
    *
    * @param additionalTransform
    */
-  setAdditionalTransform(additionalTransform: unknown): void;
+  setAdditionalTransform(additionalTransform: CCAffineTransform): void;
 
   /**
    * Sets the anchor point in percent.
@@ -1469,5 +1462,5 @@ export interface CCNode extends CCClass {
   /**
    * @deprecated since v3.0, please use getWorldToNodeTransform instead.
    */
-  worldToNodeTransform(): void;
+  worldToNodeTransform(): CCAffineTransform;
 }
