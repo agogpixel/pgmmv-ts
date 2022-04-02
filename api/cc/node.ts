@@ -349,7 +349,7 @@ export interface CCNode extends CCClass {
    *
    * @param ctx The render context.
    */
-  draw(ctx: CanvasRenderingContext2D | WebGLRenderingContext): void;
+  draw(ctx: unknown): void;
 
   /**
    * Search the children of the receiving node to perform processing for nodes which share a name.
