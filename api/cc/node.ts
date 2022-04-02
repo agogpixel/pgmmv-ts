@@ -934,494 +934,480 @@ export interface CCNode extends CCClass {
    */
   runAction(action: unknown): unknown;
 
+  /**
+   * Schedules a custom selector.
+   * If the selector is already scheduled, then the interval parameter will be updated without scheduling it again.
+   *
+   * @param callback A function wrapped as a selector.
+   * @param interval Tick interval in seconds. 0 means tick every frame. If interval = 0, it's recommended to use scheduleUpdate() instead.
+   * @param repeat The selector will be executed (repeat + 1) times, you can use kCCRepeatForever for tick infinitely.
+   * @param delay The amount of time that the first tick will wait before execution.
+   * @param key The only string identifying the callback.
+   */
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  schedule(callback: Function, interval: number, repeat: number, delay: number, key: string): void;
+
+  /**
+   * Schedules a callback function that runs only once, with a delay of 0 or larger.
+   *
+   * @param callback A function wrapped as a selector.
+   * @param delay The amount of time that the first tick will wait before execution.
+   * @param key The only string identifying the callback.
+   */
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  scheduleOnce(callback: Function, delay: number, key: string): void;
+
+  /**
+   * Schedules the "update" method.
+   * It will use the order number 0. This method will be called every frame.
+   * Scheduled methods with a lower order value will be called before the ones that have a higher order value.
+   * Only one "update" method could be scheduled per node.
+   */
+  scheduleUpdate(): void;
+
+  /**
+   * Schedules the "update" callback function with a custom priority. This callback function will be called every frame.
+   * Scheduled callback functions with a lower priority will be called before the ones that have a higher value.
+   * Only one "update" callback function could be scheduled per node (You can't have 2 'update' callback functions).
+   *
+   * @param priority
+   */
+  scheduleUpdateWithPriority(priority: number): void;
+
+  /**
+   * Sets the cc.ActionManager object that is used by all actions.
+   * TODO: Implement cc.ActionManager typings...
+   * @param actionManager A CCActionManager object that is used by all actions.
+   */
+  setActionManager(actionManager: unknown): void;
+
+  /**
+   * Sets the additional transform.
+   * The additional transform will be concatenated at the end of getNodeToParentTransform.
+   * It could be used to simulate `parent-child` relationship between two nodes (e.g. one is in BatchNode, another isn't).
+   *
+   * ```
+   * // create a batchNode
+   * var batch = new cc.SpriteBatchNode("Icon-114.png");
+   * this.addChild(batch);
+   *
+   * // create two sprites, spriteA will be added to batchNode, they are using different textures.
+   * var spriteA = new cc.Sprite(batch->getTexture());
+   * var spriteB = new cc.Sprite("Icon-72.png");
+   *
+   * batch.addChild(spriteA);
+   *
+   * // We can't make spriteB as spriteA's child since they use different textures. So just add it to layer.
+   * // But we want to simulate `parent-child` relationship for these two node.
+   * this.addChild(spriteB);
+   *
+   * //position
+   * spriteA.setPosition(ccp(200, 200));
+   *
+   * // Gets the spriteA's transform.
+   * var t = spriteA.getNodeToParentTransform();
+   *
+   * // Sets the additional transform to spriteB, spriteB's position will based on its pseudo parent i.e. spriteA.
+   * spriteB.setAdditionalTransform(t);
+   *
+   * //scale
+   * spriteA.setScale(2);
+   *
+   * // Gets the spriteA's transform.
+   * t = spriteA.getNodeToParentTransform();
+   *
+   * // Sets the additional transform to spriteB, spriteB's scale will based on its pseudo parent i.e. spriteA.
+   * spriteB.setAdditionalTransform(t);
+   *
+   * //rotation
+   * spriteA.setRotation(20);
+   *
+   * // Gets the spriteA's transform.
+   * t = spriteA.getNodeToParentTransform();
+   *
+   * // Sets the additional transform to spriteB, spriteB's rotation will based on its pseudo parent i.e. spriteA.
+   * spriteB.setAdditionalTransform(t);
+   * ```
+   * TODO: Define cc.AffineTransform typings...
+   *
+   * @param additionalTransform
+   */
+  setAdditionalTransform(additionalTransform: unknown): void;
+
+  /**
+   * Sets the anchor point in percent.
+   *
+   * Anchor point is the point around which all transformations and positioning manipulations take place.
+   * It's like a pin in the node where it is "attached" to its parent.
+   * The anchorPoint is normalized, like a percentage. (0,0) means the bottom-left corner and (1,1) means the top-right corner.
+   * But you can use values higher than (1,1) and lower than (0,0) too.
+   * The default anchor point is (0.5,0.5), so it starts at the center of the node.
+   *
+   * @param point The anchor point of node or The x axis anchor of node.
+   * @param y The y axis anchor of node.
+   */
+  setAnchorPoint(point: CCPoint | number, y?: number): void;
+
+  /**
+   * Enable or disable cascade color, if cascade enabled, child nodes' opacity will be the cascade value of parent color and its own color.
+   *
+   * @param cascadeColorEnabled
+   */
+  setCascadeColorEnabled(cascadeColorEnabled: boolean): void;
+
+  /**
+   * Enable or disable cascade opacity, if cascade enabled, child nodes' opacity will be the multiplication of parent opacity and its own opacity.
+   *
+   * @param cascadeOpacityEnabled
+   */
+  setCascadeOpacityEnabled(cascadeOpacityEnabled: boolean): void;
+
+  /**
+   * Sets the color of Node.
+   * When color doesn't include opacity value like cc.color(128,128,128), this function only change the color.
+   * When color include opacity like cc.color(128,128,128,100), then this function will change the color and the opacity.
+   *
+   * @param color he new color given.
+   */
+  setColor(color: CCColor): void;
+
+  /**
+   * Sets the untransformed size of the node.
+   *
+   * The contentSize remains the same no matter the node is scaled or rotated.
+   * All nodes has a size. Layer and Scene has the same size of the screen.
+   * TODO: Define cc.Size typings...
+   *
+   * @param size The untransformed size of the node or The untransformed size's width of the node.
+   * @param height The untransformed size's height of the node.
+   */
+  setContentSize(size: unknown | number, height?: number): void;
+
+  /**
+   * Defines the oder in which the nodes are renderer.
+   * Nodes that have a Global Z Order lower, are renderer first.
+   *
+   * In case two or more nodes have the same Global Z Order, the oder is not guaranteed.
+   * The only exception if the Nodes have a Global Z Order == 0. In that case, the Scene Graph order is used.
+   *
+   * By default, all nodes have a Global Z Order = 0. That means that by default, the Scene Graph order is used to render the nodes.
+   *
+   * Global Z Order is useful when you need to render nodes in an order different than the Scene Graph order.
+   *
+   * Limitations: Global Z Order can't be used used by Nodes that have SpriteBatchNode as one of their ancestors.
+   * And if ClippingNode is one of the ancestors, then "global Z order" will be relative to the ClippingNode.
+   *
+   * @param globalZOrder
+   */
+  setGlobalZOrder(globalZOrder: number): void;
+
+  /**
+   * Sets the state of OpenGL server side.
+   *
+   * @param state The state of OpenGL server side.
+   * @deprecated since v3.0, no need anymore.
+   */
+  setGLServerState(state: number): void;
+
+  /**
+   * Changes a grid object that is used when applying effects.
+   * This function have been deprecated, please use cc.NodeGrid to run grid actions.
+   * TODO: Define cc.GridBase typings...
+   *
+   * @param grid A CCGrid object that is used when applying effects.
+   * @deprecated since v3.0, no alternative function.
+   */
+  setGrid(grid: unknown): void;
+
+  /**
+   * LocalZOrder is the 'key' used to sort the node relative to its siblings.
+   *
+   * The Node's parent will sort all its children based ont the LocalZOrder value.
+   * If two nodes have the same LocalZOrder, then the node that was added first to the children's array
+   * will be in front of the other node in the array.
+   *
+   * Also, the Scene Graph is traversed using the "In-Order" tree traversal algorithm ( http://en.wikipedia.org/wiki/Tree_traversal#In-order )
+   * And Nodes that have LocalZOder values < 0 are the "left" subtree
+   * While Nodes with LocalZOder >=0 are the "right" subtree.
+   *
+   * @param localZOrder
+   */
+  setLocalZOrder(localZOrder: number): void;
+
+  /**
+   * Changes the name that is used to identify the node easily.
+   *
+   * @param name
+   */
+  setName(name: string): void;
+
+  /**
+   * Sets the position (x,y) using values between 0 and 1.
+   * The positions in pixels is calculated like the following:
+   *
+   * ```
+   * _position = _normalizedPosition * parent.getContentSize();
+   * ```
+   *
+   * @param posOrX
+   * @param y
+   */
+  setNormalizedPosition(posOrX: CCPoint | number, y?: number): void;
+
+  /**
+   * Sets the opacity of Node.
+   *
+   * @param opacity
+   */
+  setOpacity(opacity: number): void;
+
+  /**
+   * Set whether color should be changed with the opacity value, useless in cc.Node,
+   * but this function is override in some class to have such behavior.
+   *
+   * @param opacityValue
+   */
+  setOpacityModifyRGB(opacityValue: boolean): void;
+
+  /**
+   * Sets the arrival order when this node has a same ZOrder with other children.
+   *
+   * A node which called addChild subsequently will take a larger arrival order,
+   * If two children have the same Z order, the child with larger arrival order will be drawn later.
+   *
+   * @param Var The arrival order.
+   */
+  setOrderOfArrival(Var: number): void;
+
+  /**
+   * Sets the parent node.
+   *
+   * @param parent A reference to the parent node.
+   */
+  setParent(parent: CCNode): void;
+
+  /**
+   * Changes the position (x,y) of the node in cocos2d coordinates.
+   * The original point (0,0) is at the left-bottom corner of screen.
+   * Usually we use cc.p(x,y) to compose CCPoint object.
+   * and Passing two numbers (x,y) is more efficient than passing CCPoint object.
+   *
+   * ```
+   * var size = cc.winSize;
+   * node.setPosition(size.width/2, size.height/2);
+   * ```
+   *
+   * @param newPosOrxValue The position (x,y) of the node in coordinates or the X coordinate for position.
+   * @param yValue Y coordinate for position
+   */
+  setPosition(newPosOrxValue: CCPoint | number, yValue?: number): void;
+
+  /**
+   * Sets the x axis position of the node in cocos2d coordinates.
+   *
+   * @param x The new position in x axis.
+   */
+  setPositionX(x: number): void;
+
+  /**
+   * Sets the y axis position of the node in cocos2d coordinates.
+   *
+   * @param y The new position in y axis.
+   */
+  setPositionY(y: number): void;
+
+  /**
+   * Sets the rotation (angle) of the node in degrees.
+   *
+   * 0 is the default rotation angle.
+   * Positive values rotate node clockwise, and negative values for anti-clockwise.
+   *
+   * @param newRotation The rotation of the node in degrees.
+   */
+  setRotation(newRotation: number): void;
+
+  /**
+   * Sets the X rotation (angle) of the node in degrees which performs a horizontal rotational skew.
+   * (support only in WebGL rendering mode)
+   * 0 is the default rotation angle.
+   * Positive values rotate node clockwise, and negative values for anti-clockwise.
+   *
+   * @param rotationX The X rotation in degrees which performs a horizontal rotational skew.
+   */
+  setRotationX(rotationX: number): void;
+
+  /**
+   * Sets the Y rotation (angle) of the node in degrees which performs a vertical rotational skew.
+   * (support only in WebGL rendering mode)
+   * 0 is the default rotation angle.
+   * Positive values rotate node clockwise, and negative values for anti-clockwise.
+   *
+   * @param rotationY The Y rotation in degrees.
+   */
+  setRotationY(rotationY: number): void;
+
+  /**
+   * Sets the scale factor of the node. 1.0 is the default scale factor. This function can modify the X and Y scale at the same time.
+   *
+   * @param scale or scaleX value.
+   * @param scaleY
+   */
+  setScale(scale: number, scaleY?: number): void;
+
+  /**
+   * Changes the scale factor on X axis of this node.
+   * The default value is 1.0 if you haven't changed it before.
+   *
+   * @param newScaleX The scale factor on X axis.
+   */
+  setScaleX(newScaleX: number): void;
+
+  /**
+   * Changes the scale factor on Y axis of this node
+   * The Default value is 1.0 if you haven't changed it before.
+   *
+   * @param newScaleY The scale factor on Y axis.
+   */
+  setScaleY(newScaleY: number): void;
+
+  /**
+   * Sets a CCScheduler object that is used to schedule all "updates" and timers.
+   * IMPORTANT: If you set a new cc.Scheduler, then previously created timers/update are going to be removed.
+   * TODO: Define cc.Scheduler typings...
+   *
+   * @param scheduler A cc.Scheduler object that is used to schedule all "update" and timers.
+   */
+  setScheduler(scheduler: unknown): void;
+
+  /**
+   * Sets the shader program for this node Since v2.0, each rendering node must set its shader program. It should be set in initialize phase.
+   *
+   * ```
+   * node.setGLProgram(cc.shaderCache.programForKey(cc.SHADER_POSITION_TEXTURECOLOR));
+   * ```
+   * TODO: Define cc.GLProgram typings...
+   *
+   * @param newShaderProgram The shader program which fetches from CCShaderCache.
+   */
+  setShaderProgram(newShaderProgram: unknown): void;
+
+  /**
+   * Changes the X skew angle of the node in degrees.
+   *
+   * This angle describes the shear distortion in the X direction.
+   * Thus, it is the angle between the Y axis and the left edge of the shape
+   * The default skewX angle is 0. Positive values distort the node in a CW direction.
+   *
+   * @param newSkewX The X skew angle of the node in degrees.
+   */
+  setSkewX(newSkewX: number): void;
+
+  /**
+   * Changes the Y skew angle of the node in degrees.
+   *
+   * This angle describes the shear distortion in the Y direction.
+   * Thus, it is the angle between the X axis and the bottom edge of the shape
+   * The default skewY angle is 0. Positive values distort the node in a CCW direction.
+   *
+   * @param newSkewY The Y skew angle of the node in degrees.
+   */
+  setSkewY(newSkewY: number): void;
+
+  /**
+   * Changes the tag that is used to identify the node easily.
+   * Please refer to getTag for the sample code.
+   *
+   * @param tag A integer that identifies the node.
+   */
+  setTag(tag: number): void;
+
+  /**
+   * Sets a custom user data reference
+   * You can set everything in UserData reference, a data block, a structure or an object, etc.
+   *
+   * @param Var A custom user data.
+   */
+  setUserData(Var: Record<string, unknown>): void;
+
+  /**
+   * Sets a user assigned cocos2d object.
+   * Similar to UserData, but instead of holding all kinds of data it can only hold a cocos2d object.
+   * In JSB, the UserObject will be retained once in this method, and the previous UserObject (if existed) will be release.
+   * The UserObject will be released in CCNode's destruction.
+   *
+   * @param newValue A user cocos2d object.
+   */
+  setUserObject(newValue: Record<string, unknown>): void;
+
+  /**
+   * Sets the real WebGL Z vertex.
+   *
+   * Differences between openGL Z vertex and cocos2d Z order:
+   *  - WebGL Z modifies the Z vertex, and not the Z order in the relation between parent-children
+   *  - WebGL Z might require to set 2D projection
+   *  - cocos2d Z order works OK if all the nodes uses the same WebGL Z vertex. eg: vertexZ = 0
+   *
+   * @param Var
+   */
+  setVertexZ(Var: number): void;
+
+  /**
+   * Sets whether the node is visible.
+   * The default value is true.
+   *
+   * @param visible Pass true to make the node visible, false to hide the node.
+   */
+  setVisible(visible: boolean): void;
+
+  /**
+   * Sets the Z order which stands for the drawing order, and reorder this node in its parent's children array.
+   *
+   * The Z order of node is relative to its "brothers": children of the same parent.
+   * It's nothing to do with OpenGL's z vertex. This one only affects the draw order of nodes in cocos2d.
+   * The larger number it is, the later this node will be drawn in each message loop.
+   * Please refer to setVertexZ(float) for the difference.
+   *
+   * @param z Z order of this node.
+   * @deprecated since 3.0, please use setLocalZOrder instead
+   */
+  setZOrder(z: number): void;
+
+  /**
+   * Sorts the children array once before drawing, instead of every time when a child is added or reordered.
+   * This approach can improves the performance massively.
+   */
+  sortAllChildren(): void;
+
+  /**
+   * Stops and removes an action from the running action list.
+   * TODO: Define cc.Action typings...
+   *
+   * @param action An action object to be removed.
+   */
+  stopAction(action: unknown): void;
+
+  /**
+   * Removes an action from the running action list by its tag.
+   *
+   * @param tag A tag that indicates the action to be removed.
+   */
+  stopActionByTag(tag: number): void;
+
+  /**
+   * Stops and removes all actions from the running action list.
+   */
+  stopAllActions(): void;
+
+  /**
+   * Performs view-matrix transformation based on position, scale, rotation and other attributes.
+   * TODO: what type is a RenderCmd...?
+   *
+   * @param parentCmd Parent's render command.
+   * @param recursive Whether call its children's transform.
+   */
+  transform(parentCmd: unknown, recursive: boolean): void;
+
   /*
-schedule(callback, interval, repeat, delay, key)
-
-Schedules a custom selector.
-If the selector is already scheduled, then the interval parameter will be updated without scheduling it again.
-
-Parameters:
-{function} callback
-    A function wrapped as a selector
-{Number} interval
-    Tick interval in seconds. 0 means tick every frame. If interval = 0, it's recommended to use scheduleUpdate() instead.
-{Number} repeat
-    The selector will be executed (repeat + 1) times, you can use kCCRepeatForever for tick infinitely.
-{Number} delay
-    The amount of time that the first tick will wait before execution.
-{String} key
-    The only string identifying the callback
-
-scheduleOnce(callback, delay, key)
-Schedules a callback function that runs only once, with a delay of 0 or larger
-
-Parameters:
-{function} callback
-    A function wrapped as a selector
-{Number} delay
-    The amount of time that the first tick will wait before execution.
-{String} key
-    The only string identifying the callback
-
-See:
-    cc.Node#schedule
-
-scheduleUpdate()
-
-schedules the "update" method.
-It will use the order number 0. This method will be called every frame.
-Scheduled methods with a lower order value will be called before the ones that have a higher order value.
-Only one "update" method could be scheduled per node.
-scheduleUpdateWithPriority(priority)
-
-schedules the "update" callback function with a custom priority. This callback function will be called every frame.
-Scheduled callback functions with a lower priority will be called before the ones that have a higher value.
-Only one "update" callback function could be scheduled per node (You can't have 2 'update' callback functions).
-
-Parameters:
-{Number} priority
-
-setActionManager(actionManager)
-
-Sets the cc.ActionManager object that is used by all actions.
-
-Parameters:
-{cc.ActionManager} actionManager
-    A CCActionManager object that is used by all actions.
-
-setAdditionalTransform(additionalTransform)
-
-Sets the additional transform.
-The additional transform will be concatenated at the end of getNodeToParentTransform.
-It could be used to simulate `parent-child` relationship between two nodes (e.g. one is in BatchNode, another isn't).
-
-// create a batchNode
-var batch = new cc.SpriteBatchNode("Icon-114.png");
-this.addChild(batch);
-
-// create two sprites, spriteA will be added to batchNode, they are using different textures.
-var spriteA = new cc.Sprite(batch->getTexture());
-var spriteB = new cc.Sprite("Icon-72.png");
-
-batch.addChild(spriteA);
-
-// We can't make spriteB as spriteA's child since they use different textures. So just add it to layer.
-// But we want to simulate `parent-child` relationship for these two node.
-this.addChild(spriteB);
-
-//position
-spriteA.setPosition(ccp(200, 200));
-
-// Gets the spriteA's transform.
-var t = spriteA.getNodeToParentTransform();
-
-// Sets the additional transform to spriteB, spriteB's position will based on its pseudo parent i.e. spriteA.
-spriteB.setAdditionalTransform(t);
-
-//scale
-spriteA.setScale(2);
-
-// Gets the spriteA's transform.
-t = spriteA.getNodeToParentTransform();
-
-// Sets the additional transform to spriteB, spriteB's scale will based on its pseudo parent i.e. spriteA.
-spriteB.setAdditionalTransform(t);
-
-//rotation
-spriteA.setRotation(20);
-
-// Gets the spriteA's transform.
-t = spriteA.getNodeToParentTransform();
-
-// Sets the additional transform to spriteB, spriteB's rotation will based on its pseudo parent i.e. spriteA.
-spriteB.setAdditionalTransform(t);
-
-Parameters:
-{cc.AffineTransform} additionalTransform
-    The additional transform
-
-setAnchorPoint(point, y)
-
-Sets the anchor point in percent.
-
-anchor point is the point around which all transformations and positioning manipulations take place.
-It's like a pin in the node where it is "attached" to its parent.
-The anchorPoint is normalized, like a percentage. (0,0) means the bottom-left corner and (1,1) means the top-right corner.
-But you can use values higher than (1,1) and lower than (0,0) too.
-The default anchor point is (0.5,0.5), so it starts at the center of the node.
-
-Parameters:
-{cc.Point|Number} point
-    The anchor point of node or The x axis anchor of node.
-{Number} y Optional
-    The y axis anchor of node.
-
-setCascadeColorEnabled(cascadeColorEnabled)
-Enable or disable cascade color, if cascade enabled, child nodes' opacity will be the cascade value of parent color and its own color.
-
-Parameters:
-{boolean} cascadeColorEnabled
-
-setCascadeOpacityEnabled(cascadeOpacityEnabled)
-Enable or disable cascade opacity, if cascade enabled, child nodes' opacity will be the multiplication of parent opacity and its own opacity.
-
-Parameters:
-{boolean} cascadeOpacityEnabled
-
-setColor(color)
-
-Sets the color of Node.
-When color doesn't include opacity value like cc.color(128,128,128), this function only change the color.
-When color include opacity like cc.color(128,128,128,100), then this function will change the color and the opacity.
-
-Parameters:
-{cc.Color} color
-    The new color given
-
-setContentSize(size, height)
-
-Sets the untransformed size of the node.
-
-The contentSize remains the same no matter the node is scaled or rotated.
-All nodes has a size. Layer and Scene has the same size of the screen.
-
-Parameters:
-{cc.Size|Number} size
-    The untransformed size of the node or The untransformed size's width of the node.
-{Number} height Optional
-    The untransformed size's height of the node.
-
-setGlobalZOrder(globalZOrder)
-
-Defines the oder in which the nodes are renderer.
-Nodes that have a Global Z Order lower, are renderer first.
-
-In case two or more nodes have the same Global Z Order, the oder is not guaranteed.
-The only exception if the Nodes have a Global Z Order == 0. In that case, the Scene Graph order is used.
-
-By default, all nodes have a Global Z Order = 0. That means that by default, the Scene Graph order is used to render the nodes.
-
-Global Z Order is useful when you need to render nodes in an order different than the Scene Graph order.
-
-Limitations: Global Z Order can't be used used by Nodes that have SpriteBatchNode as one of their ancestors.
-And if ClippingNode is one of the ancestors, then "global Z order" will be relative to the ClippingNode.
-
-Parameters:
-{Number} globalZOrder
-
-setGLServerState(state)
-Sets the state of OpenGL server side.
-
-Parameters:
-{Number} state
-    The state of OpenGL server side.
-
-Deprecated:
-since v3.0, no need anymore
-
-setGrid(grid)
-
-Changes a grid object that is used when applying effects
-This function have been deprecated, please use cc.NodeGrid to run grid actions
-
-Parameters:
-{cc.GridBase} grid
-    A CCGrid object that is used when applying effects
-
-Deprecated:
-since v3.0, no alternative function
-
-setLocalZOrder(localZOrder)
-
-LocalZOrder is the 'key' used to sort the node relative to its siblings.
-
-The Node's parent will sort all its children based ont the LocalZOrder value.
-If two nodes have the same LocalZOrder, then the node that was added first to the children's array
-will be in front of the other node in the array.
-
-Also, the Scene Graph is traversed using the "In-Order" tree traversal algorithm ( http://en.wikipedia.org/wiki/Tree_traversal#In-order )
-And Nodes that have LocalZOder values < 0 are the "left" subtree
-While Nodes with LocalZOder >=0 are the "right" subtree.
-
-Parameters:
-{Number} localZOrder
-
-setName(name)
-Changes the name that is used to identify the node easily.
-
-Parameters:
-{String} name
-
-setNormalizedPosition(posOrX, y)
-
-Sets the position (x,y) using values between 0 and 1.
-The positions in pixels is calculated like the following:
-_position = _normalizedPosition * parent.getContentSize()
-
-Parameters:
-{cc.Point|Number} posOrX
-{Number} y Optional
-
-setOpacity(opacity)
-Sets the opacity of Node
-
-Parameters:
-{Number} opacity
-
-setOpacityModifyRGB(opacityValue)
-Set whether color should be changed with the opacity value, useless in cc.Node, but this function is override in some class to have such behavior.
-
-Parameters:
-{Boolean} opacityValue
-
-setOrderOfArrival(Var)
-
-Sets the arrival order when this node has a same ZOrder with other children.
-
-A node which called addChild subsequently will take a larger arrival order,
-If two children have the same Z order, the child with larger arrival order will be drawn later.
-
-Parameters:
-{Number} Var
-    The arrival order.
-
-setParent(parent)
-Sets the parent node
-
-Parameters:
-{cc.Node} parent
-    A reference to the parent node
-
-setPosition(newPosOrxValue, yValue)
-
-Changes the position (x,y) of the node in cocos2d coordinates.
-The original point (0,0) is at the left-bottom corner of screen.
-Usually we use cc.p(x,y) to compose CCPoint object.
-and Passing two numbers (x,y) is more efficient than passing CCPoint object.
-
-   var size = cc.winSize;
-   node.setPosition(size.width/2, size.height/2);
-
-Parameters:
-{cc.Point|Number} newPosOrxValue
-    The position (x,y) of the node in coordinates or the X coordinate for position
-{Number} yValue Optional
-    Y coordinate for position
-
-setPositionX(x)
-
-Sets the x axis position of the node in cocos2d coordinates.
-
-Parameters:
-{Number} x
-    The new position in x axis
-
-setPositionY(y)
-
-Sets the y axis position of the node in cocos2d coordinates.
-
-Parameters:
-{Number} y
-    The new position in y axis
-
-setRotation(newRotation)
-
-Sets the rotation (angle) of the node in degrees.
-
-0 is the default rotation angle.
-Positive values rotate node clockwise, and negative values for anti-clockwise.
-
-Parameters:
-{Number} newRotation
-    The rotation of the node in degrees.
-
-setRotationX(rotationX)
-
-Sets the X rotation (angle) of the node in degrees which performs a horizontal rotational skew.
-(support only in WebGL rendering mode)
-0 is the default rotation angle.
-Positive values rotate node clockwise, and negative values for anti-clockwise.
-
-Parameters:
-{Number} rotationX
-    The X rotation in degrees which performs a horizontal rotational skew.
-
-setRotationY(rotationY)
-
-Sets the Y rotation (angle) of the node in degrees which performs a vertical rotational skew.
-(support only in WebGL rendering mode)
-0 is the default rotation angle.
-Positive values rotate node clockwise, and negative values for anti-clockwise.
-
-Parameters:
-rotationY
-    The Y rotation in degrees.
-
-setScale(scale, scaleY)
-Sets the scale factor of the node. 1.0 is the default scale factor. This function can modify the X and Y scale at the same time.
-
-Parameters:
-{Number} scale
-    or scaleX value
-{Number} scaleY Optional
-
-setScaleX(newScaleX)
-
-Changes the scale factor on X axis of this node
-The default value is 1.0 if you haven't changed it before
-
-Parameters:
-{Number} newScaleX
-    The scale factor on X axis.
-
-setScaleY(newScaleY)
-
-Changes the scale factor on Y axis of this node
-The Default value is 1.0 if you haven't changed it before.
-
-Parameters:
-{Number} newScaleY
-    The scale factor on Y axis.
-
-setScheduler(scheduler)
-
-Sets a CCScheduler object that is used to schedule all "updates" and timers.
-IMPORTANT: If you set a new cc.Scheduler, then previously created timers/update are going to be removed.
-
-Parameters:
-scheduler
-    A cc.Scheduler object that is used to schedule all "update" and timers.
-
-setShaderProgram(newShaderProgram)
-
-Sets the shader program for this node Since v2.0, each rendering node must set its shader program. It should be set in initialize phase.
-
-node.setGLProgram(cc.shaderCache.programForKey(cc.SHADER_POSITION_TEXTURECOLOR));
-
-Parameters:
-{cc.GLProgram} newShaderProgram
-    The shader program which fetches from CCShaderCache.
-
-setSkewX(newSkewX)
-
-Changes the X skew angle of the node in degrees.
-
-This angle describes the shear distortion in the X direction.
-Thus, it is the angle between the Y axis and the left edge of the shape
-The default skewX angle is 0. Positive values distort the node in a CW direction.
-
-Parameters:
-{Number} newSkewX
-    The X skew angle of the node in degrees.
-
-setSkewY(newSkewY)
-
-Changes the Y skew angle of the node in degrees.
-
-This angle describes the shear distortion in the Y direction.
-Thus, it is the angle between the X axis and the bottom edge of the shape
-The default skewY angle is 0. Positive values distort the node in a CCW direction.
-
-Parameters:
-{Number} newSkewY
-    The Y skew angle of the node in degrees.
-
-setTag(tag)
-Changes the tag that is used to identify the node easily.
-Please refer to getTag for the sample code.
-
-Parameters:
-{Number} tag
-    A integer that identifies the node.
-
-See:
-    cc.Node#getTag
-
-setUserData(Var)
-
-Sets a custom user data reference
-You can set everything in UserData reference, a data block, a structure or an object, etc.
-
-Parameters:
-{object} Var
-    A custom user data
-
-setUserObject(newValue)
-
-Sets a user assigned cocos2d object
-Similar to UserData, but instead of holding all kinds of data it can only hold a cocos2d object
-In JSB, the UserObject will be retained once in this method, and the previous UserObject (if existed) will be release.
-The UserObject will be released in CCNode's destruction.
-
-Parameters:
-{object} newValue
-    A user cocos2d object
-
-setVertexZ(Var)
-
-Sets the real WebGL Z vertex.
-
-Differences between openGL Z vertex and cocos2d Z order:
-- WebGL Z modifies the Z vertex, and not the Z order in the relation between parent-children
-- WebGL Z might require to set 2D projection
-- cocos2d Z order works OK if all the nodes uses the same WebGL Z vertex. eg: vertexZ = 0
-
-Parameters:
-{Number} Var
-
-setVisible(visible)
-Sets whether the node is visible
-The default value is true
-
-Parameters:
-{Boolean} visible
-    Pass true to make the node visible, false to hide the node.
-
-setZOrder(z)
-
-Sets the Z order which stands for the drawing order, and reorder this node in its parent's children array.
-
-The Z order of node is relative to its "brothers": children of the same parent.
-It's nothing to do with OpenGL's z vertex. This one only affects the draw order of nodes in cocos2d.
-The larger number it is, the later this node will be drawn in each message loop.
-Please refer to setVertexZ(float) for the difference.
-
-Parameters:
-{Number} z
-    Z order of this node.
-
-Deprecated:
-since 3.0, please use setLocalZOrder instead
-
-sortAllChildren()
-
-Sorts the children array once before drawing, instead of every time when a child is added or reordered.
-This approach can improves the performance massively.
-stopAction(action)
-Stops and removes an action from the running action list.
-
-Parameters:
-{cc.Action} action
-    An action object to be removed.
-
-stopActionByTag(tag)
-Removes an action from the running action list by its tag.
-
-Parameters:
-{Number} tag
-    A tag that indicates the action to be removed.
-
-stopAllActions()
-Stops and removes all actions from the running action list .
-transform(parentCmd, recursive)
-Performs view-matrix transformation based on position, scale, rotation and other attributes.
-
-Parameters:
-{cc.Node.RenderCmd} parentCmd
-    parent's render command
-{boolean} recursive
-    whether call its children's transform
-
 unschedule(callback_fn)
 unschedules a custom callback function.
 
