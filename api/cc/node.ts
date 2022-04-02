@@ -348,4 +348,26 @@ export interface CCNode {
    * Remember to call "this._super()" in the extended "ctor" function.
    */
   ctor(): void;
+
+  /**
+   * Render function using the canvas 2d context or WebGL context.
+   * Internal usage only, please do not call this function.
+   *
+   * @param ctx The render context.
+   */
+  draw(ctx: CanvasRenderingContext2D | WebGLRenderingContext): void;
+
+  /**
+   * Search the children of the receiving node to perform processing for nodes which share a name.
+   *
+   * @param name The name to search for, supports c++11 regular expression.
+   * Search syntax options:
+   * - `//`: Can only be placed at the begin of the search string. This indicates that it will search recursively.
+   * - `..`: The search should move up to the node's parent. Can only be placed at the end of string.
+   * - `/` : When placed anywhere but the start of the search string, this indicates that the search should move to the node's children.
+   * @param callback A callback function to execute on nodes that match the `name` parameter.
+   * The function takes the following arguments: `node` A node that matches the name and returns a boolean result.
+   * Your callback can return `true` to terminate the enumeration.
+   */
+  enumerateChildren(name: string, callback: (node: CCNode) => boolean): void;
 }
