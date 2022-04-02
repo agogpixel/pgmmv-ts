@@ -239,4 +239,31 @@ export type CCNode = {
    * Z order in depth which stands for the drawing order.
    */
   zIndex: number;
+
+  /**
+   * "add" logic MUST only be in this method.
+   *
+   * If the child is added to a 'running' node, then 'onEnter' and 'onEnterTransitionDidFinish' will be called immediately.
+   *
+   * @param child A child node.
+   * @param localZOrder Z order for drawing priority. Please refer to setZOrder(int).
+   * @param tag An integer or a name to identify the node easily. Please refer to setTag(int) and setName(string).
+   */
+  addChild(child: CCNode, localZOrder?: number, tag?: number | string): void;
+
+  /**
+   * Adds a component to the node's component container.
+   * TODO: Implement cc.Component typings...
+   *
+   * @param component
+   */
+  addComponent(component: unknown): void;
+
+  /**
+   * Properties configuration function. All properties in attrs will be set to the node,
+   * when the setter of the node is available, the property will be set via setter function.
+   *
+   * @param attrs Properties to be set to node
+   */
+  attr(attrs: Record<string, unknown>): void;
 };
