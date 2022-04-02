@@ -809,136 +809,132 @@ export interface CCNode extends CCClass {
    */
   pauseSchedulerAndActions(): void;
 
+  /**
+   * Currently JavaScript Bindings (JSB), in some cases, needs to use retain and release.
+   * This is a bug in JSB, and the ugly workaround is to use retain/release.
+   * So, these 2 methods were added to be compatible with JSB. This is a hack, and should be removed once JSB fixes the retain/release bug.
+   * You will need to retain an object if you created an engine object and haven't added it into the scene graph during the same frame.
+   * Otherwise, JSB's native autorelease pool will consider this object a useless one and release it directly,
+   * when you want to use it later, a "Invalid Native Object" error will be raised.
+   * The retain function can increase a reference count for the native object to avoid it being released,
+   * you need to manually invoke release function when you think this object is no longer needed, otherwise, there will be memory learks.
+   * retain and release function call should be paired in developer's game code.
+   */
+  release(): void;
+
+  /**
+   * Removes all children from the container and do a cleanup all running actions depending on the cleanup parameter.
+   * If the cleanup parameter is not passed, it will force a cleanup.
+   *
+   * @param cleanup Default true. All running actions on all children nodes should be cleanup, false otherwise.
+   */
+  removeAllChildren(cleanup?: boolean): void;
+
+  /**
+   * Removes all children from the container and do a cleanup all running actions depending on the cleanup parameter.
+   *
+   * @param cleanup Default true.
+   */
+  removeAllChildrenWithCleanup(cleanup?: boolean): void;
+
+  /**
+   * Removes all components of cc.Node, it called when cc.Node is exiting from stage.
+   */
+  removeAllComponents(): void;
+
+  /**
+   * Removes a child from the container. It will also cleanup all running actions depending on the cleanup parameter.
+   * If the cleanup parameter is not passed, it will force a cleanup.
+   *
+   * "remove" logic MUST only be on this method.
+   * If a class wants to extend the 'removeChild' behavior it only needs
+   * to override this method.
+   *
+   * @param child The child node which will be removed.
+   * @param cleanup Default true. All running actions and callbacks on the child node will be cleanup, false otherwise.
+   */
+  removeChild(child: CCNode, cleanup?: boolean): void;
+
+  /**
+   * Removes a child from the container by tag value. It will also cleanup all running actions depending on the cleanup parameter.
+   * If the cleanup parameter is not passed, it will force a cleanup.
+   *
+   * @param tag An integer number that identifies a child node.
+   * @param cleanup Default true. All running actions and callbacks on the child node will be cleanup, false otherwise.
+   */
+  removeChildByTag(tag: number, cleanup?: boolean): void;
+
+  /**
+   * Removes a component identified by the given name or removes the component object given.
+   *
+   * @param component
+   */
+  removeComponent(component: string | CCComponent): void;
+
+  /**
+   * Remove itself from its parent node. If cleanup is true, then also remove all actions and callbacks.
+   * If the cleanup parameter is not passed, it will force a cleanup.
+   * If the node orphan, then nothing happens.
+   *
+   * @param cleanup Default true. All actions and callbacks on this node should be removed, false otherwise.
+   */
+  removeFromParent(cleanup?: boolean): void;
+
+  /**
+   * Removes this node itself from its parent node.
+   * If the node orphan, then nothing happens.
+   *
+   * @param cleanup Default true. All actions and callbacks on this node should be removed, false otherwise.
+   * @deprecated since v3.0, please use removeFromParent() instead.
+   */
+  removeFromParentAndCleanup(cleanup?: boolean): void;
+
+  /**
+   * Reorders a child according to a new z value.
+   * The child MUST be already added.
+
+   * @param child An already added child node. It MUST be already added.
+   * @param zOrder Z order for drawing priority. Please refer to setZOrder(int)
+   */
+  reorderChild(child: CCNode, zOrder: number): void;
+
+  /**
+   * Resumes all scheduled selectors and actions.
+   * This method is called internally by onEnter.
+   */
+  resume(): void;
+
+  /**
+   * Resumes all scheduled selectors and actions.
+   * This method is called internally by onEnter.
+   *
+   * @deprecated since v3.0, please use resume() instead.
+   */
+  resumeSchedulerAndActions(): void;
+
+  /**
+   * Currently JavaScript Bindings (JSB), in some cases, needs to use retain and release.
+   * This is a bug in JSB, and the ugly workaround is to use retain/release.
+   * So, these 2 methods were added to be compatible with JSB. This is a hack, and should be removed once JSB fixes the retain/release bug.
+   * You will need to retain an object if you created an engine object and haven't added it into the scene graph during the same frame.
+   * Otherwise, JSB's native autorelease pool will consider this object a useless one and release it directly,
+   * when you want to use it later, a "Invalid Native Object" error will be raised.
+   * The retain function can increase a reference count for the native object to avoid it being released,
+   * you need to manually invoke release function when you think this object is no longer needed, otherwise, there will be memory learks.
+   * retain and release function call should be paired in developer's game code.
+   */
+  retain(): void;
+
+  /**
+   * Executes an action, and returns the action that is executed.
+   * The node becomes the action's target. Refer to cc.Action's getTarget()
+   * TODO: Implement cc.Action definition...
+   *
+   * @param action
+   */
+  runAction(action: unknown): unknown;
+
   /*
-release()
-
-Currently JavaScript Bindings (JSB), in some cases, needs to use retain and release. This is a bug in JSB, and the ugly workaround is to use retain/release. So, these 2 methods were added to be compatible with JSB. This is a hack, and should be removed once JSB fixes the retain/release bug
-You will need to retain an object if you created an engine object and haven't added it into the scene graph during the same frame.
-Otherwise, JSB's native autorelease pool will consider this object a useless one and release it directly,
-when you want to use it later, a "Invalid Native Object" error will be raised.
-The retain function can increase a reference count for the native object to avoid it being released,
-you need to manually invoke release function when you think this object is no longer needed, otherwise, there will be memory learks.
-retain and release function call should be paired in developer's game code.
-
-See:
-    cc.Node#retain
-
-removeAllChildren(cleanup)
-Removes all children from the container and do a cleanup all running actions depending on the cleanup parameter.
-If the cleanup parameter is not passed, it will force a cleanup.
-
-Parameters:
-{Boolean} cleanup Optional, Default: true
-    true if all running actions on all children nodes should be cleanup, false otherwise.
-
-removeAllChildrenWithCleanup(cleanup)
-Removes all children from the container and do a cleanup all running actions depending on the cleanup parameter.
-
-Parameters:
-{Boolean} cleanup Optional, Default: true
-
-removeAllComponents()
-Removes all components of cc.Node, it called when cc.Node is exiting from stage.
-removeChild(child, cleanup)
-
-Removes a child from the container. It will also cleanup all running actions depending on the cleanup parameter.
-If the cleanup parameter is not passed, it will force a cleanup.
-
-"remove" logic MUST only be on this method
-If a class wants to extend the 'removeChild' behavior it only needs
-to override this method
-
-Parameters:
-{cc.Node} child
-    The child node which will be removed.
-{Boolean} cleanup Optional, Default: true
-    true if all running actions and callbacks on the child node will be cleanup, false otherwise.
-
-removeChildByTag(tag, cleanup)
-Removes a child from the container by tag value. It will also cleanup all running actions depending on the cleanup parameter. If the cleanup parameter is not passed, it will force a cleanup.
-
-Parameters:
-{Number} tag
-    An integer number that identifies a child node
-{Boolean} cleanup Optional, Default: true
-    true if all running actions and callbacks on the child node will be cleanup, false otherwise.
-
-See:
-    cc.Node#removeChildByTag
-
-removeComponent(component)
-Removes a component identified by the given name or removes the component object given
-
-Parameters:
-{String|cc.Component} component
-
-removeFromParent(cleanup)
-Remove itself from its parent node. If cleanup is true, then also remove all actions and callbacks.
-If the cleanup parameter is not passed, it will force a cleanup.
-If the node orphan, then nothing happens.
-
-Parameters:
-{Boolean} cleanup Optional, Default: true
-    true if all actions and callbacks on this node should be removed, false otherwise.
-
-See:
-    cc.Node#removeFromParentAndCleanup
-
-removeFromParentAndCleanup(cleanup)
-Removes this node itself from its parent node.
-If the node orphan, then nothing happens.
-
-Parameters:
-{Boolean} cleanup Optional, Default: true
-    true if all actions and callbacks on this node should be removed, false otherwise.
-
-Deprecated:
-since v3.0, please use removeFromParent() instead
-
-reorderChild(child, zOrder)
-Reorders a child according to a new z value.
-The child MUST be already added.
-
-Parameters:
-{cc.Node} child
-    An already added child node. It MUST be already added.
-{Number} zOrder
-    Z order for drawing priority. Please refer to setZOrder(int)
-
-resume()
-
-Resumes all scheduled selectors and actions.
-This method is called internally by onEnter
-resumeSchedulerAndActions()
-Resumes all scheduled selectors and actions.
-This method is called internally by onEnter
-
-Deprecated:
-since v3.0, please use resume() instead
-
-retain()
-
-Currently JavaScript Bindings (JSB), in some cases, needs to use retain and release. This is a bug in JSB, and the ugly workaround is to use retain/release. So, these 2 methods were added to be compatible with JSB. This is a hack, and should be removed once JSB fixes the retain/release bug
-You will need to retain an object if you created an engine object and haven't added it into the scene graph during the same frame.
-Otherwise, JSB's native autorelease pool will consider this object a useless one and release it directly,
-when you want to use it later, a "Invalid Native Object" error will be raised.
-The retain function can increase a reference count for the native object to avoid it being released,
-you need to manually invoke release function when you think this object is no longer needed, otherwise, there will be memory learks.
-retain and release function call should be paired in developer's game code.
-
-See:
-    cc.Node#release
-
-{cc.Action} runAction(action)
-Executes an action, and returns the action that is executed.
-The node becomes the action's target. Refer to cc.Action's getTarget()
-
-Parameters:
-{cc.Action} action
-
-Returns:
-    {cc.Action} An Action pointer
-
 schedule(callback, interval, repeat, delay, key)
 
 Schedules a custom selector.
