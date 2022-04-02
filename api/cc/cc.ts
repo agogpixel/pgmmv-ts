@@ -1,5 +1,7 @@
-import type { CCNode } from './node';
+import type { CCClassNamespace } from './class';
+import type { CCNodeNamespace } from './node';
 
 export interface cc {
-  Node: CCNode;
+  Class: CCClassNamespace;
+  Node: CCNodeNamespace;
 }

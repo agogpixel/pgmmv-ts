@@ -1,3 +1,19 @@
+import type { CCClassNamespace } from './class';
+
+export type CCNodeNamespace = {
+  /**
+   * cc.Node is the root class of all node.
+   */
+  new (): CCNode;
+
+  /**
+   * Allocates and initializes a node.
+   *
+   * @deprecated since v3.0, please use new construction instead.
+   */
+  create(): CCNode;
+} & CCClassNamespace;
+
 /**
  * cc.Node is the root class of all node. Anything that gets drawn or contains things that get drawn is a cc.Node.
  * The most popular cc.Nodes are: cc.Scene, cc.Layer, cc.Sprite, cc.Menu.
@@ -49,12 +65,7 @@
  * -# The grid will capture the screen
  * -# The grid will render the captured screen
  */
-export type CCNode = {
-  /**
-   * cc.Node is the root class of all node.
-   */
-  new (): CCNode;
-
+export interface CCNode {
   /**
    * The CCActionManager object that is used by all actions.
    * TODO: Implement cc.ActionManager typings...
@@ -266,4 +277,75 @@ export type CCNode = {
    * @param attrs Properties to be set to node
    */
   attr(attrs: Record<string, unknown>): void;
-};
+
+  /**
+   * Returns a "local" axis aligned bounding box of the node.
+   * TODO: Implement cc.Rect typings...
+   *
+   * @deprecated since v3.0, please use getBoundingBox instead.
+   */
+  boundingBox(): unknown;
+
+  /**
+   * Stops all running actions and schedulers.
+   */
+  cleanup(): void;
+
+  /**
+   * Converts a Point to node (local) space coordinates. The result is in Points.
+   * TODO: Implement cc.Point typings...
+   *
+   * @param worldPoint
+   */
+  convertToNodeSpace(worldPoint: unknown): unknown;
+
+  /**
+   * Converts a Point to node (local) space coordinates. The result is in Points.
+   * treating the returned/received node point as anchor relative.
+   * TODO: Implement cc.Point typings...
+   *
+   * @param worldPoint
+   */
+  convertToNodeSpaceAR(worldPoint: unknown): unknown;
+
+  /**
+   * Convenience methods which take a cc.Touch instead of cc.Point.
+   * TODO: Implement cc.Point typings...
+   * TODO: Implement cc.Touch typings...
+   *
+   * @param touch The touch object.
+   */
+  convertTouchToNodeSpace(touch: unknown): unknown;
+
+  /**
+   * Converts a cc.Touch (world coordinates) into a local coordinate. This method is AR (Anchor Relative).
+   * TODO: Implement cc.Point typings...
+   * TODO: Implement cc.Touch typings...
+   *
+   * @param touch The touch object.
+   */
+  convertTouchToNodeSpaceAR(touch: unknown): unknown;
+
+  /**
+   * Converts a Point to world space coordinates. The result is in Points.
+   * TODO: Implement cc.Point typings...
+   *
+   * @param nodePoint
+   */
+  convertToWorldSpace(nodePoint: unknown): unknown;
+
+  /**
+   * Converts a local Point to world space coordinates. The result is in Points.
+   * Treating the returned/received node point as anchor relative.
+   * TODO: Implement cc.Point typings...
+   *
+   * @param nodePoint
+   */
+  convertToWorldSpaceAR(nodePoint: unknown): unknown;
+
+  /**
+   * Constructor function, override it to extend the construction behavior.
+   * Remember to call "this._super()" in the extended "ctor" function.
+   */
+  ctor(): void;
+}
