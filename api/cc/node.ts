@@ -1407,64 +1407,67 @@ export interface CCNode extends CCClass {
    */
   transform(parentCmd: unknown, recursive: boolean): void;
 
-  /*
-unschedule(callback_fn)
-unschedules a custom callback function.
+  /**
+   * Unschedules a custom callback function.
+   *
+   * @param callback_fn A function wrapped as a selector.
+   */
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  unschedule(callback_fn: Function): void;
 
-Parameters:
-{function} callback_fn
-    A function wrapped as a selector
+  /**
+   * Unschedule all scheduled callback functions: custom callback functions, and the 'update' callback function.
+   * Actions are not affected by this method.
+   */
+  unscheduleAllCallbacks(): void;
 
-See:
-    cc.Node#schedule
+  /**
+   * Unschedules the "update" method.
+   */
+  unscheduleUpdate(): void;
 
-unscheduleAllCallbacks()
+  /**
+   * Update will be called automatically every frame if "scheduleUpdate" is called when the node is "live".
+   * The default behavior is to invoke the visit function of node's componentContainer.
+   * Override me to implement your own update logic.
+   *
+   * @param dt Delta time since last update.
+   */
+  update(dt: number): void;
 
-unschedule all scheduled callback functions: custom callback functions, and the 'update' callback function.
-Actions are not affected by this method.
-unscheduleUpdate()
-Unschedules the "update" method.
+  /**
+   * Update the displayed color of Node.
+   *
+   * @param parentColor
+   */
+  updateDisplayedColor(parentColor: CCColor): void;
 
-See:
-    cc.Node#scheduleUpdate
+  /**
+   * Update displayed opacity.
+   *
+   * @param parentOpacity
+   */
+  updateDisplayedOpacity(parentOpacity: number): void;
 
-update(dt)
-Update will be called automatically every frame if "scheduleUpdate" is called when the node is "live".
-The default behavior is to invoke the visit function of node's componentContainer.
-Override me to implement your own update logic.
+  /**
+   * Calls children's updateTransform() method recursively.
+   *
+   * This method is moved from CCSprite, so it's no longer specific to CCSprite.
+   * As the result, you apply CCSpriteBatchNode's optimization on your customed CCNode.
+   * e.g., batchNode->addChild(myCustomNode), while you can only addChild(sprite) before.
+   */
+  updateTransform(): void;
 
-Parameters:
-{Number} dt
-    Delta time since last update
+  /**
+   * Recursive method that visit its children and draw them.
+   * TODO: what is cc.Node.RenderCmd ...?
+   *
+   * @param parentCmd
+   */
+  visit(parentCmd: unknown): void;
 
-updateDisplayedColor(parentColor)
-Update the displayed color of Node
-
-Parameters:
-{cc.Color} parentColor
-
-updateDisplayedOpacity(parentOpacity)
-Update displayed opacity
-
-Parameters:
-{Number} parentOpacity
-
-updateTransform()
-
-Calls children's updateTransform() method recursively.
-
-This method is moved from CCSprite, so it's no longer specific to CCSprite.
-As the result, you apply CCSpriteBatchNode's optimization on your customed CCNode.
-e.g., batchNode->addChild(myCustomNode), while you can only addChild(sprite) before.
-visit(parentCmd)
-Recursive method that visit its children and draw them
-
-Parameters:
-{cc.Node.RenderCmd} parentCmd
-
-worldToNodeTransform()
-
-Deprecated:
-since v3.0, please use getWorldToNodeTransform instead
-*/
+  /**
+   * @deprecated since v3.0, please use getWorldToNodeTransform instead.
+   */
+  worldToNodeTransform(): void;
 }
