@@ -1,4 +1,9 @@
-import type { CCClassNamespace } from './class';
+import type { CCClass, CCClassNamespace } from './class';
+import type { CCColor } from './color';
+import type { CCComponent } from './component';
+import type { CCPoint } from './point';
+import type { CCRect } from './rect';
+import type { CCTouch } from './touch';
 
 export type CCNodeNamespace = {
   /**
@@ -65,7 +70,7 @@ export type CCNodeNamespace = {
  * -# The grid will capture the screen
  * -# The grid will render the captured screen
  */
-export interface CCNode {
+export interface CCNode extends CCClass {
   /**
    * The CCActionManager object that is used by all actions.
    * TODO: Implement cc.ActionManager typings...
@@ -109,9 +114,8 @@ export interface CCNode {
 
   /**
    * Color of node, default value is white: (255, 255, 255).
-   * TODO: Implement cc.Color typings...
    */
-  color: unknown;
+  color: CCColor;
 
   /**
    * The state of OpenGL server side.
@@ -264,11 +268,10 @@ export interface CCNode {
 
   /**
    * Adds a component to the node's component container.
-   * TODO: Implement cc.Component typings...
    *
    * @param component
    */
-  addComponent(component: unknown): void;
+  addComponent(component: CCComponent): void;
 
   /**
    * Properties configuration function. All properties in attrs will be set to the node,
@@ -280,11 +283,10 @@ export interface CCNode {
 
   /**
    * Returns a "local" axis aligned bounding box of the node.
-   * TODO: Implement cc.Rect typings...
    *
    * @deprecated since v3.0, please use getBoundingBox instead.
    */
-  boundingBox(): unknown;
+  boundingBox(): CCRect;
 
   /**
    * Stops all running actions and schedulers.
@@ -293,55 +295,47 @@ export interface CCNode {
 
   /**
    * Converts a Point to node (local) space coordinates. The result is in Points.
-   * TODO: Implement cc.Point typings...
    *
    * @param worldPoint
    */
-  convertToNodeSpace(worldPoint: unknown): unknown;
+  convertToNodeSpace(worldPoint: CCPoint): CCPoint;
 
   /**
    * Converts a Point to node (local) space coordinates. The result is in Points.
    * treating the returned/received node point as anchor relative.
-   * TODO: Implement cc.Point typings...
    *
    * @param worldPoint
    */
-  convertToNodeSpaceAR(worldPoint: unknown): unknown;
+  convertToNodeSpaceAR(worldPoint: CCPoint): CCPoint;
 
   /**
    * Convenience methods which take a cc.Touch instead of cc.Point.
-   * TODO: Implement cc.Point typings...
-   * TODO: Implement cc.Touch typings...
    *
    * @param touch The touch object.
    */
-  convertTouchToNodeSpace(touch: unknown): unknown;
+  convertTouchToNodeSpace(touch: CCTouch): CCPoint;
 
   /**
    * Converts a cc.Touch (world coordinates) into a local coordinate. This method is AR (Anchor Relative).
-   * TODO: Implement cc.Point typings...
-   * TODO: Implement cc.Touch typings...
    *
    * @param touch The touch object.
    */
-  convertTouchToNodeSpaceAR(touch: unknown): unknown;
+  convertTouchToNodeSpaceAR(touch: CCTouch): CCPoint;
 
   /**
    * Converts a Point to world space coordinates. The result is in Points.
-   * TODO: Implement cc.Point typings...
    *
    * @param nodePoint
    */
-  convertToWorldSpace(nodePoint: unknown): unknown;
+  convertToWorldSpace(nodePoint: CCPoint): CCPoint;
 
   /**
    * Converts a local Point to world space coordinates. The result is in Points.
    * Treating the returned/received node point as anchor relative.
-   * TODO: Implement cc.Point typings...
    *
    * @param nodePoint
    */
-  convertToWorldSpaceAR(nodePoint: unknown): unknown;
+  convertToWorldSpaceAR(nodePoint: CCPoint): CCPoint;
 
   /**
    * Constructor function, override it to extend the construction behavior.
@@ -370,4 +364,1185 @@ export interface CCNode {
    * Your callback can return `true` to terminate the enumeration.
    */
   enumerateChildren(name: string, callback: (node: CCNode) => boolean): void;
+
+  /*
+  {cc.Action} getActionByTag(tag)
+Returns an action from the running action list by its tag.
+
+Parameters:
+{Number} tag
+
+Returns:
+    {cc.Action} The action object with the given tag.
+See:
+    cc.Node#getTag and cc.Node#setTag
+
+{cc.ActionManager} getActionManager()
+
+Returns the CCActionManager object that is used by all actions.
+(IMPORTANT: If you set a new cc.ActionManager, then previously created actions are going to be removed.)
+
+Returns:
+    {cc.ActionManager} A CCActionManager object.
+See:
+    cc.Node#setActionManager
+
+{cc.Point} getAnchorPoint()
+
+Returns a copy of the anchor point.
+Anchor point is the point around which all transformations and positioning manipulations take place.
+It's like a pin in the node where it is "attached" to its parent.
+The anchorPoint is normalized, like a percentage. (0,0) means the bottom-left corner and (1,1) means the top-right corner.
+But you can use values higher than (1,1) and lower than (0,0) too.
+The default anchor point is (0.5,0.5), so it starts at the center of the node.
+
+Returns:
+    {cc.Point} The anchor point of node.
+
+{cc.Point} getAnchorPointInPoints()
+Returns a copy of the anchor point in absolute pixels.
+you can only read it. If you wish to modify it, use setAnchorPoint
+
+Returns:
+    {cc.Point} The anchor point in absolute pixels.
+See:
+    cc.Node#getAnchorPoint
+
+{cc.Rect} getBoundingBox()
+Returns a "local" axis aligned bounding box of the node.
+The returned box is relative only to its parent.
+
+Returns:
+    {cc.Rect} The calculated bounding box of the node
+
+{cc.Rect} getBoundingBoxToWorld()
+Returns a "world" axis aligned bounding box of the node.
+
+Returns:
+    {cc.Rect}
+
+{null} getCamera()
+Returns null
+
+Deprecated:
+since v3.0, no alternative function
+Returns:
+    {null}
+
+{cc.Node} getChildByName(name)
+Returns a child from the container given its name
+
+Parameters:
+{String} name
+    A name to find the child node.
+
+Returns:
+    {cc.Node} a CCNode object whose name equals to the input parameter
+
+{cc.Node} getChildByTag(aTag)
+Returns a child from the container given its tag
+
+Parameters:
+{Number} aTag
+    An identifier to find the child node.
+
+Returns:
+    {cc.Node} a CCNode object whose tag equals to the input parameter
+
+{Array} getChildren()
+Returns an array of all children
+Composing a "tree" structure is a very important feature of CCNode
+
+ //This sample code traverses all children nodes, and set their position to (0,0)
+ var allChildren = parent.getChildren();
+ for(var i = 0; i< allChildren.length; i++) {
+     allChildren[i].setPosition(0,0);
+ }
+
+Returns:
+    {Array} An array of children
+
+{Number} getChildrenCount()
+Returns the amount of children.
+
+Returns:
+    {Number} The amount of children.
+
+{cc.Color} getColor()
+Returns the color of Node
+
+Returns:
+    {cc.Color}
+
+{cc.Component} getComponent(name)
+Returns a component identified by the name given.
+
+Parameters:
+{String} name
+    The name to search for
+
+Returns:
+    {cc.Component} The component found
+
+{cc.Size} getContentSize()
+
+Returns a copy the untransformed size of the node.
+The contentSize remains the same no matter the node is scaled or rotated.
+All nodes has a size. Layer and Scene has the same size of the screen by default.
+
+Returns:
+    {cc.Size} The untransformed size of the node.
+
+{cc.Color} getDisplayedColor()
+Returns the displayed color of Node, the difference between displayed color and color is that displayed color is calculated based on color and parent node's color when cascade color enabled.
+
+Returns:
+    {cc.Color}
+
+{number} getDisplayedOpacity()
+Returns the displayed opacity of Node, the difference between displayed opacity and opacity is that displayed opacity is calculated based on opacity and parent node's opacity when cascade opacity enabled.
+
+Returns:
+    {number} displayed opacity
+
+{number} getGlobalZOrder()
+Return the Node's Global Z Order.
+
+Returns:
+    {number} The node's global Z order
+
+{Number} getGLServerState()
+Returns the state of OpenGL server side.
+
+Deprecated:
+since v3.0, no need anymore
+Returns:
+    {Number} The state of OpenGL server side.
+
+{cc.GridBase} getGrid()
+
+Returns a grid object that is used when applying effects.
+This function have been deprecated, please use cc.NodeGrid to run grid actions
+
+Deprecated:
+since v3.0, no alternative function
+Returns:
+    {cc.GridBase} A CCGrid object that is used when applying effects
+
+{Number} getLocalZOrder()
+Returns the local Z order of this node.
+
+Returns:
+    {Number} The local (relative to its siblings) Z order.
+
+{string} getName()
+Returns a string that is used to identify the node.
+
+Returns:
+    {string} A string that identifies the node.
+
+{cc.AffineTransform} getNodeToParentTransform(ancestor)
+Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
+The matrix is in Pixels.
+
+Parameters:
+ancestor
+
+Returns:
+    {cc.AffineTransform} The affine transform object
+
+{cc.AffineTransform} getNodeToWorldTransform()
+Returns the world affine transform matrix. The matrix is in Pixels.
+
+Returns:
+    {cc.AffineTransform}
+
+{cc.Point} getNormalizedPosition()
+returns the normalized position
+
+Returns:
+    {cc.Point}
+
+{Number} getNumberOfRunningActions()
+
+Returns the numbers of actions that are running plus the ones that are schedule to run (actions in actionsToAdd and actions arrays).
+Composable actions are counted as 1 action. Example:
+If you are running 1 Sequence of 7 actions, it will return 1.
+If you are running 7 Sequences of 2 actions, it will return 7.
+
+Returns:
+    {Number} The number of actions that are running plus the ones that are schedule to run
+
+{number} getOpacity()
+Returns the opacity of Node
+
+Returns:
+    {number} opacity
+
+{Number} getOrderOfArrival()
+Returns the arrival order, indicates which children should be added previously.
+
+Returns:
+    {Number} The arrival order.
+
+{cc.Node} getParent()
+Returns a reference to the parent node
+
+Returns:
+    {cc.Node} A reference to the parent node
+
+{cc.AffineTransform} getParentToNodeTransform()
+Returns the matrix that transform parent's space coordinates to the node's (local) space coordinates.
+The matrix is in Pixels.
+
+Returns:
+    {cc.AffineTransform}
+
+{cc.Point} getPosition()
+
+Returns a copy of the position (x,y) of the node in cocos2d coordinates. (0,0) is the left-bottom corner.
+
+Returns:
+    {cc.Point} The position (x,y) of the node in OpenGL coordinates
+
+{Number} getPositionX()
+
+Returns the x axis position of the node in cocos2d coordinates.
+
+Returns:
+    {Number}
+
+{Number} getPositionY()
+
+Returns the y axis position of the node in cocos2d coordinates.
+
+Returns:
+    {Number}
+
+{Number} getRotation()
+Returns the rotation (angle) of the node in degrees. 0 is the default rotation angle. Positive values rotate node clockwise.
+
+Returns:
+    {Number} The rotation of the node in degrees.
+
+{Number} getRotationX()
+Returns the X axis rotation (angle) which represent a horizontal rotational skew of the node in degrees.
+0 is the default rotation angle. Positive values rotate node clockwise
+(support only in WebGL rendering mode)
+
+Returns:
+    {Number} The X rotation in degrees.
+
+{Number} getRotationY()
+Returns the Y axis rotation (angle) which represent a vertical rotational skew of the node in degrees.
+0 is the default rotation angle. Positive values rotate node clockwise
+(support only in WebGL rendering mode)
+
+Returns:
+    {Number} The Y rotation in degrees.
+
+{Number} getScale()
+Returns the scale factor of the node.
+
+Returns:
+    {Number} The scale factor
+
+{Number} getScaleX()
+Returns the scale factor on X axis of this node
+
+Returns:
+    {Number} The scale factor on X axis.
+
+{Number} getScaleY()
+Returns the scale factor on Y axis of this node
+
+Returns:
+    {Number} The scale factor on Y axis.
+
+{cc.Scheduler} getScheduler()
+
+Returns the cc.Scheduler object used to schedule all "updates" and timers.
+
+Returns:
+    {cc.Scheduler} A CCScheduler object.
+
+{cc.GLProgram} getShaderProgram()
+Return the shader program currently used for this node
+
+Returns:
+    {cc.GLProgram} The shader program currently used for this node
+
+{Number} getSkewX()
+
+Returns the skew degrees in X
+The X skew angle of the node in degrees.
+This angle describes the shear distortion in the X direction.
+Thus, it is the angle between the Y axis and the left edge of the shape
+The default skewX angle is 0. Positive values distort the node in a CW direction.
+
+Returns:
+    {Number} The X skew angle of the node in degrees.
+
+{Number} getSkewY()
+
+Returns the skew degrees in Y
+The Y skew angle of the node in degrees.
+This angle describes the shear distortion in the Y direction.
+Thus, it is the angle between the X axis and the bottom edge of the shape
+The default skewY angle is 0. Positive values distort the node in a CCW direction.
+
+Returns:
+    {Number} The Y skew angle of the node in degrees.
+
+{Number} getTag()
+Returns a tag that is used to identify the node easily.
+
+ //You can set tags to node then identify them easily.
+// set tags
+node1.setTag(TAG_PLAYER);
+node2.setTag(TAG_MONSTER);
+node3.setTag(TAG_BOSS);
+parent.addChild(node1);
+parent.addChild(node2);
+parent.addChild(node3);
+// identify by tags
+var allChildren = parent.getChildren();
+for(var i = 0; i < allChildren.length; i++){
+    switch(node.getTag()) {
+        case TAG_PLAYER:
+            break;
+        case TAG_MONSTER:
+            break;
+        case TAG_BOSS:
+            break;
+    }
+}
+
+Returns:
+    {Number} An integer that identifies the node.
+
+{object} getUserData()
+
+Returns a custom user data pointer
+You can set everything in UserData pointer, a data block, a structure or an object.
+
+Returns:
+    {object} A custom user data pointer
+
+{object} getUserObject()
+Returns a user assigned cocos2d object.
+Similar to userData, but instead of holding all kinds of data it can only hold a cocos2d object
+
+Returns:
+    {object} A user assigned CCObject
+
+{Number} getVertexZ()
+Returns WebGL Z vertex of this node.
+
+Returns:
+    {Number} WebGL Z vertex of this node
+
+{cc.AffineTransform} getWorldToNodeTransform()
+Returns the inverse world affine transform matrix. The matrix is in Pixels.
+
+Returns:
+    {cc.AffineTransform}
+
+{Number} getZOrder()
+Returns z order of this node
+
+Deprecated:
+since 3.0, please use getLocalZOrder instead
+Returns:
+    {Number}
+
+ignoreAnchorPointForPosition(newValue)
+
+Sets whether the anchor point will be ignored when you position this node.
+When anchor point ignored, position will be calculated based on the origin point (0, 0) in parent's coordinates.
+This is an internal method, only used by CCLayer and CCScene. Don't call it outside framework.
+The default value is false, while in CCLayer and CCScene are true
+
+Parameters:
+{Boolean} newValue
+    true if anchor point will be ignored when you position this node
+
+{boolean} init()
+Initializes the instance of cc.Node
+
+Returns:
+    {boolean} Whether the initialization was successful.
+
+{boolean} isCascadeColorEnabled()
+Returns whether node's color value affect its child nodes.
+
+Returns:
+    {boolean}
+
+{boolean} isCascadeOpacityEnabled()
+Returns whether node's opacity value affect its child nodes.
+
+Returns:
+    {boolean}
+
+{Boolean} isIgnoreAnchorPointForPosition()
+Returns whether the anchor point will be ignored when you position this node.
+When anchor point ignored, position will be calculated based on the origin point (0, 0) in parent's coordinates.
+
+Returns:
+    {Boolean} true if the anchor point will be ignored when you position this node.
+See:
+    cc.Node#ignoreAnchorPointForPosition
+
+{Boolean} isOpacityModifyRGB()
+Get whether color should be changed with the opacity value
+
+Returns:
+    {Boolean}
+
+{Boolean} isRunning()
+
+Returns whether or not the node accepts event callbacks.
+Running means the node accept event callbacks like onEnter(), onExit(), update()
+
+Returns:
+    {Boolean} Whether or not the node is running.
+
+{Boolean} isVisible()
+Returns if the node is visible
+
+Returns:
+    {Boolean} true if the node is visible, false if the node is hidden.
+See:
+    cc.Node#setVisible
+
+{cc.AffineTransform} nodeToParentTransform()
+
+Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
+The matrix is in Pixels.
+
+Deprecated:
+since v3.0, please use getNodeToParentTransform instead
+Returns:
+    {cc.AffineTransform}
+
+nodeToWorldTransform()
+
+Deprecated:
+since v3.0, please use getNodeToWorldTransform instead
+
+onEnter()
+
+Event callback that is invoked every time when CCNode enters the 'stage'.
+If the CCNode enters the 'stage' with a transition, this event is called when the transition starts.
+During onEnter you can't access a "sister/brother" node.
+If you override onEnter, you must call its parent's onEnter function with this._super().
+onEnterTransitionDidFinish()
+
+Event callback that is invoked when the CCNode enters in the 'stage'.
+If the CCNode enters the 'stage' with a transition, this event is called when the transition finishes.
+If you override onEnterTransitionDidFinish, you shall call its parent's onEnterTransitionDidFinish with this._super()
+onExit()
+
+callback that is called every time the cc.Node leaves the 'stage'.
+If the cc.Node leaves the 'stage' with a transition, this callback is called when the transition finishes.
+During onExit you can't access a sibling node.
+If you override onExit, you shall call its parent's onExit with this._super().
+onExitTransitionDidStart()
+
+callback that is called every time the cc.Node leaves the 'stage'.
+If the cc.Node leaves the 'stage' with a transition, this callback is called when the transition starts.
+If you override onExitTransitionDidStart, you shall call its parent's onExitTransitionDidStart with this._super()
+parentToNodeTransform()
+
+Deprecated:
+since v3.0, please use getParentToNodeTransform instead
+
+pause()
+
+Pauses all scheduled selectors and actions.
+This method is called internally by onExit
+pauseSchedulerAndActions()
+
+Pauses all scheduled selectors and actions.
+This method is called internally by onExit
+
+Deprecated:
+since v3.0, please use pause instead
+
+release()
+
+Currently JavaScript Bindings (JSB), in some cases, needs to use retain and release. This is a bug in JSB, and the ugly workaround is to use retain/release. So, these 2 methods were added to be compatible with JSB. This is a hack, and should be removed once JSB fixes the retain/release bug
+You will need to retain an object if you created an engine object and haven't added it into the scene graph during the same frame.
+Otherwise, JSB's native autorelease pool will consider this object a useless one and release it directly,
+when you want to use it later, a "Invalid Native Object" error will be raised.
+The retain function can increase a reference count for the native object to avoid it being released,
+you need to manually invoke release function when you think this object is no longer needed, otherwise, there will be memory learks.
+retain and release function call should be paired in developer's game code.
+
+See:
+    cc.Node#retain
+
+removeAllChildren(cleanup)
+Removes all children from the container and do a cleanup all running actions depending on the cleanup parameter.
+If the cleanup parameter is not passed, it will force a cleanup.
+
+Parameters:
+{Boolean} cleanup Optional, Default: true
+    true if all running actions on all children nodes should be cleanup, false otherwise.
+
+removeAllChildrenWithCleanup(cleanup)
+Removes all children from the container and do a cleanup all running actions depending on the cleanup parameter.
+
+Parameters:
+{Boolean} cleanup Optional, Default: true
+
+removeAllComponents()
+Removes all components of cc.Node, it called when cc.Node is exiting from stage.
+removeChild(child, cleanup)
+
+Removes a child from the container. It will also cleanup all running actions depending on the cleanup parameter.
+If the cleanup parameter is not passed, it will force a cleanup.
+
+"remove" logic MUST only be on this method
+If a class wants to extend the 'removeChild' behavior it only needs
+to override this method
+
+Parameters:
+{cc.Node} child
+    The child node which will be removed.
+{Boolean} cleanup Optional, Default: true
+    true if all running actions and callbacks on the child node will be cleanup, false otherwise.
+
+removeChildByTag(tag, cleanup)
+Removes a child from the container by tag value. It will also cleanup all running actions depending on the cleanup parameter. If the cleanup parameter is not passed, it will force a cleanup.
+
+Parameters:
+{Number} tag
+    An integer number that identifies a child node
+{Boolean} cleanup Optional, Default: true
+    true if all running actions and callbacks on the child node will be cleanup, false otherwise.
+
+See:
+    cc.Node#removeChildByTag
+
+removeComponent(component)
+Removes a component identified by the given name or removes the component object given
+
+Parameters:
+{String|cc.Component} component
+
+removeFromParent(cleanup)
+Remove itself from its parent node. If cleanup is true, then also remove all actions and callbacks.
+If the cleanup parameter is not passed, it will force a cleanup.
+If the node orphan, then nothing happens.
+
+Parameters:
+{Boolean} cleanup Optional, Default: true
+    true if all actions and callbacks on this node should be removed, false otherwise.
+
+See:
+    cc.Node#removeFromParentAndCleanup
+
+removeFromParentAndCleanup(cleanup)
+Removes this node itself from its parent node.
+If the node orphan, then nothing happens.
+
+Parameters:
+{Boolean} cleanup Optional, Default: true
+    true if all actions and callbacks on this node should be removed, false otherwise.
+
+Deprecated:
+since v3.0, please use removeFromParent() instead
+
+reorderChild(child, zOrder)
+Reorders a child according to a new z value.
+The child MUST be already added.
+
+Parameters:
+{cc.Node} child
+    An already added child node. It MUST be already added.
+{Number} zOrder
+    Z order for drawing priority. Please refer to setZOrder(int)
+
+resume()
+
+Resumes all scheduled selectors and actions.
+This method is called internally by onEnter
+resumeSchedulerAndActions()
+Resumes all scheduled selectors and actions.
+This method is called internally by onEnter
+
+Deprecated:
+since v3.0, please use resume() instead
+
+retain()
+
+Currently JavaScript Bindings (JSB), in some cases, needs to use retain and release. This is a bug in JSB, and the ugly workaround is to use retain/release. So, these 2 methods were added to be compatible with JSB. This is a hack, and should be removed once JSB fixes the retain/release bug
+You will need to retain an object if you created an engine object and haven't added it into the scene graph during the same frame.
+Otherwise, JSB's native autorelease pool will consider this object a useless one and release it directly,
+when you want to use it later, a "Invalid Native Object" error will be raised.
+The retain function can increase a reference count for the native object to avoid it being released,
+you need to manually invoke release function when you think this object is no longer needed, otherwise, there will be memory learks.
+retain and release function call should be paired in developer's game code.
+
+See:
+    cc.Node#release
+
+{cc.Action} runAction(action)
+Executes an action, and returns the action that is executed.
+The node becomes the action's target. Refer to cc.Action's getTarget()
+
+Parameters:
+{cc.Action} action
+
+Returns:
+    {cc.Action} An Action pointer
+
+schedule(callback, interval, repeat, delay, key)
+
+Schedules a custom selector.
+If the selector is already scheduled, then the interval parameter will be updated without scheduling it again.
+
+Parameters:
+{function} callback
+    A function wrapped as a selector
+{Number} interval
+    Tick interval in seconds. 0 means tick every frame. If interval = 0, it's recommended to use scheduleUpdate() instead.
+{Number} repeat
+    The selector will be executed (repeat + 1) times, you can use kCCRepeatForever for tick infinitely.
+{Number} delay
+    The amount of time that the first tick will wait before execution.
+{String} key
+    The only string identifying the callback
+
+scheduleOnce(callback, delay, key)
+Schedules a callback function that runs only once, with a delay of 0 or larger
+
+Parameters:
+{function} callback
+    A function wrapped as a selector
+{Number} delay
+    The amount of time that the first tick will wait before execution.
+{String} key
+    The only string identifying the callback
+
+See:
+    cc.Node#schedule
+
+scheduleUpdate()
+
+schedules the "update" method.
+It will use the order number 0. This method will be called every frame.
+Scheduled methods with a lower order value will be called before the ones that have a higher order value.
+Only one "update" method could be scheduled per node.
+scheduleUpdateWithPriority(priority)
+
+schedules the "update" callback function with a custom priority. This callback function will be called every frame.
+Scheduled callback functions with a lower priority will be called before the ones that have a higher value.
+Only one "update" callback function could be scheduled per node (You can't have 2 'update' callback functions).
+
+Parameters:
+{Number} priority
+
+setActionManager(actionManager)
+
+Sets the cc.ActionManager object that is used by all actions.
+
+Parameters:
+{cc.ActionManager} actionManager
+    A CCActionManager object that is used by all actions.
+
+setAdditionalTransform(additionalTransform)
+
+Sets the additional transform.
+The additional transform will be concatenated at the end of getNodeToParentTransform.
+It could be used to simulate `parent-child` relationship between two nodes (e.g. one is in BatchNode, another isn't).
+
+// create a batchNode
+var batch = new cc.SpriteBatchNode("Icon-114.png");
+this.addChild(batch);
+
+// create two sprites, spriteA will be added to batchNode, they are using different textures.
+var spriteA = new cc.Sprite(batch->getTexture());
+var spriteB = new cc.Sprite("Icon-72.png");
+
+batch.addChild(spriteA);
+
+// We can't make spriteB as spriteA's child since they use different textures. So just add it to layer.
+// But we want to simulate `parent-child` relationship for these two node.
+this.addChild(spriteB);
+
+//position
+spriteA.setPosition(ccp(200, 200));
+
+// Gets the spriteA's transform.
+var t = spriteA.getNodeToParentTransform();
+
+// Sets the additional transform to spriteB, spriteB's position will based on its pseudo parent i.e. spriteA.
+spriteB.setAdditionalTransform(t);
+
+//scale
+spriteA.setScale(2);
+
+// Gets the spriteA's transform.
+t = spriteA.getNodeToParentTransform();
+
+// Sets the additional transform to spriteB, spriteB's scale will based on its pseudo parent i.e. spriteA.
+spriteB.setAdditionalTransform(t);
+
+//rotation
+spriteA.setRotation(20);
+
+// Gets the spriteA's transform.
+t = spriteA.getNodeToParentTransform();
+
+// Sets the additional transform to spriteB, spriteB's rotation will based on its pseudo parent i.e. spriteA.
+spriteB.setAdditionalTransform(t);
+
+Parameters:
+{cc.AffineTransform} additionalTransform
+    The additional transform
+
+setAnchorPoint(point, y)
+
+Sets the anchor point in percent.
+
+anchor point is the point around which all transformations and positioning manipulations take place.
+It's like a pin in the node where it is "attached" to its parent.
+The anchorPoint is normalized, like a percentage. (0,0) means the bottom-left corner and (1,1) means the top-right corner.
+But you can use values higher than (1,1) and lower than (0,0) too.
+The default anchor point is (0.5,0.5), so it starts at the center of the node.
+
+Parameters:
+{cc.Point|Number} point
+    The anchor point of node or The x axis anchor of node.
+{Number} y Optional
+    The y axis anchor of node.
+
+setCascadeColorEnabled(cascadeColorEnabled)
+Enable or disable cascade color, if cascade enabled, child nodes' opacity will be the cascade value of parent color and its own color.
+
+Parameters:
+{boolean} cascadeColorEnabled
+
+setCascadeOpacityEnabled(cascadeOpacityEnabled)
+Enable or disable cascade opacity, if cascade enabled, child nodes' opacity will be the multiplication of parent opacity and its own opacity.
+
+Parameters:
+{boolean} cascadeOpacityEnabled
+
+setColor(color)
+
+Sets the color of Node.
+When color doesn't include opacity value like cc.color(128,128,128), this function only change the color.
+When color include opacity like cc.color(128,128,128,100), then this function will change the color and the opacity.
+
+Parameters:
+{cc.Color} color
+    The new color given
+
+setContentSize(size, height)
+
+Sets the untransformed size of the node.
+
+The contentSize remains the same no matter the node is scaled or rotated.
+All nodes has a size. Layer and Scene has the same size of the screen.
+
+Parameters:
+{cc.Size|Number} size
+    The untransformed size of the node or The untransformed size's width of the node.
+{Number} height Optional
+    The untransformed size's height of the node.
+
+setGlobalZOrder(globalZOrder)
+
+Defines the oder in which the nodes are renderer.
+Nodes that have a Global Z Order lower, are renderer first.
+
+In case two or more nodes have the same Global Z Order, the oder is not guaranteed.
+The only exception if the Nodes have a Global Z Order == 0. In that case, the Scene Graph order is used.
+
+By default, all nodes have a Global Z Order = 0. That means that by default, the Scene Graph order is used to render the nodes.
+
+Global Z Order is useful when you need to render nodes in an order different than the Scene Graph order.
+
+Limitations: Global Z Order can't be used used by Nodes that have SpriteBatchNode as one of their ancestors.
+And if ClippingNode is one of the ancestors, then "global Z order" will be relative to the ClippingNode.
+
+Parameters:
+{Number} globalZOrder
+
+setGLServerState(state)
+Sets the state of OpenGL server side.
+
+Parameters:
+{Number} state
+    The state of OpenGL server side.
+
+Deprecated:
+since v3.0, no need anymore
+
+setGrid(grid)
+
+Changes a grid object that is used when applying effects
+This function have been deprecated, please use cc.NodeGrid to run grid actions
+
+Parameters:
+{cc.GridBase} grid
+    A CCGrid object that is used when applying effects
+
+Deprecated:
+since v3.0, no alternative function
+
+setLocalZOrder(localZOrder)
+
+LocalZOrder is the 'key' used to sort the node relative to its siblings.
+
+The Node's parent will sort all its children based ont the LocalZOrder value.
+If two nodes have the same LocalZOrder, then the node that was added first to the children's array
+will be in front of the other node in the array.
+
+Also, the Scene Graph is traversed using the "In-Order" tree traversal algorithm ( http://en.wikipedia.org/wiki/Tree_traversal#In-order )
+And Nodes that have LocalZOder values < 0 are the "left" subtree
+While Nodes with LocalZOder >=0 are the "right" subtree.
+
+Parameters:
+{Number} localZOrder
+
+setName(name)
+Changes the name that is used to identify the node easily.
+
+Parameters:
+{String} name
+
+setNormalizedPosition(posOrX, y)
+
+Sets the position (x,y) using values between 0 and 1.
+The positions in pixels is calculated like the following:
+_position = _normalizedPosition * parent.getContentSize()
+
+Parameters:
+{cc.Point|Number} posOrX
+{Number} y Optional
+
+setOpacity(opacity)
+Sets the opacity of Node
+
+Parameters:
+{Number} opacity
+
+setOpacityModifyRGB(opacityValue)
+Set whether color should be changed with the opacity value, useless in cc.Node, but this function is override in some class to have such behavior.
+
+Parameters:
+{Boolean} opacityValue
+
+setOrderOfArrival(Var)
+
+Sets the arrival order when this node has a same ZOrder with other children.
+
+A node which called addChild subsequently will take a larger arrival order,
+If two children have the same Z order, the child with larger arrival order will be drawn later.
+
+Parameters:
+{Number} Var
+    The arrival order.
+
+setParent(parent)
+Sets the parent node
+
+Parameters:
+{cc.Node} parent
+    A reference to the parent node
+
+setPosition(newPosOrxValue, yValue)
+
+Changes the position (x,y) of the node in cocos2d coordinates.
+The original point (0,0) is at the left-bottom corner of screen.
+Usually we use cc.p(x,y) to compose CCPoint object.
+and Passing two numbers (x,y) is more efficient than passing CCPoint object.
+
+   var size = cc.winSize;
+   node.setPosition(size.width/2, size.height/2);
+
+Parameters:
+{cc.Point|Number} newPosOrxValue
+    The position (x,y) of the node in coordinates or the X coordinate for position
+{Number} yValue Optional
+    Y coordinate for position
+
+setPositionX(x)
+
+Sets the x axis position of the node in cocos2d coordinates.
+
+Parameters:
+{Number} x
+    The new position in x axis
+
+setPositionY(y)
+
+Sets the y axis position of the node in cocos2d coordinates.
+
+Parameters:
+{Number} y
+    The new position in y axis
+
+setRotation(newRotation)
+
+Sets the rotation (angle) of the node in degrees.
+
+0 is the default rotation angle.
+Positive values rotate node clockwise, and negative values for anti-clockwise.
+
+Parameters:
+{Number} newRotation
+    The rotation of the node in degrees.
+
+setRotationX(rotationX)
+
+Sets the X rotation (angle) of the node in degrees which performs a horizontal rotational skew.
+(support only in WebGL rendering mode)
+0 is the default rotation angle.
+Positive values rotate node clockwise, and negative values for anti-clockwise.
+
+Parameters:
+{Number} rotationX
+    The X rotation in degrees which performs a horizontal rotational skew.
+
+setRotationY(rotationY)
+
+Sets the Y rotation (angle) of the node in degrees which performs a vertical rotational skew.
+(support only in WebGL rendering mode)
+0 is the default rotation angle.
+Positive values rotate node clockwise, and negative values for anti-clockwise.
+
+Parameters:
+rotationY
+    The Y rotation in degrees.
+
+setScale(scale, scaleY)
+Sets the scale factor of the node. 1.0 is the default scale factor. This function can modify the X and Y scale at the same time.
+
+Parameters:
+{Number} scale
+    or scaleX value
+{Number} scaleY Optional
+
+setScaleX(newScaleX)
+
+Changes the scale factor on X axis of this node
+The default value is 1.0 if you haven't changed it before
+
+Parameters:
+{Number} newScaleX
+    The scale factor on X axis.
+
+setScaleY(newScaleY)
+
+Changes the scale factor on Y axis of this node
+The Default value is 1.0 if you haven't changed it before.
+
+Parameters:
+{Number} newScaleY
+    The scale factor on Y axis.
+
+setScheduler(scheduler)
+
+Sets a CCScheduler object that is used to schedule all "updates" and timers.
+IMPORTANT: If you set a new cc.Scheduler, then previously created timers/update are going to be removed.
+
+Parameters:
+scheduler
+    A cc.Scheduler object that is used to schedule all "update" and timers.
+
+setShaderProgram(newShaderProgram)
+
+Sets the shader program for this node Since v2.0, each rendering node must set its shader program. It should be set in initialize phase.
+
+node.setGLProgram(cc.shaderCache.programForKey(cc.SHADER_POSITION_TEXTURECOLOR));
+
+Parameters:
+{cc.GLProgram} newShaderProgram
+    The shader program which fetches from CCShaderCache.
+
+setSkewX(newSkewX)
+
+Changes the X skew angle of the node in degrees.
+
+This angle describes the shear distortion in the X direction.
+Thus, it is the angle between the Y axis and the left edge of the shape
+The default skewX angle is 0. Positive values distort the node in a CW direction.
+
+Parameters:
+{Number} newSkewX
+    The X skew angle of the node in degrees.
+
+setSkewY(newSkewY)
+
+Changes the Y skew angle of the node in degrees.
+
+This angle describes the shear distortion in the Y direction.
+Thus, it is the angle between the X axis and the bottom edge of the shape
+The default skewY angle is 0. Positive values distort the node in a CCW direction.
+
+Parameters:
+{Number} newSkewY
+    The Y skew angle of the node in degrees.
+
+setTag(tag)
+Changes the tag that is used to identify the node easily.
+Please refer to getTag for the sample code.
+
+Parameters:
+{Number} tag
+    A integer that identifies the node.
+
+See:
+    cc.Node#getTag
+
+setUserData(Var)
+
+Sets a custom user data reference
+You can set everything in UserData reference, a data block, a structure or an object, etc.
+
+Parameters:
+{object} Var
+    A custom user data
+
+setUserObject(newValue)
+
+Sets a user assigned cocos2d object
+Similar to UserData, but instead of holding all kinds of data it can only hold a cocos2d object
+In JSB, the UserObject will be retained once in this method, and the previous UserObject (if existed) will be release.
+The UserObject will be released in CCNode's destruction.
+
+Parameters:
+{object} newValue
+    A user cocos2d object
+
+setVertexZ(Var)
+
+Sets the real WebGL Z vertex.
+
+Differences between openGL Z vertex and cocos2d Z order:
+- WebGL Z modifies the Z vertex, and not the Z order in the relation between parent-children
+- WebGL Z might require to set 2D projection
+- cocos2d Z order works OK if all the nodes uses the same WebGL Z vertex. eg: vertexZ = 0
+
+Parameters:
+{Number} Var
+
+setVisible(visible)
+Sets whether the node is visible
+The default value is true
+
+Parameters:
+{Boolean} visible
+    Pass true to make the node visible, false to hide the node.
+
+setZOrder(z)
+
+Sets the Z order which stands for the drawing order, and reorder this node in its parent's children array.
+
+The Z order of node is relative to its "brothers": children of the same parent.
+It's nothing to do with OpenGL's z vertex. This one only affects the draw order of nodes in cocos2d.
+The larger number it is, the later this node will be drawn in each message loop.
+Please refer to setVertexZ(float) for the difference.
+
+Parameters:
+{Number} z
+    Z order of this node.
+
+Deprecated:
+since 3.0, please use setLocalZOrder instead
+
+sortAllChildren()
+
+Sorts the children array once before drawing, instead of every time when a child is added or reordered.
+This approach can improves the performance massively.
+stopAction(action)
+Stops and removes an action from the running action list.
+
+Parameters:
+{cc.Action} action
+    An action object to be removed.
+
+stopActionByTag(tag)
+Removes an action from the running action list by its tag.
+
+Parameters:
+{Number} tag
+    A tag that indicates the action to be removed.
+
+stopAllActions()
+Stops and removes all actions from the running action list .
+transform(parentCmd, recursive)
+Performs view-matrix transformation based on position, scale, rotation and other attributes.
+
+Parameters:
+{cc.Node.RenderCmd} parentCmd
+    parent's render command
+{boolean} recursive
+    whether call its children's transform
+
+unschedule(callback_fn)
+unschedules a custom callback function.
+
+Parameters:
+{function} callback_fn
+    A function wrapped as a selector
+
+See:
+    cc.Node#schedule
+
+unscheduleAllCallbacks()
+
+unschedule all scheduled callback functions: custom callback functions, and the 'update' callback function.
+Actions are not affected by this method.
+unscheduleUpdate()
+Unschedules the "update" method.
+
+See:
+    cc.Node#scheduleUpdate
+
+update(dt)
+Update will be called automatically every frame if "scheduleUpdate" is called when the node is "live".
+The default behavior is to invoke the visit function of node's componentContainer.
+Override me to implement your own update logic.
+
+Parameters:
+{Number} dt
+    Delta time since last update
+
+updateDisplayedColor(parentColor)
+Update the displayed color of Node
+
+Parameters:
+{cc.Color} parentColor
+
+updateDisplayedOpacity(parentOpacity)
+Update displayed opacity
+
+Parameters:
+{Number} parentOpacity
+
+updateTransform()
+
+Calls children's updateTransform() method recursively.
+
+This method is moved from CCSprite, so it's no longer specific to CCSprite.
+As the result, you apply CCSpriteBatchNode's optimization on your customed CCNode.
+e.g., batchNode->addChild(myCustomNode), while you can only addChild(sprite) before.
+visit(parentCmd)
+Recursive method that visit its children and draw them
+
+Parameters:
+{cc.Node.RenderCmd} parentCmd
+
+worldToNodeTransform()
+
+Deprecated:
+since v3.0, please use getWorldToNodeTransform instead
+*/
 }
