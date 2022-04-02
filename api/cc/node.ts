@@ -697,67 +697,54 @@ export interface CCNode extends CCClass {
    */
   getZOrder(): number;
 
+  /**
+   * Sets whether the anchor point will be ignored when you position this node.
+   * When anchor point ignored, position will be calculated based on the origin point (0, 0) in parent's coordinates.
+   * This is an internal method, only used by CCLayer and CCScene. Don't call it outside framework.
+   * The default value is false, while in CCLayer and CCScene are true
+   *
+   * @param newValue
+   */
+  ignoreAnchorPointForPosition(newValue: boolean): void;
+
+  /**
+   * Initializes the instance of cc.Node.
+   */
+  init(): boolean;
+
+  /**
+   * Returns whether node's color value affect its child nodes.
+   */
+  isCascadeColorEnabled(): boolean;
+
+  /**
+   * Returns whether node's opacity value affect its child nodes.
+   */
+  isCascadeOpacityEnabled(): boolean;
+
+  /**
+   * Returns whether the anchor point will be ignored when you position this node.
+   * When anchor point ignored, position will be calculated based on the origin point (0, 0) in parent's coordinates.
+   */
+  isIgnoreAnchorPointForPosition(): boolean;
+
+  /**
+   * Get whether color should be changed with the opacity value.
+   */
+  isOpacityModifyRGB(): boolean;
+
+  /**
+   * Returns whether or not the node accepts event callbacks.
+   * Running means the node accept event callbacks like onEnter(), onExit(), update().
+   */
+  isRunning(): boolean;
+
+  /**
+   * Returns if the node is visible.
+   */
+  isVisible(): boolean;
+
   /*
-ignoreAnchorPointForPosition(newValue)
-
-Sets whether the anchor point will be ignored when you position this node.
-When anchor point ignored, position will be calculated based on the origin point (0, 0) in parent's coordinates.
-This is an internal method, only used by CCLayer and CCScene. Don't call it outside framework.
-The default value is false, while in CCLayer and CCScene are true
-
-Parameters:
-{Boolean} newValue
-    true if anchor point will be ignored when you position this node
-
-{boolean} init()
-Initializes the instance of cc.Node
-
-Returns:
-    {boolean} Whether the initialization was successful.
-
-{boolean} isCascadeColorEnabled()
-Returns whether node's color value affect its child nodes.
-
-Returns:
-    {boolean}
-
-{boolean} isCascadeOpacityEnabled()
-Returns whether node's opacity value affect its child nodes.
-
-Returns:
-    {boolean}
-
-{Boolean} isIgnoreAnchorPointForPosition()
-Returns whether the anchor point will be ignored when you position this node.
-When anchor point ignored, position will be calculated based on the origin point (0, 0) in parent's coordinates.
-
-Returns:
-    {Boolean} true if the anchor point will be ignored when you position this node.
-See:
-    cc.Node#ignoreAnchorPointForPosition
-
-{Boolean} isOpacityModifyRGB()
-Get whether color should be changed with the opacity value
-
-Returns:
-    {Boolean}
-
-{Boolean} isRunning()
-
-Returns whether or not the node accepts event callbacks.
-Running means the node accept event callbacks like onEnter(), onExit(), update()
-
-Returns:
-    {Boolean} Whether or not the node is running.
-
-{Boolean} isVisible()
-Returns if the node is visible
-
-Returns:
-    {Boolean} true if the node is visible, false if the node is hidden.
-See:
-    cc.Node#setVisible
-
 {cc.AffineTransform} nodeToParentTransform()
 
 Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
