@@ -4,6 +4,7 @@ import type { CCAffineTransformNamespace } from './affine-transform';
 import type { CCClassNamespace } from './class';
 import type { CCColorNamespace } from './color';
 import type { CCComponentNamespace } from './component';
+import type { CCGridBaseNamespace } from './grid-base';
 import type { CCNodeNamespace } from './node';
 import type { CCPointNamespace } from './point';
 import type { CCRectNamespace } from './rect';
@@ -17,6 +18,7 @@ export interface cc {
   Class: CCClassNamespace;
   Color: CCColorNamespace;
   Component: CCComponentNamespace;
+  GridBase: CCGridBaseNamespace;
   Node: CCNodeNamespace;
   Point: CCPointNamespace;
   Rect: CCRectNamespace;

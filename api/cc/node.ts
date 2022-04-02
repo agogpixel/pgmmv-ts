@@ -1,9 +1,10 @@
-import { CCAction } from './action';
+import type { CCAction } from './action';
 import type { CCActionManager } from './action-manager';
 import type { CCAffineTransform } from './affine-transform';
 import type { CCClass, CCClassNamespace } from './class';
 import type { CCColor } from './color';
 import type { CCComponent } from './component';
+import type { CCGridBase } from './grid-base';
 import type { CCPoint } from './point';
 import type { CCRect } from './rect';
 import type { CCSize } from './size';
@@ -127,9 +128,8 @@ export interface CCNode extends CCClass {
 
   /**
    * Grid object that is used when applying effects.
-   * TODO: Implement cc.GridBase typings...
    */
-  grid: unknown;
+  grid: CCGridBase;
 
   /**
    * Height of node.
@@ -494,11 +494,10 @@ export interface CCNode extends CCClass {
   /**
    * Returns a grid object that is used when applying effects.
    * This function have been deprecated, please use cc.NodeGrid to run grid actions.
-   * TODO: Implement cc.GridBase typings...
    *
    * @deprecated since v3.0, no alternative function.
    */
-  getGrid(): unknown;
+  getGrid(): CCGridBase;
 
   /**
    * Returns the local Z order of this node.
@@ -1101,12 +1100,11 @@ export interface CCNode extends CCClass {
   /**
    * Changes a grid object that is used when applying effects.
    * This function have been deprecated, please use cc.NodeGrid to run grid actions.
-   * TODO: Define cc.GridBase typings...
    *
    * @param grid A CCGrid object that is used when applying effects.
    * @deprecated since v3.0, no alternative function.
    */
-  setGrid(grid: unknown): void;
+  setGrid(grid: CCGridBase): void;
 
   /**
    * LocalZOrder is the 'key' used to sort the node relative to its siblings.
