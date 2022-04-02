@@ -744,61 +744,72 @@ export interface CCNode extends CCClass {
    */
   isVisible(): boolean;
 
+  /**
+   * Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
+   * The matrix is in Pixels.
+   * TODO: Implement cc.AffineTransform typings...
+   *
+   * @deprecated since v3.0, please use getNodeToParentTransform instead
+   */
+  nodeToParentTransform(): unknown;
+
+  /**
+   * @deprecated since v3.0, please use getNodeToWorldTransform instead.
+   */
+  nodeToWorldTransform(): unknown;
+
+  /**
+   * Event callback that is invoked every time when CCNode enters the 'stage'.
+   * If the CCNode enters the 'stage' with a transition, this event is called when the transition starts.
+   * During onEnter you can't access a "sister/brother" node.
+   * If you override onEnter, you must call its parent's onEnter function with this._super().
+   */
+  onEnter(): void;
+
+  /**
+   * Event callback that is invoked when the CCNode enters in the 'stage'.
+   * If the CCNode enters the 'stage' with a transition, this event is called when the transition finishes.
+   * If you override onEnterTransitionDidFinish, you shall call its parent's onEnterTransitionDidFinish with this._super().
+   */
+  onEnterTransitionDidFinish(): void;
+
+  /**
+   * Callback that is called every time the cc.Node leaves the 'stage'.
+   * If the cc.Node leaves the 'stage' with a transition, this callback is called when the transition finishes.
+   * During onExit you can't access a sibling node.
+   * If you override onExit, you shall call its parent's onExit with this._super().
+   */
+  onExit(): void;
+
+  /**
+   * Callback that is called every time the cc.Node leaves the 'stage'.
+   * If the cc.Node leaves the 'stage' with a transition, this callback is called when the transition starts.
+   * If you override onExitTransitionDidStart, you shall call its parent's onExitTransitionDidStart with this._super().
+   */
+  onExitTransitionDidStart(): void;
+
+  /**
+   * TODO: Implement cc.AffineTransform typings...
+   *
+   * @deprecated since v3.0, please use getParentToNodeTransform instead.
+   */
+  parentToNodeTransform(): unknown;
+
+  /**
+   * Pauses all scheduled selectors and actions.
+   * This method is called internally by onExit.
+   */
+  pause(): void;
+
+  /**
+   * Pauses all scheduled selectors and actions.
+   * This method is called internally by onExit
+   *
+   * @deprecated since v3.0, please use pause instead.
+   */
+  pauseSchedulerAndActions(): void;
+
   /*
-{cc.AffineTransform} nodeToParentTransform()
-
-Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
-The matrix is in Pixels.
-
-Deprecated:
-since v3.0, please use getNodeToParentTransform instead
-Returns:
-    {cc.AffineTransform}
-
-nodeToWorldTransform()
-
-Deprecated:
-since v3.0, please use getNodeToWorldTransform instead
-
-onEnter()
-
-Event callback that is invoked every time when CCNode enters the 'stage'.
-If the CCNode enters the 'stage' with a transition, this event is called when the transition starts.
-During onEnter you can't access a "sister/brother" node.
-If you override onEnter, you must call its parent's onEnter function with this._super().
-onEnterTransitionDidFinish()
-
-Event callback that is invoked when the CCNode enters in the 'stage'.
-If the CCNode enters the 'stage' with a transition, this event is called when the transition finishes.
-If you override onEnterTransitionDidFinish, you shall call its parent's onEnterTransitionDidFinish with this._super()
-onExit()
-
-callback that is called every time the cc.Node leaves the 'stage'.
-If the cc.Node leaves the 'stage' with a transition, this callback is called when the transition finishes.
-During onExit you can't access a sibling node.
-If you override onExit, you shall call its parent's onExit with this._super().
-onExitTransitionDidStart()
-
-callback that is called every time the cc.Node leaves the 'stage'.
-If the cc.Node leaves the 'stage' with a transition, this callback is called when the transition starts.
-If you override onExitTransitionDidStart, you shall call its parent's onExitTransitionDidStart with this._super()
-parentToNodeTransform()
-
-Deprecated:
-since v3.0, please use getParentToNodeTransform instead
-
-pause()
-
-Pauses all scheduled selectors and actions.
-This method is called internally by onExit
-pauseSchedulerAndActions()
-
-Pauses all scheduled selectors and actions.
-This method is called internally by onExit
-
-Deprecated:
-since v3.0, please use pause instead
-
 release()
 
 Currently JavaScript Bindings (JSB), in some cases, needs to use retain and release. This is a bug in JSB, and the ugly workaround is to use retain/release. So, these 2 methods were added to be compatible with JSB. This is a hack, and should be removed once JSB fixes the retain/release bug
