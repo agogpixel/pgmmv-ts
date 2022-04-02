@@ -1,5 +1,7 @@
 import type { AgtkConstants } from '../../constants';
 
+type TemplateMove = AgtkConstants['actionCommands']['templateMove'];
+
 /**
  * * 300 specifies a numerical value equivalent to 1 second in duration300.
  * (Same for other instances of '300').
@@ -11,7 +13,7 @@ export interface AgtkCommandTemplateMoveConfig {
    *
    * MoveNearObject and MoveApartNearObject will be used in their place.
    */
-  moveType: AgtkConstants['actionCommands']['templateMove'][keyof AgtkConstants['actionCommands']['templateMove']];
+  moveType: TemplateMove[keyof TemplateMove];
   horizontalMoveStartRight: boolean;
   horizontalMoveDuration300: number;
   horizontalInfinite: boolean;

@@ -1,8 +1,10 @@
 import type { AgtkConstants } from '../../constants';
 
+type EffectShow = AgtkConstants['actionCommands']['effectShow'];
+
 export interface AgtkCommandEffectShowConfig {
   effectId: number;
-  positionType: AgtkConstants['actionCommands']['effectShow'][keyof AgtkConstants['actionCommands']['effectShow']];
+  positionType: EffectShow[keyof EffectShow];
   useConnect: boolean;
   connectId: number;
   adjustX: number;

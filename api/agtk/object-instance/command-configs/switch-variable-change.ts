@@ -1,5 +1,8 @@
 import type { AgtkConstants } from '../../constants';
 
+type Assignments = AgtkConstants['assignments'];
+type AssignmentsValue = Assignments[keyof Assignments];
+
 /**
  * See: Agtk.constants.assignments.
  */
@@ -8,15 +11,15 @@ export interface AgtkCommandSwitchVariableChangeConfig {
   switchObjectId: number;
   switchQualifierId: number;
   switchId: number;
-  switchValue: AgtkConstants['assignments'][keyof AgtkConstants['assignments']];
+  switchValue: AssignmentsValue;
   variableObjectId: number;
   variableQualifierId: number;
   variableId: number;
-  variableAssignOperator: AgtkConstants['assignments'][keyof AgtkConstants['assignments']];
+  variableAssignOperator: AssignmentsValue;
   /**
    * * Do NOT specify Agtk.constants.assignments.VariableAssignScript
    */
-  variableAssignValueType: AgtkConstants['assignments'][keyof AgtkConstants['assignments']];
+  variableAssignValueType: AssignmentsValue;
   assignValue: number;
   assignVariableObjectId: number;
   assignVariableQualifierId: number;

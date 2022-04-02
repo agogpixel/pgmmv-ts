@@ -1,8 +1,10 @@
 import type { AgtkConstants } from '../../constants';
 
+type ParticleShow = AgtkConstants['actionCommands']['particleShow'];
+
 export interface AgtkCommandParticleShowConfig {
   particleId: number;
-  positionType: AgtkConstants['actionCommands']['particleShow'][keyof AgtkConstants['actionCommands']['particleShow']];
+  positionType: ParticleShow[keyof ParticleShow];
   useConnect: boolean;
   connectId: number;
   adjustX: number;

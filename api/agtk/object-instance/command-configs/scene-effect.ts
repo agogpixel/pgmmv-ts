@@ -2,10 +2,12 @@ import type { AgtkConstants } from '../../constants';
 
 import type { AgtkCommandObjectFilterEffectConfig } from './object-filter-effect';
 
+type FilterEffects = AgtkConstants['filterEffects'];
+
 export interface AgtkCommandSceneEffectConfig {
   layerIndex: number;
   filterEffect: AgtkCommandObjectFilterEffectConfig;
-  effectType: AgtkConstants['filterEffects'][keyof AgtkConstants['filterEffects']];
+  effectType: FilterEffects[keyof FilterEffects];
   noise: number;
   mosaic: number;
   monochrome: number;

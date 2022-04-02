@@ -1,7 +1,9 @@
 import type { AgtkConstants } from '../../constants';
 
+type SoundPlay = AgtkConstants['actionCommands']['soundPlay'];
+
 export interface AgtkCommandSoundPlayConfig {
-  soundType: AgtkConstants['actionCommands']['soundPlay'][keyof AgtkConstants['actionCommands']['soundPlay']];
+  soundType: SoundPlay[keyof SoundPlay];
   seId: number;
   voiceId: number;
   bgmId: number;

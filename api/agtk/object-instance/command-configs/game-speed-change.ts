@@ -1,5 +1,7 @@
 import type { AgtkConstants } from '../../constants';
 
+type GameSpeedChange = AgtkConstants['actionCommands']['gameSpeedChange'];
+
 export interface AgtkCommandGameSpeedChangeConfig {
   gameSpeed: number;
   duration300: number;
@@ -8,7 +10,7 @@ export interface AgtkCommandGameSpeedChangeConfig {
   targetEffect: boolean;
   targetTile: boolean;
   targetMenu: boolean;
-  targettingType: AgtkConstants['actionCommands']['gameSpeedChange'][keyof AgtkConstants['actionCommands']['gameSpeedChange']];
+  targettingType: GameSpeedChange[keyof GameSpeedChange];
   targetObjectGroup: number;
   targetObjectId: number;
   targetQualifierId: number;

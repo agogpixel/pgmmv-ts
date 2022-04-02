@@ -1,5 +1,8 @@
 import type { AgtkConstants } from '../../constants';
 
+type MovieShow = AgtkConstants['actionCommands']['movieShow'];
+type MovieShowValue = MovieShow[keyof MovieShow];
+
 export interface AgtkCommandMovieShowConfig {
   movieId: number;
   loop: boolean;
@@ -7,11 +10,11 @@ export interface AgtkCommandMovieShowConfig {
   defaultSize: boolean;
   width: number;
   height: number;
-  positionType: AgtkConstants['actionCommands']['movieShow'][keyof AgtkConstants['actionCommands']['movieShow']];
+  positionType: MovieShowValue;
   useConnect: boolean;
   connectId: number;
-  vertAlign: AgtkConstants['actionCommands']['movieShow'][keyof AgtkConstants['actionCommands']['movieShow']];
-  horzAlign: AgtkConstants['actionCommands']['movieShow'][keyof AgtkConstants['actionCommands']['movieShow']];
+  vertAlign: MovieShowValue;
+  horzAlign: MovieShowValue;
   adjustX: number;
   adjustY: number;
   hideOnObjectActionChange: boolean;

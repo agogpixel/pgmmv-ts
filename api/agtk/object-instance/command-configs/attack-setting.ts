@@ -1,5 +1,8 @@
 import type { AgtkConstants } from '../../constants';
 
+type AttackSetting = AgtkConstants['actionCommands']['attackSetting'];
+type AttackAttributes = AgtkConstants['attackAttributes'];
+
 export interface AgtkCommandAttackSettingConfig {
   attackChange: number;
   hitObjectFlag: boolean;
@@ -12,7 +15,7 @@ export interface AgtkCommandAttackSettingConfig {
   objectGroupBit: number;
   hitTileFlag: boolean;
   tileGroupBit: number;
-  attributeType: AgtkConstants['actionCommands']['attackSetting'][keyof AgtkConstants['actionCommands']['attackSetting']];
-  attributePresetId: AgtkConstants['attackAttributes'][keyof AgtkConstants['attackAttributes']];
+  attributeType: AttackSetting[keyof AttackSetting];
+  attributePresetId: AttackAttributes[keyof AttackAttributes];
   attributeValue: number;
 }

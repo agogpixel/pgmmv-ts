@@ -1,5 +1,8 @@
 import type { AgtkConstants } from '../../constants';
 
+type ScrollMessageShow = AgtkConstants['actionCommands']['scrollMessageShow'];
+type ScrollMessageShowValue = ScrollMessageShow[keyof ScrollMessageShow];
+
 export interface AgtkCommandScrollMessageShowConfig {
   textId: number;
   scrollSpeed: number;
@@ -10,14 +13,14 @@ export interface AgtkCommandScrollMessageShowConfig {
   colorB: number;
   backgroundWidth: number;
   backgroundHeight: number;
-  backgroundType: AgtkConstants['actionCommands']['scrollMessageShow'][keyof AgtkConstants['actionCommands']['scrollMessageShow']];
-  templateId: AgtkConstants['actionCommands']['scrollMessageShow'][keyof AgtkConstants['actionCommands']['scrollMessageShow']];
+  backgroundType: ScrollMessageShowValue;
+  templateId: ScrollMessageShowValue;
   imageId: number;
   backgroundTransparency: number;
   topBottomMargin: number;
   leftRightMargin: number;
-  horzAlign: AgtkConstants['actionCommands']['scrollMessageShow'][keyof AgtkConstants['actionCommands']['scrollMessageShow']];
-  positionType: AgtkConstants['actionCommands']['scrollMessageShow'][keyof AgtkConstants['actionCommands']['scrollMessageShow']];
+  horzAlign: ScrollMessageShowValue;
+  positionType: ScrollMessageShowValue;
   useConnect: boolean;
   connectId: number;
   adjustX: number;

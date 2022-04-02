@@ -1,7 +1,10 @@
 import type { AgtkConstants } from '../../constants';
 
+type ObjectMove = AgtkConstants['actionCommands']['objectMove'];
+type ObjectMoveValue = ObjectMove[keyof ObjectMove];
+
 export interface AgtkCommandObjectMoveConfig {
-  moveType: AgtkConstants['actionCommands']['objectMove'][keyof AgtkConstants['actionCommands']['objectMove']];
+  moveType: ObjectMoveValue;
   angle: number;
   moveDistance: number;
   posX: number;
@@ -16,7 +19,7 @@ export interface AgtkCommandObjectMoveConfig {
   useObjectParameter: boolean;
   changeMoveSpeed: number;
   moveDuration300: number;
-  targettingType: AgtkConstants['actionCommands']['objectMove'][keyof AgtkConstants['actionCommands']['objectMove']];
+  targettingType: ObjectMoveValue;
 
   targetObjectGroup: number;
   targetObjectId: number;

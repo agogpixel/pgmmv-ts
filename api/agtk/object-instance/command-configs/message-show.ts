@@ -1,5 +1,8 @@
 import type { AgtkConstants } from '../../constants';
 
+type MessageShow = AgtkConstants['actionCommands']['messageShow'];
+type MessageShowValue = MessageShow[keyof MessageShow];
+
 export interface AgtkCommandMessageShowConfig {
   textFlag: boolean;
   textId: number;
@@ -20,19 +23,19 @@ export interface AgtkCommandMessageShowConfig {
   colorB: number;
   windowWidth: number;
   windowHeight: number;
-  windowType: AgtkConstants['actionCommands']['messageShow'][keyof AgtkConstants['actionCommands']['messageShow']];
-  templateId: AgtkConstants['actionCommands']['messageShow'][keyof AgtkConstants['actionCommands']['messageShow']];
+  windowType: MessageShowValue;
+  templateId: MessageShowValue;
   imageId: number;
   windowTransparency: number;
-  positionType: AgtkConstants['actionCommands']['messageShow'][keyof AgtkConstants['actionCommands']['messageShow']];
+  positionType: MessageShowValue;
   useConnect: boolean;
   connectId: number;
   adjustX: number;
   adjustY: number;
   topBottomMargin: number;
   leftRightMargin: number;
-  horzAlign: AgtkConstants['actionCommands']['messageShow'][keyof AgtkConstants['actionCommands']['messageShow']];
-  vertAlign: AgtkConstants['actionCommands']['messageShow'][keyof AgtkConstants['actionCommands']['messageShow']];
+  horzAlign: MessageShowValue;
+  vertAlign: MessageShowValue;
   actionChangeHide: boolean;
   closeByKey: boolean;
   keyId: number;

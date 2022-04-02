@@ -1,7 +1,9 @@
 import type { AgtkConstants } from '../../constants';
 
+type FilterEffects = AgtkConstants['filterEffects'];
+
 export interface AgtkCommandObjectFilterEffectConfig {
-  effectType: AgtkConstants['filterEffects'][keyof AgtkConstants['filterEffects']];
+  effectType: FilterEffects[keyof FilterEffects];
   noise: number;
   mosaic: number;
   monochrome: number;

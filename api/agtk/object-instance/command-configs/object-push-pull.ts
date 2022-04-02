@@ -1,5 +1,8 @@
 import type { AgtkConstants } from '../../constants';
 
+type ObjectPushPull = AgtkConstants['actionCommands']['objectPushPull'];
+type ObjectPushPullValue = ObjectPushPull[keyof ObjectPushPull];
+
 export interface AgtkCommandObjectPushPullConfig {
   effectRangeBaseConnect: boolean;
   effectRangeBaseConnectId: number;
@@ -8,9 +11,9 @@ export interface AgtkCommandObjectPushPullConfig {
   rectangleHeight: number;
   circleDistance: number;
   arcAngle: number;
-  effectDirectionType: AgtkConstants['actionCommands']['objectPushPull'][keyof AgtkConstants['actionCommands']['objectPushPull']];
+  effectDirectionType: ObjectPushPullValue;
   effectDirection: number;
-  directionType: AgtkConstants['actionCommands']['objectPushPull'][keyof AgtkConstants['actionCommands']['objectPushPull']];
+  directionType: ObjectPushPullValue;
   angle: number;
   connectId: number;
   effectValue: number;
@@ -18,7 +21,7 @@ export interface AgtkCommandObjectPushPullConfig {
   nearValue: number;
   farValue: number;
   oneTimeEffect: boolean;
-  targettingType: AgtkConstants['actionCommands']['objectPushPull'][keyof AgtkConstants['actionCommands']['objectPushPull']];
+  targettingType: ObjectPushPullValue;
   targetObjectGroup: number;
   targetObjectId: number;
   targetQualifierId: number;

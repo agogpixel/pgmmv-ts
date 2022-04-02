@@ -1,10 +1,13 @@
 import type { AgtkConstants } from '../../constants';
 
+type ObjectLock = AgtkConstants['actionCommands']['objectLock'];
+type ObjectLockValue = ObjectLock[keyof ObjectLock];
+
 export interface AgtkCommandObjectLockConfig {
   lockTouchedObject: boolean;
   lockViewportLightObject: boolean;
   lockObjectOnScreen: boolean;
-  objectType: AgtkConstants['actionCommands']['objectLock'][keyof AgtkConstants['actionCommands']['objectLock']];
+  objectType: ObjectLockValue;
   /**
    * Specify the index of the object group set The object groups
    * prepared by the system are Agtk.constants.objectGroup.ObjectGroupPlayer,
@@ -12,12 +15,12 @@ export interface AgtkCommandObjectLockConfig {
    */
   objectGroup: number;
   objectId: number;
-  useType: AgtkConstants['actionCommands']['objectLock'][keyof AgtkConstants['actionCommands']['objectLock']];
+  useType: ObjectLockValue;
   switchId: number;
   switchCondition: number;
   variableId: number;
   compareVariableOperator: number;
-  compareValueType: AgtkConstants['actionCommands']['objectLock'][keyof AgtkConstants['actionCommands']['objectLock']];
+  compareValueType: ObjectLockValue;
   compareValue: number;
   compareVariableObjectId: number;
   /**

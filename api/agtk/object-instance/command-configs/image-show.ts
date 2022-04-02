@@ -1,5 +1,8 @@
 import type { AgtkConstants } from '../../constants';
 
+type ImageShow = AgtkConstants['actionCommands']['imageShow'];
+type ImageShowValue = ImageShow[keyof ImageShow];
+
 export interface AgtkCommandImageShowConfig {
   imageId: number;
   duration300: number;
@@ -7,11 +10,11 @@ export interface AgtkCommandImageShowConfig {
   defaultSize: boolean;
   width: number;
   height: number;
-  positionType: AgtkConstants['actionCommands']['imageShow'][keyof AgtkConstants['actionCommands']['imageShow']];
+  positionType: ImageShowValue;
   useConnect: boolean;
   connectId: number;
-  vertAlign: AgtkConstants['actionCommands']['imageShow'][keyof AgtkConstants['actionCommands']['imageShow']];
-  horzAlign: AgtkConstants['actionCommands']['imageShow'][keyof AgtkConstants['actionCommands']['imageShow']];
+  vertAlign: ImageShowValue;
+  horzAlign: ImageShowValue;
   adjustX: number;
   adjustY: number;
   hideOnObjectActionChange: boolean;
