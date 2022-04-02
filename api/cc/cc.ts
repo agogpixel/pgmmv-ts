@@ -8,6 +8,7 @@ import type { CCGridBaseNamespace } from './grid-base';
 import type { CCNodeNamespace } from './node';
 import type { CCPointNamespace } from './point';
 import type { CCRectNamespace } from './rect';
+import type { CCSchedulerNamespace } from './scheduler';
 import type { CCSizeNamespace } from './size';
 import type { CCTouchNamespace } from './touch';
 
@@ -22,6 +23,7 @@ export interface cc {
   Node: CCNodeNamespace;
   Point: CCPointNamespace;
   Rect: CCRectNamespace;
+  Scheduler: CCSchedulerNamespace;
   Size: CCSizeNamespace;
   Touch: CCTouchNamespace;
 }

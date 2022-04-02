@@ -7,6 +7,7 @@ import type { CCComponent } from './component';
 import type { CCGridBase } from './grid-base';
 import type { CCPoint } from './point';
 import type { CCRect } from './rect';
+import type { CCScheduler } from './scheduler';
 import type { CCSize } from './size';
 import type { CCTouch } from './touch';
 
@@ -193,9 +194,8 @@ export interface CCNode extends CCClass {
 
   /**
    * cc.Scheduler used to schedule all "updates" and timers.
-   * TODO: Implement cc.Scheduler typings...
    */
-  scheduler: unknown;
+  scheduler: CCScheduler;
 
   /**
    * The shader program currently used for this node.
@@ -607,9 +607,8 @@ export interface CCNode extends CCClass {
 
   /**
    * Returns the cc.Scheduler object used to schedule all "updates" and timers.
-   * TODO: Implement cc.Scheduler typings...
    */
-  getScheduler(): unknown;
+  getScheduler(): CCScheduler;
 
   /**
    * Return the shader program currently used for this node.
@@ -1260,11 +1259,10 @@ export interface CCNode extends CCClass {
   /**
    * Sets a CCScheduler object that is used to schedule all "updates" and timers.
    * IMPORTANT: If you set a new cc.Scheduler, then previously created timers/update are going to be removed.
-   * TODO: Define cc.Scheduler typings...
    *
    * @param scheduler A cc.Scheduler object that is used to schedule all "update" and timers.
    */
-  setScheduler(scheduler: unknown): void;
+  setScheduler(scheduler: CCScheduler): void;
 
   /**
    * Sets the shader program for this node Since v2.0, each rendering node must set its shader program. It should be set in initialize phase.

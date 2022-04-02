@@ -9,5 +9,6 @@ export * from './grid-base';
 export * from './node';
 export * from './point';
 export * from './rect';
+export * from './scheduler';
 export * from './size';
 export * from './touch';
