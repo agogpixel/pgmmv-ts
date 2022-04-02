@@ -2,6 +2,7 @@ import type { CCClass, CCClassNamespace } from './class';
 import type { CCPoint } from './point';
 import type { CCRect } from './rect';
 import type { CCSize } from './size';
+import type { CCTexture2D } from './texture-2d';
 
 export type CCGridBaseNamespace = {
   /**
@@ -11,9 +12,13 @@ export type CCGridBaseNamespace = {
 
   /**
    * Create one cc.GridBase Object.
-   * TODO: Define cc.Texture2D typings...
+   *
+   * @param gridSize
+   * @param texture
+   * @param flipped
+   * @param rect
    */
-  create(gridSize: CCSize, texture?: unknown, flipped?: boolean, rect?: CCRect): CCGridBase;
+  create(gridSize: CCSize, texture?: CCTexture2D, flipped?: boolean, rect?: CCRect): CCGridBase;
 } & CCClassNamespace;
 
 /**
@@ -22,14 +27,13 @@ export type CCGridBaseNamespace = {
 export interface CCGridBase extends CCClass {
   /**
    * Create one cc.GridBase Object Constructor of cc.GridBase.
-   * TODO: Define cc.Texture2D typings...
    *
    * @param gridSize
    * @param texture
    * @param flipped
    * @param rect
    */
-  ctor(gridSize: CCSize, texture?: unknown, flipped?: boolean, rect?: CCRect): void;
+  ctor(gridSize: CCSize, texture?: CCTexture2D, flipped?: boolean, rect?: CCRect): void;
 
   /**
    * Get rect of the grid.
@@ -52,14 +56,12 @@ export interface CCGridBase extends CCClass {
   getStep(): CCPoint;
 
   /**
-   * TODO: Define cc.Texture2D typings...
-   *
    * @param gridSize
    * @param texture
    * @param flipped
    * @param rect
    */
-  initWithSize(gridSize: CCSize, texture?: unknown, flipped?: boolean, rect?: CCRect): boolean;
+  initWithSize(gridSize: CCSize, texture?: CCTexture2D, flipped?: boolean, rect?: CCRect): boolean;
 
   /**
    * Whether or not the grid is active.

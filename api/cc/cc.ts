@@ -4,12 +4,14 @@ import type { CCAffineTransformNamespace } from './affine-transform';
 import type { CCClassNamespace } from './class';
 import type { CCColorNamespace } from './color';
 import type { CCComponentNamespace } from './component';
+import type { CCGLProgramNamespace } from './gl-program';
 import type { CCGridBaseNamespace } from './grid-base';
 import type { CCNodeNamespace } from './node';
 import type { CCPointNamespace } from './point';
 import type { CCRectNamespace } from './rect';
 import type { CCSchedulerNamespace } from './scheduler';
 import type { CCSizeNamespace } from './size';
+import type { CCTexture2DNamespace } from './texture-2d';
 import type { CCTouchNamespace } from './touch';
 
 export interface cc {
@@ -19,11 +21,13 @@ export interface cc {
   Class: CCClassNamespace;
   Color: CCColorNamespace;
   Component: CCComponentNamespace;
+  GLProgram: CCGLProgramNamespace;
   GridBase: CCGridBaseNamespace;
   Node: CCNodeNamespace;
   Point: CCPointNamespace;
   Rect: CCRectNamespace;
   Scheduler: CCSchedulerNamespace;
   Size: CCSizeNamespace;
+  Texture2D: CCTexture2DNamespace;
   Touch: CCTouchNamespace;
 }

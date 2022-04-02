@@ -4,6 +4,7 @@ import type { CCAffineTransform } from './affine-transform';
 import type { CCClass, CCClassNamespace } from './class';
 import type { CCColor } from './color';
 import type { CCComponent } from './component';
+import type { CCGLProgram } from './gl-program';
 import type { CCGridBase } from './grid-base';
 import type { CCPoint } from './point';
 import type { CCRect } from './rect';
@@ -199,9 +200,8 @@ export interface CCNode extends CCClass {
 
   /**
    * The shader program currently used for this node.
-   * TODO: Implement cc.GLProgram typings...
    */
-  shaderProgram: unknown;
+  shaderProgram: CCGLProgram;
 
   /**
    * Skew x.
@@ -612,9 +612,8 @@ export interface CCNode extends CCClass {
 
   /**
    * Return the shader program currently used for this node.
-   * TODO: Implement cc.GLProgram typings...
    */
-  getShaderProgram(): unknown;
+  getShaderProgram(): CCGLProgram;
 
   /**
    * Returns the skew degrees in X.
@@ -1270,11 +1269,10 @@ export interface CCNode extends CCClass {
    * ```
    * node.setGLProgram(cc.shaderCache.programForKey(cc.SHADER_POSITION_TEXTURECOLOR));
    * ```
-   * TODO: Define cc.GLProgram typings...
    *
    * @param newShaderProgram The shader program which fetches from CCShaderCache.
    */
-  setShaderProgram(newShaderProgram: unknown): void;
+  setShaderProgram(newShaderProgram: CCGLProgram): void;
 
   /**
    * Changes the X skew angle of the node in degrees.
