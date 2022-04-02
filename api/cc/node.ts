@@ -1,4 +1,5 @@
-import { CCAffineTransform } from './affine-transform';
+import type { CCActionManager } from './action-manager';
+import type { CCAffineTransform } from './affine-transform';
 import type { CCClass, CCClassNamespace } from './class';
 import type { CCColor } from './color';
 import type { CCComponent } from './component';
@@ -74,9 +75,8 @@ export type CCNodeNamespace = {
 export interface CCNode extends CCClass {
   /**
    * The CCActionManager object that is used by all actions.
-   * TODO: Implement cc.ActionManager typings...
    */
-  actionManager: unknown;
+  actionManager: CCActionManager;
 
   /**
    * Anchor point's position on x axis.
@@ -377,9 +377,8 @@ export interface CCNode extends CCClass {
   /**
    * Returns the CCActionManager object that is used by all actions.
    * (IMPORTANT: If you set a new cc.ActionManager, then previously created actions are going to be removed.)
-   * TODO: Implement cc.ActionManager typings...
    */
-  getActionManager(): unknown;
+  getActionManager(): CCActionManager;
 
   /**
    * Returns a copy of the anchor point.
@@ -970,10 +969,9 @@ export interface CCNode extends CCClass {
 
   /**
    * Sets the cc.ActionManager object that is used by all actions.
-   * TODO: Implement cc.ActionManager typings...
    * @param actionManager A CCActionManager object that is used by all actions.
    */
-  setActionManager(actionManager: unknown): void;
+  setActionManager(actionManager: CCActionManager): void;
 
   /**
    * Sets the additional transform.

@@ -1,3 +1,4 @@
+export * from './action-manager';
 export * from './affine-transform';
 export * from './cc';
 export * from './class';
