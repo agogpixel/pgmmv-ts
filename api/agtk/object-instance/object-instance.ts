@@ -3,9 +3,13 @@ import type { AgtkConstants } from '../constants';
 import type {
   AgtkCommandAttackSettingConfig,
   AgtkCommandBulletFireConfig,
+  AgtkCommandCameraAreaChangeConfig,
   AgtkCommandDisableObjectEnableConfig,
   AgtkCommandDisappearObjectRecoverConfig,
+  AgtkCommandEffectRemoveConfig,
+  AgtkCommandEffectShowConfig,
   AgtkCommandLayerMoveConfig,
+  AgtkCommandMessageShowConfig,
   AgtkCommandObjectChangeConfig,
   AgtkCommandObjectCreateConfig,
   AgtkCommandObjectFilterEffectConfig,
@@ -14,6 +18,11 @@ import type {
   AgtkCommandObjectMoveConfig,
   AgtkCommandObjectPushPullConfig,
   AgtkCommandSceneEffectConfig,
+  AgtkCommandSceneEffectRemoveConfig,
+  AgtkCommandSceneGravityChangeConfig,
+  AgtkCommandSceneRotateFlipConfig,
+  AgtkCommandScrollMessageShowConfig,
+  AgtkCommandSoundPlayConfig,
   AgtkCommandTemplateMoveConfig
 } from './command-configs';
 import type { AgtkObjectInstanceSwitches } from './switches';
@@ -190,5 +199,86 @@ export interface AgtkObjectInstance {
    */
   execCommandSceneEffect(
     arg1: AgtkCommandSceneEffectConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Delete Screen Effects from Scene".
+   *
+   * @param arg1
+   */
+  execCommandSceneEffectRemove(
+    arg1: AgtkCommandSceneEffectRemoveConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Change Scene Gravity Effect".
+   *
+   * @param arg1
+   */
+  execCommandSceneGravityChange(
+    arg1: AgtkCommandSceneGravityChangeConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Rotate/Flip Scene".
+   *
+   * @param arg1
+   */
+  execCommandSceneRotateFlip(
+    arg1: AgtkCommandSceneRotateFlipConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Change Camera Display Area".
+   *
+   * @param arg1
+   */
+  execCommandCameraAreaChange(
+    arg1: AgtkCommandCameraAreaChangeConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Audio Playback".
+   *
+   * @param arg1
+   */
+  execCommandSoundPlay(
+    arg1: AgtkCommandSoundPlayConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Show Text".
+   *
+   * @param arg1
+   */
+  execCommandMessageShow(
+    arg1: AgtkCommandMessageShowConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Show Scrolling Text".
+   *
+   * @param arg1
+   */
+  execCommandScrollMessageShow(
+    arg1: AgtkCommandScrollMessageShowConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Show Effect".
+   *
+   * @param arg1
+   */
+  execCommandEffectShow(
+    arg1: AgtkCommandEffectShowConfig
+  ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
+
+  /**
+   * Executes "Hide Effects".
+   *
+   * @param arg1
+   */
+  execCommandEffectRemove(
+    arg1: AgtkCommandEffectRemoveConfig
   ): AgtkConstants['actionCommands']['commandBehavior']['CommandBehaviorNext'];
 }
