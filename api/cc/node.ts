@@ -6,6 +6,7 @@ import type { CCColor } from './color';
 import type { CCComponent } from './component';
 import type { CCPoint } from './point';
 import type { CCRect } from './rect';
+import type { CCSize } from './size';
 import type { CCTouch } from './touch';
 
 export type CCNodeNamespace = {
@@ -461,9 +462,8 @@ export interface CCNode extends CCClass {
    * Returns a copy the untransformed size of the node.
    * The contentSize remains the same no matter the node is scaled or rotated.
    * All nodes has a size. Layer and Scene has the same size of the screen by default.
-   * TODO: Implement cc.Size typings...
    */
-  getContentSize(): unknown;
+  getContentSize(): CCSize;
 
   /**
    * Returns the displayed color of Node, the difference between displayed color
@@ -1066,12 +1066,11 @@ export interface CCNode extends CCClass {
    *
    * The contentSize remains the same no matter the node is scaled or rotated.
    * All nodes has a size. Layer and Scene has the same size of the screen.
-   * TODO: Define cc.Size typings...
    *
    * @param size The untransformed size of the node or The untransformed size's width of the node.
    * @param height The untransformed size's height of the node.
    */
-  setContentSize(size: unknown | number, height?: number): void;
+  setContentSize(size: CCSize | number, height?: number): void;
 
   /**
    * Defines the oder in which the nodes are renderer.

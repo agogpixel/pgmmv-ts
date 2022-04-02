@@ -8,4 +8,5 @@ export * from './component';
 export * from './node';
 export * from './point';
 export * from './rect';
+export * from './size';
 export * from './touch';

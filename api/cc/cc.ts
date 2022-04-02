@@ -7,6 +7,7 @@ import type { CCComponentNamespace } from './component';
 import type { CCNodeNamespace } from './node';
 import type { CCPointNamespace } from './point';
 import type { CCRectNamespace } from './rect';
+import type { CCSizeNamespace } from './size';
 import type { CCTouchNamespace } from './touch';
 
 export interface cc {
@@ -19,5 +20,6 @@ export interface cc {
   Node: CCNodeNamespace;
   Point: CCPointNamespace;
   Rect: CCRectNamespace;
+  Size: CCSizeNamespace;
   Touch: CCTouchNamespace;
 }
