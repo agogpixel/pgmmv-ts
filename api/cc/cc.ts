@@ -1,14 +1,15 @@
 import type { CCActionNamespace } from './action';
 import type { CCActionManager, CCActionManagerNamespace } from './action-manager';
-import type { CCAffineTransformNamespace } from './affine-transform';
+import type { CCAffineTransform, CCAffineTransformNamespace } from './affine-transform';
 import type { CCAsyncNamespace } from './async';
 import type { CCAsyncPoolNamespace } from './async-pool';
 import type { CCClassNamespace } from './class';
-import type { CCColorNamespace } from './color';
+import type { CCColor, CCColorNamespace } from './color';
 import type { CCComponentNamespace } from './component';
 import type { CCEventNamespace } from './event';
 import type { CCEventListenerNamespace } from './event-listener';
 import type { CCEventManager } from './event-manager';
+import type { CCGameNamespace } from './game';
 import type { CCGLProgramNamespace } from './gl-program';
 import type { CCGridBase, CCGridBaseNamespace } from './grid-base';
 import type { CCLoaderNamespace } from './loader';
@@ -19,6 +20,7 @@ import type { CCPoint, CCPointNamespace } from './point';
 import type { CCRect, CCRectNamespace } from './rect';
 import type { CCScheduler, CCSchedulerNamespace } from './scheduler';
 import type { CCSize, CCSizeNamespace } from './size';
+import type { CCSysNamespace } from './sys';
 import type { CCTexture2DNamespace } from './texture-2d';
 import type { CCTouchNamespace } from './touch';
 import type { CCViewNamespace } from './view';
@@ -33,78 +35,90 @@ export interface cc {
   /**
    *
    */
-  container: unknown | null;
+  AffineTransform: CCAffineTransformNamespace;
 
   /**
+   * Concatenate a transform matrix to another and return the result: t' = t1 * t2.
    *
-   * @param obj
-   * @param iterator
-   * @param context
+   * @param t1
+   * @param t2
    */
-  each<T>(
-    obj: T,
-    iterator: (value: unknown, index: T extends Array<unknown> ? number : string) => boolean,
-    context: unknown
-  ): void;
+  affineTransformConcat(t1: CCAffineTransform, t2: CCAffineTransform): CCAffineTransform;
 
   /**
+   * Concatenate a transform matrix to another.
+   * The results are reflected in the first matrix.
+   * t' = t1 * t2.
    *
-   * @param target
-   * @param sources
+   * @param t1
+   * @param t2
    */
-  extend<T, U>(target: T, ...sources: U[]): T & UnionToIntersection<U>;
+  affineTransformConcatIn(t1: CCAffineTransform, t2: CCAffineTransform): CCAffineTransform;
 
   /**
+   * Return true if an affine transform equals to another, false otherwise.
    *
-   * @param obj
+   * @param t1
+   * @param t2
    */
-  isFunction(obj: unknown): boolean;
+  affineTransformEqualToTransform(t1: CCAffineTransform, t2: CCAffineTransform): boolean;
 
   /**
+   * Get the invert transform of an AffineTransform object.
    *
-   * @param obj
+   * @param t
    */
-  isNumber(obj: unknown): boolean;
+  affineTransformInvert(t: CCAffineTransform): CCAffineTransform;
 
   /**
+   * Create a cc.AffineTransform object with all contents in the matrix.
    *
-   * @param obj
+   * @param a
+   * @param b
+   * @param c
+   * @param d
+   * @param tx
+   * @param ty
    */
-  isString(obj: unknown): boolean;
+  affineTransformMake(a: number, b: number, c: number, d: number, tx: number, ty: number): CCAffineTransform;
 
   /**
-   *
-   * @param obj
+   * Create a identity transformation matrix.
    */
-  isArray(obj: unknown): boolean;
+  affineTransformMakeIdentity(): CCAffineTransform;
 
   /**
+   * Create a identity transformation matrix.
    *
-   * @param obj
+   * @deprecated since v3.0, please use cc.affineTransformMakeIdentity() instead.
    */
-  isUndefinedfunction(obj: unknown): boolean;
+  affineTransformIdentity(): CCAffineTransform;
 
   /**
+   * Create a new affine transformation with a base transformation matrix and a rotation based on it.
    *
-   * @param obj
+   * @param aTransform The base affine transform object.
+   * @param anAngle The angle to rotate.
    */
-  isObject(obj: unknown): boolean;
+  affineTransformRotate(aTransform: CCAffineTransform, anAngle: number): CCAffineTransform;
 
   /**
+   * Create a new affine transformation with a base transformation matrix and a scale based on it.
    *
-   * @param url
+   * @param t The base affine transform object.
+   * @param sx The scale on x axis.
+   * @param sy The scale on y axis.
    */
-  isCrossOrigin(url: string): boolean;
+  affineTransformScale(t: CCAffineTransform, sx: number, sy: number): CCAffineTransform;
 
   /**
+   * Create a new affine transformation with a base transformation matrix and a translation based on it.
    *
-   * @param proto
-   * @param prop
-   * @param getter
-   * @param setter
+   * @param t The base affine transform object.
+   * @param tx The translation on x axis.
+   * @param ty The translation on y axis.
    */
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  defineGetterSetter(proto: unknown, prop: string, getter: Function, setter: Function): void;
+  affineTransformTranslate(t: CCAffineTransform, tx: number, ty: number): CCAffineTransform;
 
   /**
    *
@@ -115,11 +129,13 @@ export interface cc {
 
   /**
    *
-   * @param childCtor
-   * @param parentCtor
    */
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  inherits(childCtor: Function, parentCtor: Function): void;
+  async: CCAsyncNamespace;
+
+  /**
+   *
+   */
+  AsyncPool: CCAsyncPoolNamespace;
 
   /**
    *
@@ -130,6 +146,20 @@ export interface cc {
   base<T>(me: unknown, opt_methodName: string, ...var_args: unknown[]): T;
 
   /**
+   * Check webgl error.Error will be shown in console if exists.
+   */
+  checkGLErrorDebug(): void;
+
+  /**
+   * Clamp a value between from and to.
+   *
+   * @param value
+   * @param min_inclusive
+   * @param max_inclusive
+   */
+  clampf(value: number, min_inclusive: number, max_inclusive: number): number;
+
+  /**
    *
    */
   Class: CCClassNamespace;
@@ -137,68 +167,74 @@ export interface cc {
   /**
    *
    */
-  math: CCMathNamespace;
+  Color: CCColorNamespace;
+
+  /**
+   * Generate a color object based on multiple forms of parameters.
+   *
+   * ```
+   * // 1. All channels separately as parameters
+   * var color1 = cc.color(255, 255, 255, 255);
+   *
+   * // 2. Convert a hex string to a color
+   * var color2 = cc.color("#000000");
+   *
+   * // 3. An color object as parameter
+   * var color3 = cc.color({r: 255, g: 255, b: 255, a: 255});
+   * ```
+   *
+   * Alpha channel is optional. Default value is 255
+   *
+   * @param r
+   * @param g
+   * @param b
+   * @param a
+   */
+  color(r: number | string | CCColor, g?: number, b?: number, a?: number): CCColor;
+
+  /**
+   * Returns true if both ccColor3B are equal. Otherwise it returns false.
+   *
+   * @param color1
+   * @param color2
+   */
+  colorEqual(color1: CCColor, color2: CCColor): boolean;
+
+  /**
+   * Convert Color to a string of color for style. e.g. cc.color(255,6,255) to : "#ff06ff".
+   *
+   * @param color
+   */
+  colorToHex(color: CCColor): string;
 
   /**
    *
    */
-  AsyncPool: CCAsyncPoolNamespace;
+  container: unknown | null;
 
   /**
+   * On Mac it returns 1;
+   * On iPhone it returns 2 if RetinaDisplay is On. Otherwise it returns 1.
+   */
+  contentScaleFactor(): number;
+
+  /**
+   * Common getter setter configuration function.
    *
+   * @param proto
+   * @param prop
+   * @param getter
+   * @param setter
    */
-  async: CCAsyncNamespace;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  defineGetterSetter(proto: unknown, prop: string, getter: Function, setter: Function): void;
 
   /**
+   * Converts degrees to radians.
    *
+   * @param angle
    */
-  path: CCPathNamespace;
-
-  /**
-   *
-   */
-  loader: CCLoaderNamespace;
-
-  /**
-   *
-   * @param args
-   */
-  formatStr(...args: string[]): string;
-
-  /**
-   * TODO: cc.Director typings missing...
-   */
-  director: {
-    /**
-     *
-     */
-    _actionManager: unknown | CCActionManager;
-
-    /**
-     *
-     */
-    _scheduler: unknown | CCScheduler;
-  };
-
-  /**
-   *
-   */
-  winSize: {
-    /**
-     *
-     */
-    width: number;
-
-    /**
-     *
-     */
-    height: number;
-  };
-
-  /**
-   *
-   */
-  view: CCViewNamespace;
+  degreesToRadians(angle: number): number;
 
   /**
    *
@@ -221,97 +257,351 @@ export interface cc {
   DENSITYDPI_LOW: 'low-dpi';
 
   /**
+   * TODO: cc.Director typings missing...
+   */
+  director: {
+    /**
+     *
+     */
+    _actionManager: unknown | CCActionManager;
+
+    /**
+     *
+     */
+    _scheduler: unknown | CCScheduler;
+  };
+
+  /**
+   * Disable default GL states:
+   *  - GL_TEXTURE_2D
+   *  - GL_TEXTURE_COORD_ARRAY
+   *  - GL_COLOR_ARRAY
+   */
+  disableDefaultGLStates(): void;
+
+  /**
+   * Iterate over an object or an array, executing a function for each matched element.
+   *
+   * @param obj
+   * @param iterator
+   * @param context
+   */
+  each<T>(
+    obj: T,
+    iterator: (value: unknown, index: T extends Array<unknown> ? number : string) => boolean,
+    context?: unknown
+  ): void;
+
+  /**
+   * GL states that are enabled:
+   * - GL_TEXTURE_2D
+   * - GL_VERTEX_ARRAY
+   * - GL_TEXTURE_COORD_ARRAY
+   * - GL_COLOR_ARRAY
+   */
+  enableDefaultGLStates(): void;
+
+  /**
+   * Copy all of the properties in source objects to target object and return the target object.
+   *
+   * @param target
+   * @param sources
+   */
+  extend<T, U>(target: T, ...sources: U[]): T & UnionToIntersection<U>;
+
+  /**
    *
    */
   eventManager: CCEventManager;
 
   /**
+   * A string tool to construct a string with format string.
+   * For example:
+   *
+   * ```
+   * cc.formatStr("a: %d, b: %b", a, b); cc.formatStr(a, b, c);
+   * ```
+   * @param args
+   */
+  formatStr(...args: string[]): string;
+
+  /**
    *
    * @param x
    * @param y
-   * @param ref
    */
-  swap(x: string, y: string, ref: object): void;
-
-  /**
-   *
-   * @param a
-   * @param b
-   * @param r
-   */
-  lerp(a: number, b: number, r: number): number;
+  _g(x: number, y: number): CCGridBase;
 
   /**
    *
    */
-  rand(): number;
+  game: CCGameNamespace;
 
   /**
+   * Convert a string of color for style to Color. e.g. "#ff06ff" to : cc.color(255,6,255).
    *
+   * @param hex
    */
-  randomMinus1To1(): number;
+  hexToColor(hex: string): CCColor;
 
   /**
-   *
-   */
-  random0To1(): number;
-
-  /**
-   *
-   * @param angle
-   */
-  degreesToRadians(angle: number): number;
-
-  /**
-   *
-   * @param angle
-   */
-  radiansToDegrees(angle: number): number;
-
-  /**
-   *
-   */
-  REPEAT_FOREVER: 4294967295;
-
-  /**
-   *
-   * @param node
-   */
-  nodeDrawSetup(node: CCNode): void;
-
-  /**
-   *
-   */
-  enableDefaultGLStates(): void;
-
-  /**
-   *
-   */
-  disableDefaultGLStates(): void;
-
-  /**
+   * Increments the GL Draws counts by one.
    *
    * @param addNumber
    */
   incrementGLDraws(addNumber: number): void;
 
   /**
-   *
+   * Another way to subclass: Using Google Closure.
+   * @param childCtor
+   * @param parentCtor
    */
-  FLT_EPSILON: 1.192092896e-7;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  inherits(childCtor: Function, parentCtor: Function): void;
+
+  /**
+   * Check the obj whether is array or not.
+   *
+   * @param obj
+   */
+  isArray(obj: unknown): boolean;
+
+  /**
+   * Check the url whether cross origin.
+   *
+   * @param url
+   */
+  isCrossOrigin(url: string): boolean;
+
+  /**
+   * Check the obj whether is function or not.
+   *
+   * @param obj
+   */
+  isFunction(obj: unknown): boolean;
+
+  /**
+   * Check the obj whether is number or not.
+   *
+   * @param obj
+   */
+  isNumber(obj: unknown): boolean;
+
+  /**
+   * Check the obj whether is object or not.
+   *
+   * @param obj
+   */
+  isObject(obj: unknown): boolean;
+
+  /**
+   * Check the obj whether is string or not.
+   *
+   * @param obj
+   */
+  isString(obj: unknown): boolean;
+
+  /**
+   * Check the obj whether is undefined or not.
+   *
+   * @param obj
+   */
+  isUndefined(obj: unknown): boolean;
+
+  /**
+   * Linear interpolation between 2 numbers, the ratio sets how much it is biased to each end.
+   *
+   * ```
+   * cc.lerp(2, 10, 0.5); // returns 6
+   * cc.lerp(2, 10, 0.2); // returns 3.6
+   * ```
+   * @param a Number A
+   * @param b Number B
+   * @param r Ration between 0 and 1.
+   */
+  lerp(a: number, b: number, r: number): number;
 
   /**
    *
    */
-  contentScaleFactor(): number;
+  loader: CCLoaderNamespace;
 
   /**
    *
-   * @param points
    */
-  pointPointsToPixels(points: CCPoint): CCPoint;
+  math: CCMathNamespace;
 
   /**
+   * Helpful macro that setups the GL server state, the correct GL program and sets the Model View Projection matrix.
+   *
+   * @param node
+   */
+  nodeDrawSetup(node: CCNode): void;
+
+  /**
+   * Helper function that creates a cc.Point.
+   *
+   * ```
+   * var point1 = cc.p();
+   * var point2 = cc.p(100, 100);
+   * var point3 = cc.p(point2);
+   * var point4 = cc.p({x: 100, y: 100});
+   * ```
+   *
+   * @param x A number or point object.
+   * @param y
+   */
+  p(x?: number | CCPoint, y?: number): CCPoint;
+
+  /**
+   *
+   * @param x
+   * @param y
+   */
+  _p(x: number, y: number): CCPoint;
+
+  /**
+   * Adds one point to another (inplace).
+   *
+   * @param v1
+   * @param v2
+   */
+  pAddIn(v1: CCPoint, v2: CCPoint): void;
+
+  /**
+   * The angle in radians between two vector directions.
+   *
+   * @param a
+   * @param b
+   */
+  pAngle(a: CCPoint, b: CCPoint): number;
+
+  /**
+   * The signed angle in radians between two vector directions.
+   *
+   * @param a
+   * @param b
+   */
+  pAngleSigned(a: CCPoint, b: CCPoint): number;
+
+  /**
+   *
+   */
+  path: CCPathNamespace;
+
+  /**
+   * Multiplies a and b components, a.x*b.x, a.y*b.y.
+   *
+   * @param a
+   * @param b
+   */
+  pCompMult(a: CCPoint, b: CCPoint): CCPoint;
+
+  /**
+   * Run a math operation function on each point component
+   * Math.abs, Math.fllor, Math.ceil, Math.round.
+   *
+   * ```
+   * // For example: let's try to take the floor of x,y
+   * var p = cc.pCompOp(cc.p(10,10), Math.abs);
+   * ```
+   *
+   * @param p
+   * @param opFunc
+   */
+  pCompOp(p: CCPoint, opFunc: (n: number) => number): CCPoint;
+
+  /**
+   * Converts radians to a normalized vector.
+   *
+   * @param a
+   */
+  pForAngle(a: number): CCPoint;
+
+  /**
+   * Quickly convert cc.Size to a cc.Point
+   *
+   * @param s
+   */
+  pFromSize(s: CCSize): CCPoint;
+
+  /**
+   * If points have fuzzy equality which means equal with some degree of variance.
+   *
+   * @param a
+   * @param b
+   * @param variance
+   */
+  pFuzzyEqual(a: CCPoint, b: CCPoint, variance: number): boolean;
+
+  /**
+   * Copies the position of one point to another.
+   *
+   * @param v1
+   * @param v2
+   */
+  pIn(v1: CCPoint, v2: CCPoint): void;
+
+  /**
+   * Return the intersection point of line A-B, C-D.
+   *
+   * @param A
+   * @param B
+   * @param C
+   * @param D
+   */
+  pIntersectPoint(A: CCPoint, B: CCPoint, C: CCPoint, D: CCPoint): CCPoint;
+
+  /**
+   * Linear Interpolation between two points a and b alpha == 0 ? a alpha == 1 ? b otherwise a value between a..b.
+   *
+   * @param a
+   * @param b
+   * @param alpha
+   */
+  pLerp(a: CCPoint, b: CCPoint, alpha: number): CCPoint;
+
+  /**
+   * A general line-line intersection test indicating successful intersection of a line.
+   * Note that to truly test intersection for segments we have to make
+   * sure that s & t lie within [0..1] and for rays, make sure s & t > 0
+   * the hit point is p3 + t * (p4 - p3);
+   * the hit point also is p1 + s * (p2 - p1);
+   *
+   * @param A A is the startpoint for the first line P1 = (p1 - p2).
+   * @param B B is the endpoint for the first line P1 = (p1 - p2).
+   * @param C C is the startpoint for the second line P2 = (p3 - p4).
+   * @param D D is the endpoint for the second line P2 = (p3 - p4).
+   * @param retP retP.x is the range for a hitpoint in P1 (pa = p1 + s*(p2 - p1)),
+   * retP.y is the range for a hitpoint in P3 (pa = p2 + t*(p4 - p3)).
+   */
+  pLineIntersect(A: CCPoint, B: CCPoint, C: CCPoint, D: CCPoint, retP: CCPoint): boolean;
+
+  /**
+   * Multiplies the point with the given factor (inplace).
+   *
+   * @param point
+   * @param floatVar
+   */
+  pMultIn(point: CCPoint, floatVar: number): void;
+
+  /**
+   * Normalizes the point (inplace).
+   *
+   * @param v
+   */
+  pNormalizeIn(v: CCPoint): CCPoint;
+
+  /**
+   * Check whether a point's value equals to another.
+   *
+   * @param point1
+   * @param point2
+   */
+  pointEqualToPoint(point1: CCPoint, point2: CCPoint): boolean;
+
+  /**
+   * Converts a Point in pixels to points.
    *
    * @param pixels
    */
@@ -325,60 +615,237 @@ export interface cc {
   _pointPixelsToPointsOut(pixels: CCPoint, outPoint: CCPoint): void;
 
   /**
+   * Converts a Point in points to pixels.
    *
-   * @param sizeInPoints
+   * @param points
    */
-  sizePointsToPixels(sizeInPoints: CCSize): CCSize;
+  pointPointsToPixels(points: CCPoint): CCPoint;
 
   /**
    *
-   * @param sizeInPixels
    */
-  sizePixelsToPoints(sizeInPixels: CCSize): CCSize;
+  PointZero(): CCPoint;
+
+  /**
+   * Rotates a point counter clockwise by the angle around a pivot.
+   *
+   * @param v The point to rotate.
+   * @param pivot Pivot point.
+   * @param angle Angle of rotation cw in radians.
+   */
+  pRotateByAngle(v: CCPoint, pivot: CCPoint, angle: number): CCPoint;
+
+  /**
+   * Check to see if both points are equal.
+   *
+   * @param A
+   * @param B
+   */
+  pSameAs(A: CCPoint, B: CCPoint): boolean;
+
+  /**
+   * Return YES if Segment A-B intersects with segment C-D.
+   *
+   * @param A
+   * @param B
+   * @param C
+   * @param D
+   */
+  pSegmentIntersect(A: CCPoint, B: CCPoint, C: CCPoint, D: CCPoint): boolean;
+
+  /**
+   * Subtracts one point from another (inplace).
+   *
+   * @param v1
+   * @param v2
+   */
+  pSubIn(v1: CCPoint, v2: CCPoint): void;
+
+  /**
+   * Converts a vector to radians.
+   *
+   * @param v
+   */
+  pToAngle(v: CCPoint): number;
+
+  /**
+   * Unrotates two points.
+   *
+   * @param v1
+   * @param v2
+   */
+  pUnrotate(v1: CCPoint, v2: CCPoint): CCPoint;
+
+  /**
+   * Sets the position of the point to 0.
+   *
+   * @param v
+   */
+  pZeroIn(v: CCPoint): void;
+
+  /**
+   * Converts radians to degrees.
+   *
+   * @param angle
+   */
+  radiansToDegrees(angle: number): number;
+
+  /**
+   * Get a random number from 0 to 0xffffff.
+   */
+  rand(): number;
+
+  /**
+   * Returns a random float between 0 and 1.
+   */
+  random0To1(): number;
+
+  /**
+   * Returns a random float between -1 and 1.
+   */
+  randomMinus1To1(): number;
+
+  /**
+   * Helper function that creates a cc.Rect.
+   *
+   * ```
+   * var rect1 = cc.rect();
+   * var rect2 = cc.rect(100,100,100,100);
+   * var rect3 = cc.rect(rect2);
+   * var rect4 = cc.rect({x: 100, y: 100, width: 100, height: 100});
+   * ```
+   *
+   * @param x
+   * @param y
+   * @param w
+   * @param h
+   */
+  rect(x?: number | CCRect, y?: number, w?: number, h?: number): CCRect;
 
   /**
    *
-   * @param sizeInPixels
-   * @param outSize
+   * @param x
+   * @param y
+   * @param w
+   * @param h
    */
-  _sizePixelsToPointsOut(sizeInPixels: CCSize, outSize: CCSize): void;
+  _rect(x: number, y: number, w: number, h: number): CCRect;
 
   /**
+   * Check whether a rect contains a point.
+   *
+   * @param rect
+   * @param point
+   */
+  rectContainsPoint(rect: CCRect, point: CCPoint): boolean;
+
+  /**
+   * Check whether the rect1 contains rect2.
+   *
+   * @param rect1
+   * @param rect2
+   */
+  rectContainsRect(rect1: CCRect, rect2: CCRect): boolean;
+
+  /**
+   * Check whether a rect's value equals to another.
+   *
+   * @param rect1
+   * @param rect2
+   */
+  rectEqualToRect(rect1: CCRect, rect2: CCRect): boolean;
+
+  /**
+   * Returns the rightmost x-value of a rect.
+   *
+   * @param rect
+   */
+  rectGetMaxX(rect: CCRect): number;
+
+  /**
+   * Return the topmost y-value of a rect.
+   * @param rect
+   */
+  rectGetMaxY(rect: CCRect): number;
+
+  /**
+   * Return the midpoint x-value of a rect.
+   *
+   * @param rect
+   */
+  rectGetMidX(rect: CCRect): number;
+
+  /**
+   * Return the midpoint y-value of `rect'.
+   *
+   * @param rect
+   */
+  rectGetMidY(rect: CCRect): number;
+
+  /**
+   * Returns the leftmost x-value of a rect.
+   *
+   * @param rect
+   */
+  rectGetMinX(rect: CCRect): number;
+
+  /**
+   * Return the bottommost y-value of a rect.
+   *
+   * @param rect
+   */
+  rectGetMinY(rect: CCRect): number;
+
+  /**
+   * Returns the overlapping portion of 2 rectangles.
+   *
+   * @param rectA
+   * @param rectB
+   */
+  rectIntersection(rectA: CCRect, rectB: CCRect): CCRect;
+
+  /**
+   * Check whether a rect intersect with another.
+   *
+   * @param rectA
+   * @param rectB
+   */
+  rectIntersectsRect(rectA: CCRect, rectB: CCRect): boolean;
+
+  /**
+   * Converts a rect in pixels to points.
    *
    * @param pixel
    */
   rectPixelsToPoints(pixel: CCRect): CCRect;
 
   /**
+   * Converts a rect in points to pixels.
    *
    * @param point
    */
   rectPointsToPixels(point: CCRect): CCRect;
 
   /**
+   * Check whether a rect overlaps another.
    *
+   * @param rectA
+   * @param rectB
    */
-  checkGLErrorDebug(): void;
+  rectOverlapsRect(rectA: CCRect, rectB: CCRect): boolean;
+
+  /**
+   * Returns the smallest rectangle that contains the two source rectangles.
+   *
+   * @param rectA
+   * @param rectB
+   */
+  rectUnion(rectA: CCRect, rectB: CCRect): CCRect;
 
   /**
    *
    */
-  _reuse_p: CCPoint[];
-
-  /**
-   *
-   */
-  _reuse_p_index: number;
-
-  /**
-   *
-   */
-  _reuse_size: CCSize;
-
-  /**
-   *
-   */
-  _reuse_rect: CCRect;
+  RectZero(): CCRect;
 
   /**
    *
@@ -401,203 +868,37 @@ export interface cc {
 
   /**
    *
-   * @param x
-   * @param y
    */
-  p(x?: number | CCPoint, y?: number): CCPoint;
-
-  /**
-   *
-   * @param x
-   * @param y
-   */
-  _p(x: number, y: number): CCPoint;
-
-  /**
-   *
-   * @param point1
-   * @param point2
-   */
-  pointEqualToPoint(point1: CCPoint, point2: CCPoint): boolean;
+  _reuse_p: CCPoint[];
 
   /**
    *
    */
-  PointZero(): CCPoint;
+  _reuse_p_index: number;
 
   /**
    *
-   * @param v1
-   * @param v2
    */
-  pUnrotate(v1: CCPoint, v2: CCPoint): CCPoint;
+  _reuse_rect: CCRect;
 
   /**
    *
-   * @param a
    */
-  pForAngle(a: number): CCPoint;
+  _reuse_size: CCSize;
 
   /**
+   * Helper function that creates a cc.Size.
    *
-   * @param v
-   */
-  pToAngle(v: CCPoint): number;
-
-  /**
-   *
-   * @param value
-   * @param min_inclusive
-   * @param max_inclusive
-   */
-  clampf(value: number, min_inclusive: number, max_inclusive: number): number;
-
-  /**
-   *
-   * @param s
-   */
-  pFromSize(s: CCSize): CCPoint;
-
-  /**
-   *
-   * @param p
-   * @param opFunc
-   */
-  pCompOp(p: CCPoint, opFunc: (n: number) => number): CCPoint;
-
-  /**
-   *
-   * @param a
-   * @param b
-   * @param alpha
-   */
-  pLerp(a: CCPoint, b: CCPoint, alpha: number): CCPoint;
-
-  /**
-   *
-   * @param a
-   * @param b
-   * @param variance
-   */
-  pFuzzyEqual(a: CCPoint, b: CCPoint, variance: number): boolean;
-
-  /**
-   *
-   * @param a
-   * @param b
-   */
-  pCompMult(a: CCPoint, b: CCPoint): CCPoint;
-
-  /**
-   *
-   * @param a
-   * @param b
-   */
-  pAngleSigned(a: CCPoint, b: CCPoint): number;
-
-  /**
-   *
-   * @param a
-   * @param b
-   */
-  pAngle(a: CCPoint, b: CCPoint): number;
-
-  /**
-   *
-   * @param v
-   * @param pivot
-   * @param angle
-   */
-  pRotateByAngle(v: CCPoint, pivot: CCPoint, angle: number): CCPoint;
-
-  /**
-   *
-   * @param A
-   * @param B
-   * @param C
-   * @param D
-   * @param retP
-   */
-  pLineIntersect(A: CCPoint, B: CCPoint, C: CCPoint, D: CCPoint, retP: CCPoint): boolean;
-
-  /**
-   *
-   * @param A
-   * @param B
-   * @param C
-   * @param D
-   */
-  pSegmentIntersect(A: CCPoint, B: CCPoint, C: CCPoint, D: CCPoint): boolean;
-
-  /**
-   *
-   * @param A
-   * @param B
-   * @param C
-   * @param D
-   */
-  pIntersectPoint(A: CCPoint, B: CCPoint, C: CCPoint, D: CCPoint): CCPoint;
-
-  /**
-   *
-   * @param A
-   * @param B
-   */
-  pSameAs(A: CCPoint, B: CCPoint): boolean;
-
-  /**
-   *
-   * @param v
-   */
-  pZeroIn(v: CCPoint): void;
-
-  /**
-   *
-   * @param v1
-   * @param v2
-   */
-  pIn(v1: CCPoint, v2: CCPoint): void;
-
-  /**
-   *
-   * @param point
-   * @param floatVar
-   */
-  pMultIn(point: CCPoint, floatVar: number): void;
-
-  /**
-   *
-   * @param v1
-   * @param v2
-   */
-  pSubIn(v1: CCPoint, v2: CCPoint): void;
-
-  /**
-   *
-   * @param v1
-   * @param v2
-   */
-  pAddIn(v1: CCPoint, v2: CCPoint): void;
-
-  /**
-   *
-   * @param v
-   */
-  pNormalizeIn(v: CCPoint): CCPoint;
-
-  /**
-   *
-   * @param x
-   * @param y
-   */
-  _g(x: number, y: number): CCGridBase;
-
-  /**
-   *
+   * ```
+   * var size1 = cc.size();
+   * var size2 = cc.size(100,100);
+   * var size3 = cc.size(size2);
+   * var size4 = cc.size({width: 100, height: 100});
+   * ```
    * @param w
    * @param h
    */
-  size(w: number, h: number): CCSize;
+  size(w?: number | CCSize, h?: number): CCSize;
 
   /**
    *
@@ -607,11 +908,33 @@ export interface cc {
   _size(w: number, h: number): CCSize;
 
   /**
+   * Check whether a point's value equals to another.
    *
    * @param size1
    * @param size2
    */
   sizeEqualToSize(size1: CCSize, size2: CCSize): boolean;
+
+  /**
+   * Converts a size in pixels to points.
+   *
+   * @param sizeInPixels
+   */
+  sizePixelsToPoints(sizeInPixels: CCSize): CCSize;
+
+  /**
+   *
+   * @param sizeInPixels
+   * @param outSize
+   */
+  _sizePixelsToPointsOut(sizeInPixels: CCSize, outSize: CCSize): void;
+
+  /**
+   * Converts a Size in points to pixels.
+   *
+   * @param sizeInPoints
+   */
+  sizePointsToPixels(sizeInPoints: CCSize): CCSize;
 
   /**
    *
@@ -620,121 +943,44 @@ export interface cc {
 
   /**
    *
-   * @param x
-   * @param y
-   * @param w
-   * @param h
    */
-  rect(x: number, y: number, w: number, h: number): CCRect;
+  sys: CCSysNamespace;
 
   /**
+   * Simple macro that swaps 2 variables
+   * modified from c++ macro, you need to pass in the x and y variables names in string,
+   * and then a reference to the whole object as third variable.
    *
    * @param x
    * @param y
-   * @param w
-   * @param h
+   * @param ref
+   * @deprecated since v3.0
    */
-  _rect(x: number, y: number, w: number, h: number): CCRect;
-
-  /**
-   *
-   * @param rect1
-   * @param rect2
-   */
-  rectEqualToRect(rect1: CCRect, rect2: CCRect): boolean;
-
-  /**
-   *
-   * @param rect1
-   * @param rect2
-   */
-  rectContainsRect(rect1: CCRect, rect2: CCRect): boolean;
-
-  /**
-   *
-   * @param rect
-   */
-  rectGetMaxX(rect: CCRect): number;
-
-  /**
-   *
-   * @param rect
-   */
-  rectGetMidX(rect: CCRect): number;
-
-  /**
-   *
-   * @param rect
-   */
-  rectGetMinX(rect: CCRect): number;
-
-  /**
-   *
-   * @param rect
-   */
-  rectGetMaxY(rect: CCRect): number;
-
-  /**
-   *
-   * @param rect
-   */
-  rectGetMidY(rect: CCRect): number;
-
-  /**
-   *
-   * @param rect
-   */
-  rectGetMinY(rect: CCRect): number;
-
-  /**
-   *
-   * @param rect
-   * @param point
-   */
-  rectContainsPoint(rect: CCRect, point: CCPoint): boolean;
-
-  /**
-   *
-   * @param rectA
-   * @param rectB
-   */
-  rectIntersectsRect(rectA: CCRect, rectB: CCRect): boolean;
-
-  /**
-   *
-   * @param rectA
-   * @param rectB
-   */
-  rectOverlapsRect(rectA: CCRect, rectB: CCRect): boolean;
-
-  /**
-   *
-   * @param rectA
-   * @param rectB
-   */
-  rectUnion(rectA: CCRect, rectB: CCRect): CCRect;
-
-  /**
-   *
-   * @param rectA
-   * @param rectB
-   */
-  rectIntersection(rectA: CCRect, rectB: CCRect): CCRect;
+  swap(x: string, y: string, ref: object): void;
 
   /**
    *
    */
-  RectZero(): CCRect;
+  view: CCViewNamespace;
 
   /**
    *
    */
-  Color: CCColorNamespace;
+  winSize: {
+    /**
+     *
+     */
+    width: number;
+
+    /**
+     *
+     */
+    height: number;
+  };
 
   //
   Action: CCActionNamespace;
   ActionManager: CCActionManagerNamespace;
-  AffineTransform: CCAffineTransformNamespace;
   Component: CCComponentNamespace;
   Event: CCEventNamespace;
   EventListener: CCEventListenerNamespace;
@@ -749,6 +995,16 @@ export interface cc {
   Touch: CCTouchNamespace;
 
   //
+
+  /**
+   *
+   */
+  readonly FLT_EPSILON: 1.192092896e-7;
+
+  /**
+   *
+   */
+  readonly REPEAT_FOREVER: 4294967295;
 
   TMX_ORIENTATION_HEX: 1;
   TMX_ORIENTATION_ISO: 2;
