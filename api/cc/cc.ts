@@ -1,5 +1,5 @@
 import type { CCActionNamespace } from './action';
-import type { CCActionManager, CCActionManagerNamespace } from './action-manager';
+import type { CCActionManagerNamespace } from './action-manager';
 import type { CCAffineTransform, CCAffineTransformNamespace } from './affine-transform';
 import type { CCAsyncNamespace } from './async';
 import type { CCAsyncPoolNamespace } from './async-pool';
@@ -18,7 +18,7 @@ import type { CCNode, CCNodeNamespace } from './node';
 import type { CCPathNamespace } from './path';
 import type { CCPoint, CCPointNamespace } from './point';
 import type { CCRect, CCRectNamespace } from './rect';
-import type { CCScheduler, CCSchedulerNamespace } from './scheduler';
+import type { CCSchedulerNamespace } from './scheduler';
 import type { CCSize, CCSizeNamespace } from './size';
 import type { CCSysNamespace } from './sys';
 import type { CCTexture2DNamespace } from './texture-2d';
