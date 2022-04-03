@@ -35,6 +35,16 @@ export interface cc {
   /**
    *
    */
+  Action: CCActionNamespace;
+
+  /**
+   *
+   */
+  ActionManager: CCActionManagerNamespace;
+
+  /**
+   *
+   */
   AffineTransform: CCAffineTransformNamespace;
 
   /**
@@ -210,6 +220,11 @@ export interface cc {
   /**
    *
    */
+  Component: CCComponentNamespace;
+
+  /**
+   *
+   */
   container: unknown | null;
 
   /**
@@ -312,6 +327,16 @@ export interface cc {
   /**
    *
    */
+  Event: CCEventNamespace;
+
+  /**
+   *
+   */
+  EventListener: CCEventListenerNamespace;
+
+  /**
+   *
+   */
   eventManager: CCEventManager;
 
   /**
@@ -335,7 +360,22 @@ export interface cc {
   /**
    *
    */
+  g_NumberOfDraws: number;
+
+  /**
+   *
+   */
   game: CCGameNamespace;
+
+  /**
+   *
+   */
+  GLProgram: CCGLProgramNamespace;
+
+  /**
+   *
+   */
+  GridBase: CCGridBaseNamespace;
 
   /**
    * Convert a string of color for style to Color. e.g. "#ff06ff" to : cc.color(255,6,255).
@@ -430,6 +470,11 @@ export interface cc {
    *
    */
   math: CCMathNamespace;
+
+  /**
+   *
+   */
+  Node: CCNodeNamespace;
 
   /**
    * Helpful macro that setups the GL server state, the correct GL program and sets the Model View Projection matrix.
@@ -593,6 +638,11 @@ export interface cc {
   pNormalizeIn(v: CCPoint): CCPoint;
 
   /**
+   *
+   */
+  Point: CCPointNamespace;
+
+  /**
    * Check whether a point's value equals to another.
    *
    * @param point1
@@ -704,6 +754,11 @@ export interface cc {
    * Returns a random float between -1 and 1.
    */
   randomMinus1To1(): number;
+
+  /**
+   *
+   */
+  Rect: CCRectNamespace;
 
   /**
    * Helper function that creates a cc.Rect.
@@ -887,6 +942,21 @@ export interface cc {
   _reuse_size: CCSize;
 
   /**
+   *
+   */
+  s_globalOrderOfArrival: number;
+
+  /**
+   *
+   */
+  Scheduler: CCSchedulerNamespace;
+
+  /**
+   *
+   */
+  Size: CCSizeNamespace;
+
+  /**
    * Helper function that creates a cc.Size.
    *
    * ```
@@ -944,6 +1014,11 @@ export interface cc {
   /**
    *
    */
+  stencilBits: number;
+
+  /**
+   *
+   */
   sys: CCSysNamespace;
 
   /**
@@ -957,6 +1032,16 @@ export interface cc {
    * @deprecated since v3.0
    */
   swap(x: string, y: string, ref: object): void;
+
+  /**
+   *
+   */
+  Texture2D: CCTexture2DNamespace;
+
+  /**
+   *
+   */
+  Touch: CCTouchNamespace;
 
   /**
    *
@@ -978,24 +1063,6 @@ export interface cc {
     height: number;
   };
 
-  //
-  Action: CCActionNamespace;
-  ActionManager: CCActionManagerNamespace;
-  Component: CCComponentNamespace;
-  Event: CCEventNamespace;
-  EventListener: CCEventListenerNamespace;
-  GLProgram: CCGLProgramNamespace;
-  GridBase: CCGridBaseNamespace;
-  Node: CCNodeNamespace;
-  Point: CCPointNamespace;
-  Rect: CCRectNamespace;
-  Scheduler: CCSchedulerNamespace;
-  Size: CCSizeNamespace;
-  Texture2D: CCTexture2DNamespace;
-  Touch: CCTouchNamespace;
-
-  //
-
   /**
    *
    */
@@ -1006,485 +1073,2166 @@ export interface cc {
    */
   readonly REPEAT_FOREVER: 4294967295;
 
-  TMX_ORIENTATION_HEX: 1;
-  TMX_ORIENTATION_ISO: 2;
-  TMX_ORIENTATION_ORTHO: 0;
-  Z_COMPRESSION_BZIP2: 1;
-  Z_COMPRESSION_GZIP: 2;
-  Z_COMPRESSION_NONE: 3;
-  Z_COMPRESSION_ZLIB: 0;
-  BLEND_DST: 771;
-  BLEND_SRC: 770;
-  DIRECTOR_IOS_USE_BACKGROUND_THREAD: 0;
-  DIRECTOR_MAC_THREAD: 0;
-  DIRECTOR_STATS_INTERVAL: 0.1;
-  ENABLE_BOX2_D_INTEGRATION: 0;
-  ENABLE_DEPRECATED: 1;
-  ENABLE_GL_STATE_CACHE: 1;
-  ENABLE_PROFILERS: 0;
-  ENABLE_STACKABLE_ACTIONS: 1;
-  FIX_ARTIFACTS_BY_STRECHING_TEXEL: 0;
-  GL_ALL: 0;
-  LABELATLAS_DEBUG_DRAW: 0;
-  LABELBMFONT_DEBUG_DRAW: 0;
-  MAC_USE_DISPLAY_LINK_THREAD: 0;
-  MAC_USE_MAIN_THREAD: 2;
-  MAC_USE_OWN_THREAD: 1;
-  NODE_RENDER_SUBPIXEL: 1;
-  PVRMIPMAP_MAX: 16;
-  SPRITEBATCHNODE_RENDER_SUBPIXEL: 1;
-  SPRITE_DEBUG_DRAW: 0;
-  TEXTURE_ATLAS_USE_TRIANGLE_STRIP: 0;
-  TEXTURE_ATLAS_USE_VAO: 0;
-  USE_L_A88_LABELS: 1;
-  ACTION_TAG_INVALID: -1;
-  DEVICE_MAC: 6;
-  DEVICE_MAC_RETINA_DISPLAY: 7;
-  DEVICEI_PAD: 4;
-  DEVICEI_PAD_RETINA_DISPLAY: 5;
-  DEVICEI_PHONE: 0;
-  DEVICEI_PHONE5: 2;
-  DEVICEI_PHONE5_RETINA_DISPLAY: 3;
-  DEVICEI_PHONE_RETINA_DISPLAY: 1;
-  FILE_UTILS_SEARCH_DIRECTORY_MODE: 1;
-  FILE_UTILS_SEARCH_SUFFIX_MODE: 0;
-  FLIPED_ALL: 3758096384;
-  FLIPPED_MASK: 536870911;
-  IMAGE_FORMAT_JPEG: 0;
-  IMAGE_FORMAT_PNG: 1;
-  ITEM_SIZE: 32;
-  LABEL_AUTOMATIC_WIDTH: -1;
-  LINE_BREAK_MODE_CHARACTER_WRAP: 1;
-  LINE_BREAK_MODE_CLIP: 2;
-  LINE_BREAK_MODE_HEAD_TRUNCATION: 3;
-  LINE_BREAK_MODE_MIDDLE_TRUNCATION: 5;
-  LINE_BREAK_MODE_TAIL_TRUNCATION: 4;
-  LINE_BREAK_MODE_WORD_WRAP: 0;
-  MAC_VERSION_10_6: 168165376;
-  MAC_VERSION_10_7: 168230912;
-  MAC_VERSION_10_8: 168296448;
-  MENU_HANDLER_PRIORITY: -128;
-  MENU_STATE_TRACKING_TOUCH: 1;
-  MENU_STATE_WAITING: 0;
-  NODE_TAG_INVALID: -1;
-  PRIORITY_NON_SYSTEM_MIN: -2147483647;
-  RESOLUTION_MAC: 1;
-  RESOLUTION_MAC_RETINA_DISPLAY: 2;
-  RESOLUTION_UNKNOWN: 0;
-  TMX_TILE_DIAGONAL_FLAG: 536870912;
-  TMX_TILE_HORIZONTAL_FLAG: 2147483648;
-  TMX_TILE_VERTICAL_FLAG: 1073741824;
-  TEXT_ALIGNMENT_CENTER: 1;
-  TEXT_ALIGNMENT_RIGHT: 2;
-  TEXT_ALIGNMENT_LEFT: 0;
-  VERTICAL_TEXT_ALIGNMENT_TOP: 0;
-  VERTICAL_TEXT_ALIGNMENT_CENTER: 1;
-  VERTICAL_TEXT_ALIGNMENT_BOTTOM: 2;
-  TOUCHES_ALL_AT_ONCE: 0;
-  TOUCHES_ONE_BY_ONE: 1;
-  TRANSITION_ORIENTATION_DOWN_OVER: 1;
-  TRANSITION_ORIENTATION_LEFT_OVER: 0;
-  TRANSITION_ORIENTATION_RIGHT_OVER: 1;
-  TRANSITION_ORIENTATION_UP_OVER: 0;
-  UNIFORM_COS_TIME: 5;
-  UNIFORM_MV_MATRIX: 1;
-  UNIFORM_MVP_MATRIX: 2;
-  UNIFORM_P_MATRIX: 0;
-  UNIFORM_RANDOM01: 6;
-  UNIFORM_SAMPLER: 7;
-  UNIFORM_SIN_TIME: 4;
-  UNIFORM_TIME: 3;
-  UNIFORM_MAX: 8;
-  OS_VERSION_4_0: 67108864;
-  OS_VERSION_4_0_1: 67109120;
-  OS_VERSION_4_1: 67174400;
-  OS_VERSION_4_2: 67239936;
-  OS_VERSION_4_2_1: 67240192;
-  OS_VERSION_4_3: 67305472;
-  OS_VERSION_4_3_1: 67305728;
-  OS_VERSION_4_3_2: 67305984;
-  OS_VERSION_4_3_3: 67306240;
-  OS_VERSION_4_3_4: 67306496;
-  OS_VERSION_4_3_5: 67306752;
-  OS_VERSION_5_0: 83886080;
-  OS_VERSION_5_0_1: 83886336;
-  OS_VERSION_5_1_0: 83951616;
-  OS_VERSION_6_0_0: 100663296;
-  ANIMATION_FRAME_DISPLAYED_NOTIFICATION: 'CCAnimationFrameDisplayedNotification';
-  CHIPMUNK_IMPORT: 'chipmunk.h';
-  ATTRIBUTE_NAME_COLOR: 'a_color';
-  ATTRIBUTE_NAME_POSITION: 'a_position';
-  ATTRIBUTE_NAME_TEX_COORD: 'a_texCoord';
-  ATTRIBUTE_NAME_TEX_COORD1: 'a_texCoord1';
-  ATTRIBUTE_NAME_TEX_COORD2: 'a_texCoord2';
-  ATTRIBUTE_NAME_TEX_COORD3: 'a_texCoord3';
-  ATTRIBUTE_NAME_NORMAL: 'a_normal';
-  ATTRIBUTE_NAME_BLEND_WEIGHT: 'a_blendWeight';
-  ATTRIBUTE_NAME_BLEND_INDEX: 'a_blendIndex';
-  ENGINE_VERSION: 'Cocos2d-JS v3.15';
-  DIRECTOR_STATS_POSITION: {
-    x: 0;
-    y: 0;
-  };
-  DIRECTOR_FPS_INTERVAL: 0.5;
-  COCOSNODE_RENDER_SUBPIXEL: 1;
-  OPTIMIZE_BLEND_FUNC_FOR_PREMULTIPLIED_ALPHA: 0;
-  TEXTURE_NPOT_SUPPORT: 0;
-  RETINA_DISPLAY_SUPPORT: 1;
-  RETINA_DISPLAY_FILENAME_SUFFIX: '-hd';
-  USE_LA88_LABELS: 1;
-  SPRITEBATCHNODE_DEBUG_DRAW: 0;
-  IS_RETINA_DISPLAY_SUPPORTED: 1;
-  DEFAULT_ENGINE: 'Cocos2d-JS v3.15-native';
-  ResolutionPolicy: {
-    EXACT_FIT: 0;
-    NO_BORDER: 1;
-    SHOW_ALL: 2;
-    FIXED_HEIGHT: 3;
-    FIXED_WIDTH: 4;
-    UNKNOWN: 5;
-  };
-  LANGUAGE_ENGLISH: 0;
-  LANGUAGE_CHINESE: 1;
-  LANGUAGE_FRENCH: 2;
-  LANGUAGE_ITALIAN: 3;
-  LANGUAGE_GERMAN: 4;
-  LANGUAGE_SPANISH: 5;
-  LANGUAGE_RUSSIAN: 6;
-  LANGUAGE_KOREAN: 7;
-  LANGUAGE_JAPANESE: 8;
-  LANGUAGE_HUNGARIAN: 9;
-  LANGUAGE_PORTUGUESE: 10;
-  LANGUAGE_ARABIC: 11;
-  DEVICE_ORIENTATION_PORTRAIT: 0;
-  DEVICE_ORIENTATION_LANDSCAPE_LEFT: 1;
-  DEVICE_ORIENTATION_PORTRAIT_UPSIDE_DOWN: 2;
-  DEVICE_ORIENTATION_LANDSCAPE_RIGHT: 3;
-  DEVICE_MAX_ORIENTATIONS: 2;
-  IMAGE_FORMAT_RAWDATA: 2;
-  TOUCH_ALL_AT_ONCE: 0;
-  TOUCH_ONE_BY_ONE: 1;
-  RED: {
-    r: 255;
-    g: 0;
-    b: 0;
-  };
-  GREEN: {
-    r: 0;
-    g: 255;
-    b: 0;
-  };
-  BLUE: {
-    r: 0;
-    g: 0;
-    b: 255;
-  };
-  BLACK: {
-    r: 0;
-    g: 0;
-    b: 0;
-  };
-  WHITE: {
-    r: 255;
-    g: 255;
-    b: 255;
-  };
-  YELLOW: {
-    r: 255;
-    g: 255;
-    b: 0;
-  };
-  POINT_ZERO: {
-    x: 0;
-    y: 0;
-  };
-  PARTICLE_DEFAULT_CAPACITY: 500;
-  DEFAULT_PADDING: 5;
-  ONE: 1;
-  ZERO: 0;
-  SRC_ALPHA: 770;
-  SRC_ALPHA_SATURATE: 776;
-  SRC_COLOR: 768;
-  DST_ALPHA: 772;
-  DST_COLOR: 774;
-  ONE_MINUS_SRC_ALPHA: 771;
-  ONE_MINUS_SRC_COLOR: 769;
-  ONE_MINUS_DST_ALPHA: 773;
-  ONE_MINUS_DST_COLOR: 775;
-  ONE_MINUS_CONSTANT_ALPHA: 32772;
-  ONE_MINUS_CONSTANT_COLOR: 32770;
-  LINEAR: 9729;
-  REPEAT: 10497;
-  CLAMP_TO_EDGE: 33071;
-  MIRRORED_REPEAT: 33648;
-  VERTEX_ATTRIB_FLAG_NONE: 0;
-  VERTEX_ATTRIB_FLAG_POSITION: 1;
-  VERTEX_ATTRIB_FLAG_COLOR: 2;
-  VERTEX_ATTRIB_FLAG_TEX_COORDS: 4;
-  VERTEX_ATTRIB_FLAG_POS_COLOR_TEX: 7;
-  VERTEX_ATTRIB_POSITION: 0;
-  VERTEX_ATTRIB_COLOR: 1;
-  VERTEX_ATTRIB_TEX_COORDS: 2;
-  VERTEX_ATTRIB_MAX: 3;
-  UNIFORM_PMATRIX: 0;
-  UNIFORM_MVMATRIX: 1;
-  UNIFORM_MVPMATRIX: 2;
-  UNIFORM_SINTIME: 4;
-  UNIFORM_COSTIME: 5;
-  UNIFORM_TIME_S: 'CC_Time';
-  UNIFORM_COS_TIME_S: 'CC_CosTime';
-  UNIFORM_COSTIME_S: 'CC_CosTime';
-  UNIFORM_SIN_TIME_S: 'CC_SinTime';
-  UNIFORM_SINTIME_S: 'CC_SinTime';
-  UNIFORM_PMATRIX_S: 'CC_PMatrix';
-  UNIFORM_MVMATRIX_S: 'CC_MVMatrix';
-  UNIFORM_MVPMATRIX_S: 'CC_MVPMatrix';
-  UNIFORM_P_MATRIX_S: 'CC_PMatrix';
-  UNIFORM_MV_MATRIX_S: 'CC_MVMatrix';
-  UNIFORM_MVP_MATRIX_S: 'CC_MVPMatrix';
-  UNIFORM_RANDOM01_S: 'CC_Random01';
-  UNIFORM_SAMPLER_S: 'CC_Texture0';
-  UNIFORM_ALPHA_TEST_VALUE_S: 'CC_AlphaValue';
-  CURRENT_ITEM: 3233828865;
-  ZOOM_ACTION_TAG: 3233828866;
-  NORMAL_TAG: 8801;
-  SELECTED_TAG: 8802;
-  DISABLE_TAG: 8803;
-  stencilBits: -1;
-  g_NumberOfDraws: 0;
-  s_globalOrderOfArrival: 1;
-  TMX_PROPERTY_NONE: 0;
-  TMX_PROPERTY_MAP: 1;
-  TMX_PROPERTY_LAYER: 2;
-  TMX_PROPERTY_OBJECTGROUP: 3;
-  TMX_PROPERTY_OBJECT: 4;
-  TMX_PROPERTY_TILE: 5;
-  SCENE_FADE: 4208917214;
-  SCENE_RADIAL: 49153;
-  INVALID_INDEX: -1;
-  PI: 3.141592653589793;
-  FLT_MAX: 3.402823466e38;
-  RAD: 0.017453292519943295;
-  DEG: 57.29577951308232;
-  UINT_MAX: 4294967295;
+  /**
+   *
+   */
+  readonly TMX_ORIENTATION_HEX: 1;
 
-  KEYBOARD_RETURNTYPE_DEFAULT: 0;
-  KEYBOARD_RETURNTYPE_DONE: 1;
-  KEYBOARD_RETURNTYPE_SEND: 2;
-  KEYBOARD_RETURNTYPE_SEARCH: 3;
-  KEYBOARD_RETURNTYPE_GO: 4;
-  EDITBOX_INPUT_MODE_ANY: 0;
-  EDITBOX_INPUT_MODE_EMAILADDR: 1;
-  EDITBOX_INPUT_MODE_NUMERIC: 2;
-  EDITBOX_INPUT_MODE_PHONENUMBER: 3;
-  EDITBOX_INPUT_MODE_URL: 4;
-  EDITBOX_INPUT_MODE_DECIMAL: 5;
-  EDITBOX_INPUT_MODE_SINGLELINE: 6;
-  EDITBOX_INPUT_FLAG_PASSWORD: 0;
-  EDITBOX_INPUT_FLAG_SENSITIVE: 1;
-  EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD: 2;
-  EDITBOX_INPUT_FLAG_INITIAL_CAPS_SENTENCE: 3;
-  EDITBOX_INPUT_FLAG_INITIAL_CAPS_ALL_CHARACTERS: 4;
+  /**
+   *
+   */
+  readonly TMX_ORIENTATION_ISO: 2;
 
-  SCROLLVIEW_DIRECTION_NONE: -1;
-  SCROLLVIEW_DIRECTION_HORIZONTAL: 0;
-  SCROLLVIEW_DIRECTION_VERTICAL: 1;
-  SCROLLVIEW_DIRECTION_BOTH: 2;
-  TABLEVIEW_FILL_TOPDOWN: 0;
-  TABLEVIEW_FILL_BOTTOMUP: 1;
-  CONTROL_EVENT_TOTAL_NUMBER: 9;
-  CONTROL_EVENT_TOUCH_DOWN: 1;
-  CONTROL_EVENT_TOUCH_DRAG_INSIDE: 2;
-  CONTROL_EVENT_TOUCH_DRAG_OUTSIDE: 4;
-  CONTROL_EVENT_TOUCH_DRAG_ENTER: 8;
-  CONTROL_EVENT_TOUCH_DRAG_EXIT: 16;
-  CONTROL_EVENT_TOUCH_UP_INSIDE: 32;
-  CONTROL_EVENT_TOUCH_UP_OUTSIDE: 64;
-  CONTROL_EVENT_TOUCH_CANCEL: 128;
-  CONTROL_EVENT_VALUECHANGED: 256;
-  CONTROL_STATE_NORMAL: 1;
-  CONTROL_STATE_HIGHLIGHTED: 2;
-  CONTROL_STATE_DISABLED: 4;
-  CONTROL_STATE_SELECTED: 8;
-  CONTROL_STATE_INITIAL: 8;
-  CONTROL_ZOOM_ACTION_TAG: 3435855873;
-  CONTROL_STEPPER_PARTMINUS: 0;
-  CONTROL_STEPPER_PARTPLUS: 1;
-  CONTROL_STEPPER_PARTNONE: 2;
-  CONTROL_STEPPER_LABELCOLOR_ENABLED: {
-    r: 55;
-    g: 55;
-    b: 55;
-    a: 255;
-  };
-  CONTROL_STEPPER_LABELCOLOR_DISABLED: {
-    r: 147;
-    g: 147;
-    b: 147;
-    a: 255;
-  };
-  CONTROL_STEPPER_LABELFONT: 'CourierNewPSMT';
-  AUTOREPEAT_DELTATIME: 0.15;
-  AUTOREPEAT_INCREASETIME_INCREMENT: 12;
-  SHADER_POSITION_TEXTURECOLOR: 'ShaderPositionTextureColor';
-  SHADER_POSITION_TEXTURECOLORALPHATEST: 'ShaderPositionTextureColorAlphaTest';
-  SHADER_POSITION_COLOR: 'ShaderPositionColor';
-  SHADER_POSITION_TEXTURE: 'ShaderPositionTexture';
-  SHADER_POSITION_TEXTURE_UCOLOR: 'ShaderPositionTexture_uColor';
-  SHADER_POSITION_TEXTUREA8COLOR: 'ShaderPositionTextureA8Color';
-  SHADER_POSITION_UCOLOR: 'ShaderPosition_uColor';
-  SHADER_POSITION_LENGTHTEXTURECOLOR: 'ShaderPositionLengthTextureColor';
+  /**
+   *
+   */
+  readonly TMX_ORIENTATION_ORTHO: 0;
 
-  KEY: {
-    '0': 48;
-    '1': 49;
-    '2': 50;
-    '3': 51;
-    '4': 52;
-    '5': 53;
-    '6': 54;
-    '7': 55;
-    '8': 56;
-    '9': 57;
-    none: 0;
-    back: 6;
-    menu: 18;
-    backspace: 8;
-    tab: 9;
-    enter: 13;
-    shift: 16;
-    ctrl: 17;
-    alt: 18;
-    pause: 19;
-    capslock: 20;
-    escape: 27;
-    space: 32;
-    pageup: 33;
-    pagedown: 34;
-    end: 35;
-    home: 36;
-    left: 37;
-    up: 38;
-    right: 39;
-    down: 40;
-    select: 41;
-    insert: 45;
-    Delete: 46;
-    a: 65;
-    b: 66;
-    c: 67;
-    d: 68;
-    e: 69;
-    f: 70;
-    g: 71;
-    h: 72;
-    i: 73;
-    j: 74;
-    k: 75;
-    l: 76;
-    m: 77;
-    n: 78;
-    o: 79;
-    p: 80;
-    q: 81;
-    r: 82;
-    s: 83;
-    t: 84;
-    u: 85;
-    v: 86;
-    w: 87;
-    x: 88;
-    y: 89;
-    z: 90;
-    num0: 96;
-    num1: 97;
-    num2: 98;
-    num3: 99;
-    num4: 100;
-    num5: 101;
-    num6: 102;
-    num7: 103;
-    num8: 104;
-    num9: 105;
-    '*': 106;
-    '+': 107;
-    '-': 109;
-    numdel: 110;
-    '/': 111;
-    f1: 112;
-    f2: 113;
-    f3: 114;
-    f4: 115;
-    f5: 116;
-    f6: 117;
-    f7: 118;
-    f8: 119;
-    f9: 120;
-    f10: 121;
-    f11: 122;
-    f12: 123;
-    numlock: 144;
-    scrolllock: 145;
-    ';': 186;
-    semicolon: 186;
-    equal: 187;
-    '=': 187;
-    ',': 188;
-    comma: 188;
-    dash: 189;
-    '.': 190;
-    period: 190;
-    forwardslash: 191;
-    grave: 192;
-    '[': 219;
-    openbracket: 219;
-    backslash: 220;
-    ']': 221;
-    closebracket: 221;
-    quote: 222;
-    dpadLeft: 1000;
-    dpadRight: 1001;
-    dpadUp: 1003;
-    dpadDown: 1004;
-    dpadCenter: 1005;
+  /**
+   *
+   */
+  readonly Z_COMPRESSION_BZIP2: 1;
+
+  /**
+   *
+   */
+  readonly Z_COMPRESSION_GZIP: 2;
+
+  /**
+   *
+   */
+  readonly Z_COMPRESSION_NONE: 3;
+
+  /**
+   *
+   */
+  readonly Z_COMPRESSION_ZLIB: 0;
+
+  /**
+   *
+   */
+  readonly BLEND_DST: 771;
+
+  /**
+   *
+   */
+  readonly BLEND_SRC: 770;
+
+  /**
+   *
+   */
+  readonly DIRECTOR_IOS_USE_BACKGROUND_THREAD: 0;
+
+  /**
+   *
+   */
+  readonly DIRECTOR_MAC_THREAD: 0;
+
+  /**
+   *
+   */
+  readonly DIRECTOR_STATS_INTERVAL: 0.1;
+
+  /**
+   *
+   */
+  readonly ENABLE_BOX2_D_INTEGRATION: 0;
+
+  /**
+   *
+   */
+  readonly ENABLE_DEPRECATED: 1;
+
+  /**
+   *
+   */
+  readonly ENABLE_GL_STATE_CACHE: 1;
+
+  /**
+   *
+   */
+  readonly ENABLE_PROFILERS: 0;
+
+  /**
+   *
+   */
+  readonly ENABLE_STACKABLE_ACTIONS: 1;
+
+  /**
+   *
+   */
+  readonly FIX_ARTIFACTS_BY_STRECHING_TEXEL: 0;
+
+  /**
+   *
+   */
+  readonly GL_ALL: 0;
+
+  /**
+   *
+   */
+  readonly LABELATLAS_DEBUG_DRAW: 0;
+
+  /**
+   *
+   */
+  readonly LABELBMFONT_DEBUG_DRAW: 0;
+
+  /**
+   *
+   */
+  readonly MAC_USE_DISPLAY_LINK_THREAD: 0;
+
+  /**
+   *
+   */
+  readonly MAC_USE_MAIN_THREAD: 2;
+
+  /**
+   *
+   */
+  readonly MAC_USE_OWN_THREAD: 1;
+
+  /**
+   *
+   */
+  readonly NODE_RENDER_SUBPIXEL: 1;
+
+  /**
+   *
+   */
+  readonly PVRMIPMAP_MAX: 16;
+
+  /**
+   *
+   */
+  readonly SPRITEBATCHNODE_RENDER_SUBPIXEL: 1;
+
+  /**
+   *
+   */
+  readonly SPRITE_DEBUG_DRAW: 0;
+
+  /**
+   *
+   */
+  readonly TEXTURE_ATLAS_USE_TRIANGLE_STRIP: 0;
+
+  /**
+   *
+   */
+  readonly TEXTURE_ATLAS_USE_VAO: 0;
+
+  /**
+   *
+   */
+  readonly USE_L_A88_LABELS: 1;
+
+  /**
+   *
+   */
+  readonly ACTION_TAG_INVALID: -1;
+
+  /**
+   *
+   */
+  readonly DEVICE_MAC: 6;
+
+  /**
+   *
+   */
+  readonly DEVICE_MAC_RETINA_DISPLAY: 7;
+
+  /**
+   *
+   */
+  readonly DEVICEI_PAD: 4;
+
+  /**
+   *
+   */
+  readonly DEVICEI_PAD_RETINA_DISPLAY: 5;
+
+  /**
+   *
+   */
+  readonly DEVICEI_PHONE: 0;
+
+  /**
+   *
+   */
+  readonly DEVICEI_PHONE5: 2;
+
+  /**
+   *
+   */
+  readonly DEVICEI_PHONE5_RETINA_DISPLAY: 3;
+
+  /**
+   *
+   */
+  readonly DEVICEI_PHONE_RETINA_DISPLAY: 1;
+
+  /**
+   *
+   */
+  readonly FILE_UTILS_SEARCH_DIRECTORY_MODE: 1;
+
+  /**
+   *
+   */
+  readonly FILE_UTILS_SEARCH_SUFFIX_MODE: 0;
+
+  /**
+   *
+   */
+  readonly FLIPED_ALL: 3758096384;
+
+  /**
+   *
+   */
+  readonly FLIPPED_MASK: 536870911;
+
+  /**
+   *
+   */
+  readonly IMAGE_FORMAT_JPEG: 0;
+
+  /**
+   *
+   */
+  readonly IMAGE_FORMAT_PNG: 1;
+
+  /**
+   *
+   */
+  readonly ITEM_SIZE: 32;
+
+  /**
+   *
+   */
+  readonly LABEL_AUTOMATIC_WIDTH: -1;
+
+  /**
+   *
+   */
+  readonly LINE_BREAK_MODE_CHARACTER_WRAP: 1;
+
+  /**
+   *
+   */
+  readonly LINE_BREAK_MODE_CLIP: 2;
+
+  /**
+   *
+   */
+  readonly LINE_BREAK_MODE_HEAD_TRUNCATION: 3;
+
+  /**
+   *
+   */
+  readonly LINE_BREAK_MODE_MIDDLE_TRUNCATION: 5;
+
+  /**
+   *
+   */
+  readonly LINE_BREAK_MODE_TAIL_TRUNCATION: 4;
+
+  /**
+   *
+   */
+  readonly LINE_BREAK_MODE_WORD_WRAP: 0;
+
+  /**
+   *
+   */
+  readonly MAC_VERSION_10_6: 168165376;
+
+  /**
+   *
+   */
+  readonly MAC_VERSION_10_7: 168230912;
+
+  /**
+   *
+   */
+  readonly MAC_VERSION_10_8: 168296448;
+
+  /**
+   *
+   */
+  readonly MENU_HANDLER_PRIORITY: -128;
+
+  /**
+   *
+   */
+  readonly MENU_STATE_TRACKING_TOUCH: 1;
+
+  /**
+   *
+   */
+  readonly MENU_STATE_WAITING: 0;
+
+  /**
+   *
+   */
+  readonly NODE_TAG_INVALID: -1;
+
+  /**
+   *
+   */
+  readonly PRIORITY_NON_SYSTEM_MIN: -2147483647;
+
+  /**
+   *
+   */
+  readonly RESOLUTION_MAC: 1;
+
+  /**
+   *
+   */
+  readonly RESOLUTION_MAC_RETINA_DISPLAY: 2;
+
+  /**
+   *
+   */
+  readonly RESOLUTION_UNKNOWN: 0;
+
+  /**
+   *
+   */
+  readonly TMX_TILE_DIAGONAL_FLAG: 536870912;
+
+  /**
+   *
+   */
+  readonly TMX_TILE_HORIZONTAL_FLAG: 2147483648;
+
+  /**
+   *
+   */
+  readonly TMX_TILE_VERTICAL_FLAG: 1073741824;
+
+  /**
+   *
+   */
+  readonly TEXT_ALIGNMENT_CENTER: 1;
+
+  /**
+   *
+   */
+  readonly TEXT_ALIGNMENT_RIGHT: 2;
+
+  /**
+   *
+   */
+  readonly TEXT_ALIGNMENT_LEFT: 0;
+
+  /**
+   *
+   */
+  readonly VERTICAL_TEXT_ALIGNMENT_TOP: 0;
+
+  /**
+   *
+   */
+  readonly VERTICAL_TEXT_ALIGNMENT_CENTER: 1;
+
+  /**
+   *
+   */
+  readonly VERTICAL_TEXT_ALIGNMENT_BOTTOM: 2;
+
+  /**
+   *
+   */
+  readonly TOUCHES_ALL_AT_ONCE: 0;
+
+  /**
+   *
+   */
+  readonly TOUCHES_ONE_BY_ONE: 1;
+
+  /**
+   *
+   */
+  readonly TRANSITION_ORIENTATION_DOWN_OVER: 1;
+
+  /**
+   *
+   */
+  readonly TRANSITION_ORIENTATION_LEFT_OVER: 0;
+
+  /**
+   *
+   */
+  readonly TRANSITION_ORIENTATION_RIGHT_OVER: 1;
+
+  /**
+   *
+   */
+  readonly TRANSITION_ORIENTATION_UP_OVER: 0;
+
+  /**
+   *
+   */
+  readonly UNIFORM_COS_TIME: 5;
+
+  /**
+   *
+   */
+  readonly UNIFORM_MV_MATRIX: 1;
+
+  /**
+   *
+   */
+  readonly UNIFORM_MVP_MATRIX: 2;
+
+  /**
+   *
+   */
+  readonly UNIFORM_P_MATRIX: 0;
+
+  /**
+   *
+   */
+  readonly UNIFORM_RANDOM01: 6;
+
+  /**
+   *
+   */
+  readonly UNIFORM_SAMPLER: 7;
+
+  /**
+   *
+   */
+  readonly UNIFORM_SIN_TIME: 4;
+
+  /**
+   *
+   */
+  readonly UNIFORM_TIME: 3;
+
+  /**
+   *
+   */
+  readonly UNIFORM_MAX: 8;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_0: 67108864;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_0_1: 67109120;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_1: 67174400;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_2: 67239936;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_2_1: 67240192;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_3: 67305472;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_3_1: 67305728;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_3_2: 67305984;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_3_3: 67306240;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_3_4: 67306496;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_4_3_5: 67306752;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_5_0: 83886080;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_5_0_1: 83886336;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_5_1_0: 83951616;
+
+  /**
+   *
+   */
+  readonly OS_VERSION_6_0_0: 100663296;
+
+  /**
+   *
+   */
+  readonly ANIMATION_FRAME_DISPLAYED_NOTIFICATION: 'CCAnimationFrameDisplayedNotification';
+
+  /**
+   *
+   */
+  readonly CHIPMUNK_IMPORT: 'chipmunk.h';
+
+  /**
+   *
+   */
+  readonly ATTRIBUTE_NAME_COLOR: 'a_color';
+
+  /**
+   *
+   */
+  readonly ATTRIBUTE_NAME_POSITION: 'a_position';
+
+  /**
+   *
+   */
+  readonly ATTRIBUTE_NAME_TEX_COORD: 'a_texCoord';
+
+  /**
+   *
+   */
+  readonly ATTRIBUTE_NAME_TEX_COORD1: 'a_texCoord1';
+
+  /**
+   *
+   */
+  readonly ATTRIBUTE_NAME_TEX_COORD2: 'a_texCoord2';
+
+  /**
+   *
+   */
+  readonly ATTRIBUTE_NAME_TEX_COORD3: 'a_texCoord3';
+
+  /**
+   *
+   */
+  readonly ATTRIBUTE_NAME_NORMAL: 'a_normal';
+
+  /**
+   *
+   */
+  readonly ATTRIBUTE_NAME_BLEND_WEIGHT: 'a_blendWeight';
+
+  /**
+   *
+   */
+  readonly ATTRIBUTE_NAME_BLEND_INDEX: 'a_blendIndex';
+
+  /**
+   *
+   */
+  readonly ENGINE_VERSION: 'Cocos2d-JS v3.15';
+
+  /**
+   *
+   */
+  readonly DIRECTOR_STATS_POSITION: {
+    /**
+     *
+     */
+    readonly x: 0;
+
+    /**
+     *
+     */
+    readonly y: 0;
   };
 
-  CameraFlag: {
-    DEFAULT: 1;
-    USER1: 2;
-    USER2: 4;
-    USER3: 8;
-    USER4: 16;
-    USER5: 32;
-    USER6: 64;
-    USER7: 128;
-    USER8: 256;
+  /**
+   *
+   */
+  readonly DIRECTOR_FPS_INTERVAL: 0.5;
+
+  /**
+   *
+   */
+  readonly COCOSNODE_RENDER_SUBPIXEL: 1;
+
+  /**
+   *
+   */
+  readonly OPTIMIZE_BLEND_FUNC_FOR_PREMULTIPLIED_ALPHA: 0;
+
+  /**
+   *
+   */
+  readonly TEXTURE_NPOT_SUPPORT: 0;
+
+  /**
+   *
+   */
+  readonly RETINA_DISPLAY_SUPPORT: 1;
+
+  /**
+   *
+   */
+  readonly RETINA_DISPLAY_FILENAME_SUFFIX: '-hd';
+
+  /**
+   *
+   */
+  readonly USE_LA88_LABELS: 1;
+
+  /**
+   *
+   */
+  readonly SPRITEBATCHNODE_DEBUG_DRAW: 0;
+
+  /**
+   *
+   */
+  readonly IS_RETINA_DISPLAY_SUPPORTED: 1;
+
+  /**
+   *
+   */
+  readonly DEFAULT_ENGINE: 'Cocos2d-JS v3.15-native';
+
+  /**
+   *
+   */
+  readonly ResolutionPolicy: {
+    /**
+     *
+     */
+    readonly EXACT_FIT: 0;
+
+    /**
+     *
+     */
+    readonly NO_BORDER: 1;
+
+    /**
+     *
+     */
+    readonly SHOW_ALL: 2;
+
+    /**
+     *
+     */
+    readonly FIXED_HEIGHT: 3;
+
+    /**
+     *
+     */
+    readonly FIXED_WIDTH: 4;
+
+    /**
+     *
+     */
+    readonly UNKNOWN: 5;
   };
-  LightType: {
-    DIRECTIONAL: 0;
-    POINT: 1;
-    SPOT: 2;
-    AMBIENT: 3;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_ENGLISH: 0;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_CHINESE: 1;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_FRENCH: 2;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_ITALIAN: 3;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_GERMAN: 4;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_SPANISH: 5;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_RUSSIAN: 6;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_KOREAN: 7;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_JAPANESE: 8;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_HUNGARIAN: 9;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_PORTUGUESE: 10;
+
+  /**
+   *
+   */
+  readonly LANGUAGE_ARABIC: 11;
+
+  /**
+   *
+   */
+  readonly DEVICE_ORIENTATION_PORTRAIT: 0;
+
+  /**
+   *
+   */
+  readonly DEVICE_ORIENTATION_LANDSCAPE_LEFT: 1;
+
+  /**
+   *
+   */
+  readonly DEVICE_ORIENTATION_PORTRAIT_UPSIDE_DOWN: 2;
+
+  /**
+   *
+   */
+  readonly DEVICE_ORIENTATION_LANDSCAPE_RIGHT: 3;
+
+  /**
+   *
+   */
+  readonly DEVICE_MAX_ORIENTATIONS: 2;
+
+  /**
+   *
+   */
+  readonly IMAGE_FORMAT_RAWDATA: 2;
+
+  /**
+   *
+   */
+  readonly TOUCH_ALL_AT_ONCE: 0;
+
+  /**
+   *
+   */
+  readonly TOUCH_ONE_BY_ONE: 1;
+
+  /**
+   *
+   */
+  readonly RED: {
+    /**
+     *
+     */
+    readonly r: 255;
+
+    /**
+     *
+     */
+    readonly g: 0;
+
+    /**
+     *
+     */
+    readonly b: 0;
   };
-  LightFlag: {
-    LIGHT0: 1;
-    LIGHT1: 2;
-    LIGHT2: 4;
-    LIGHT3: 8;
-    LIGHT4: 16;
-    LIGHT5: 32;
-    LIGHT6: 64;
-    LIGHT7: 128;
-    LIGHT8: 256;
-    LIGHT9: 512;
-    LIGHT10: 1024;
-    LIGHT11: 2048;
-    LIGHT12: 4096;
-    LIGHT13: 8192;
-    LIGHT14: 16384;
-    LIGHT15: 32768;
+
+  /**
+   *
+   */
+  readonly GREEN: {
+    /**
+     *
+     */
+    readonly r: 0;
+
+    /**
+     *
+     */
+    readonly g: 255;
+
+    /**
+     *
+     */
+    readonly b: 0;
   };
-  attributeNames: [
+
+  /**
+   *
+   */
+  readonly BLUE: {
+    /**
+     *
+     */
+    readonly r: 0;
+
+    /**
+     *
+     */
+    readonly g: 0;
+
+    /**
+     *
+     */
+    readonly b: 255;
+  };
+
+  /**
+   *
+   */
+  readonly BLACK: {
+    /**
+     *
+     */
+    readonly r: 0;
+
+    /**
+     *
+     */
+    readonly g: 0;
+
+    /**
+     *
+     */
+    readonly b: 0;
+  };
+
+  /**
+   *
+   */
+  readonly WHITE: {
+    /**
+     *
+     */
+    readonly r: 255;
+
+    /**
+     *
+     */
+    readonly g: 255;
+
+    /**
+     *
+     */
+    readonly b: 255;
+  };
+
+  /**
+   *
+   */
+  readonly YELLOW: {
+    /**
+     *
+     */
+    readonly r: 255;
+
+    /**
+     *
+     */
+    readonly g: 255;
+
+    /**
+     *
+     */
+    readonly b: 0;
+  };
+
+  /**
+   *
+   */
+  readonly POINT_ZERO: {
+    /**
+     *
+     */
+    readonly x: 0;
+
+    /**
+     *
+     */
+    readonly y: 0;
+  };
+
+  /**
+   *
+   */
+  readonly PARTICLE_DEFAULT_CAPACITY: 500;
+
+  /**
+   *
+   */
+  readonly DEFAULT_PADDING: 5;
+
+  /**
+   *
+   */
+  readonly ONE: 1;
+
+  /**
+   *
+   */
+  readonly ZERO: 0;
+
+  /**
+   *
+   */
+  readonly SRC_ALPHA: 770;
+
+  /**
+   *
+   */
+  readonly SRC_ALPHA_SATURATE: 776;
+
+  /**
+   *
+   */
+  readonly SRC_COLOR: 768;
+
+  /**
+   *
+   */
+  readonly DST_ALPHA: 772;
+
+  /**
+   *
+   */
+  readonly DST_COLOR: 774;
+
+  /**
+   *
+   */
+  readonly ONE_MINUS_SRC_ALPHA: 771;
+
+  /**
+   *
+   */
+  readonly ONE_MINUS_SRC_COLOR: 769;
+
+  /**
+   *
+   */
+  readonly ONE_MINUS_DST_ALPHA: 773;
+
+  /**
+   *
+   */
+  readonly ONE_MINUS_DST_COLOR: 775;
+
+  /**
+   *
+   */
+  readonly ONE_MINUS_CONSTANT_ALPHA: 32772;
+
+  /**
+   *
+   */
+  readonly ONE_MINUS_CONSTANT_COLOR: 32770;
+
+  /**
+   *
+   */
+  readonly LINEAR: 9729;
+
+  /**
+   *
+   */
+  readonly REPEAT: 10497;
+
+  /**
+   *
+   */
+  readonly CLAMP_TO_EDGE: 33071;
+
+  /**
+   *
+   */
+  readonly MIRRORED_REPEAT: 33648;
+
+  /**
+   *
+   */
+  readonly VERTEX_ATTRIB_FLAG_NONE: 0;
+
+  /**
+   *
+   */
+  readonly VERTEX_ATTRIB_FLAG_POSITION: 1;
+
+  /**
+   *
+   */
+  readonly VERTEX_ATTRIB_FLAG_COLOR: 2;
+
+  /**
+   *
+   */
+  readonly VERTEX_ATTRIB_FLAG_TEX_COORDS: 4;
+
+  /**
+   *
+   */
+  readonly VERTEX_ATTRIB_FLAG_POS_COLOR_TEX: 7;
+
+  /**
+   *
+   */
+  readonly VERTEX_ATTRIB_POSITION: 0;
+
+  /**
+   *
+   */
+  readonly VERTEX_ATTRIB_COLOR: 1;
+
+  /**
+   *
+   */
+  readonly VERTEX_ATTRIB_TEX_COORDS: 2;
+
+  /**
+   *
+   */
+  readonly VERTEX_ATTRIB_MAX: 3;
+
+  /**
+   *
+   */
+  readonly UNIFORM_PMATRIX: 0;
+
+  /**
+   *
+   */
+  readonly UNIFORM_MVMATRIX: 1;
+
+  /**
+   *
+   */
+  readonly UNIFORM_MVPMATRIX: 2;
+
+  /**
+   *
+   */
+  readonly UNIFORM_SINTIME: 4;
+
+  /**
+   *
+   */
+  readonly UNIFORM_COSTIME: 5;
+
+  /**
+   *
+   */
+  readonly UNIFORM_TIME_S: 'CC_Time';
+
+  /**
+   *
+   */
+  readonly UNIFORM_COS_TIME_S: 'CC_CosTime';
+
+  /**
+   *
+   */
+  readonly UNIFORM_COSTIME_S: 'CC_CosTime';
+
+  /**
+   *
+   */
+  readonly UNIFORM_SIN_TIME_S: 'CC_SinTime';
+
+  /**
+   *
+   */
+  readonly UNIFORM_SINTIME_S: 'CC_SinTime';
+
+  /**
+   *
+   */
+  readonly UNIFORM_PMATRIX_S: 'CC_PMatrix';
+
+  /**
+   *
+   */
+  readonly UNIFORM_MVMATRIX_S: 'CC_MVMatrix';
+
+  /**
+   *
+   */
+  readonly UNIFORM_MVPMATRIX_S: 'CC_MVPMatrix';
+
+  /**
+   *
+   */
+  readonly UNIFORM_P_MATRIX_S: 'CC_PMatrix';
+
+  /**
+   *
+   */
+  readonly UNIFORM_MV_MATRIX_S: 'CC_MVMatrix';
+
+  /**
+   *
+   */
+  readonly UNIFORM_MVP_MATRIX_S: 'CC_MVPMatrix';
+
+  /**
+   *
+   */
+  readonly UNIFORM_RANDOM01_S: 'CC_Random01';
+
+  /**
+   *
+   */
+  readonly UNIFORM_SAMPLER_S: 'CC_Texture0';
+
+  /**
+   *
+   */
+  readonly UNIFORM_ALPHA_TEST_VALUE_S: 'CC_AlphaValue';
+
+  /**
+   *
+   */
+  readonly CURRENT_ITEM: 3233828865;
+
+  /**
+   *
+   */
+  readonly ZOOM_ACTION_TAG: 3233828866;
+
+  /**
+   *
+   */
+  readonly NORMAL_TAG: 8801;
+
+  /**
+   *
+   */
+  readonly SELECTED_TAG: 8802;
+
+  /**
+   *
+   */
+  readonly DISABLE_TAG: 8803;
+
+  /**
+   *
+   */
+  readonly TMX_PROPERTY_NONE: 0;
+
+  /**
+   *
+   */
+  readonly TMX_PROPERTY_MAP: 1;
+
+  /**
+   *
+   */
+  readonly TMX_PROPERTY_LAYER: 2;
+
+  /**
+   *
+   */
+  readonly TMX_PROPERTY_OBJECTGROUP: 3;
+
+  /**
+   *
+   */
+  readonly TMX_PROPERTY_OBJECT: 4;
+
+  /**
+   *
+   */
+  readonly TMX_PROPERTY_TILE: 5;
+
+  /**
+   *
+   */
+  readonly SCENE_FADE: 4208917214;
+
+  /**
+   *
+   */
+  readonly SCENE_RADIAL: 49153;
+
+  /**
+   *
+   */
+  readonly INVALID_INDEX: -1;
+
+  /**
+   *
+   */
+  readonly PI: 3.141592653589793;
+
+  /**
+   *
+   */
+  readonly FLT_MAX: 3.402823466e38;
+
+  /**
+   *
+   */
+  readonly RAD: 0.017453292519943295;
+
+  /**
+   *
+   */
+  readonly DEG: 57.29577951308232;
+
+  /**
+   *
+   */
+  readonly UINT_MAX: 4294967295;
+
+  /**
+   *
+   */
+  readonly KEYBOARD_RETURNTYPE_DEFAULT: 0;
+
+  /**
+   *
+   */
+  readonly KEYBOARD_RETURNTYPE_DONE: 1;
+
+  /**
+   *
+   */
+  readonly KEYBOARD_RETURNTYPE_SEND: 2;
+
+  /**
+   *
+   */
+  readonly KEYBOARD_RETURNTYPE_SEARCH: 3;
+
+  /**
+   *
+   */
+  readonly KEYBOARD_RETURNTYPE_GO: 4;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_MODE_ANY: 0;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_MODE_EMAILADDR: 1;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_MODE_NUMERIC: 2;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_MODE_PHONENUMBER: 3;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_MODE_URL: 4;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_MODE_DECIMAL: 5;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_MODE_SINGLELINE: 6;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_FLAG_PASSWORD: 0;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_FLAG_SENSITIVE: 1;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD: 2;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_FLAG_INITIAL_CAPS_SENTENCE: 3;
+
+  /**
+   *
+   */
+  readonly EDITBOX_INPUT_FLAG_INITIAL_CAPS_ALL_CHARACTERS: 4;
+
+  /**
+   *
+   */
+  readonly SCROLLVIEW_DIRECTION_NONE: -1;
+
+  /**
+   *
+   */
+  readonly SCROLLVIEW_DIRECTION_HORIZONTAL: 0;
+
+  /**
+   *
+   */
+  readonly SCROLLVIEW_DIRECTION_VERTICAL: 1;
+
+  /**
+   *
+   */
+  readonly SCROLLVIEW_DIRECTION_BOTH: 2;
+
+  /**
+   *
+   */
+  readonly TABLEVIEW_FILL_TOPDOWN: 0;
+
+  /**
+   *
+   */
+  readonly TABLEVIEW_FILL_BOTTOMUP: 1;
+
+  /**
+   *
+   */
+  readonly CONTROL_EVENT_TOTAL_NUMBER: 9;
+
+  /**
+   *
+   */
+  readonly CONTROL_EVENT_TOUCH_DOWN: 1;
+
+  /**
+   *
+   */
+  readonly CONTROL_EVENT_TOUCH_DRAG_INSIDE: 2;
+
+  /**
+   *
+   */
+  readonly CONTROL_EVENT_TOUCH_DRAG_OUTSIDE: 4;
+
+  /**
+   *
+   */
+  readonly CONTROL_EVENT_TOUCH_DRAG_ENTER: 8;
+
+  /**
+   *
+   */
+  readonly CONTROL_EVENT_TOUCH_DRAG_EXIT: 16;
+
+  /**
+   *
+   */
+  readonly CONTROL_EVENT_TOUCH_UP_INSIDE: 32;
+
+  /**
+   *
+   */
+  readonly CONTROL_EVENT_TOUCH_UP_OUTSIDE: 64;
+
+  /**
+   *
+   */
+  readonly CONTROL_EVENT_TOUCH_CANCEL: 128;
+
+  /**
+   *
+   */
+  readonly CONTROL_EVENT_VALUECHANGED: 256;
+
+  /**
+   *
+   */
+  readonly CONTROL_STATE_NORMAL: 1;
+
+  /**
+   *
+   */
+  readonly CONTROL_STATE_HIGHLIGHTED: 2;
+
+  /**
+   *
+   */
+  readonly CONTROL_STATE_DISABLED: 4;
+
+  /**
+   *
+   */
+  readonly CONTROL_STATE_SELECTED: 8;
+
+  /**
+   *
+   */
+  readonly CONTROL_STATE_INITIAL: 8;
+
+  /**
+   *
+   */
+  readonly CONTROL_ZOOM_ACTION_TAG: 3435855873;
+
+  /**
+   *
+   */
+  readonly CONTROL_STEPPER_PARTMINUS: 0;
+
+  /**
+   *
+   */
+  readonly CONTROL_STEPPER_PARTPLUS: 1;
+
+  /**
+   *
+   */
+  readonly CONTROL_STEPPER_PARTNONE: 2;
+
+  /**
+   *
+   */
+  readonly CONTROL_STEPPER_LABELCOLOR_ENABLED: {
+    /**
+     *
+     */
+    readonly r: 55;
+
+    /**
+     *
+     */
+    readonly g: 55;
+
+    /**
+     *
+     */
+    readonly b: 55;
+
+    /**
+     *
+     */
+    readonly a: 255;
+  };
+
+  /**
+   *
+   */
+  readonly CONTROL_STEPPER_LABELCOLOR_DISABLED: {
+    /**
+     *
+     */
+    readonly r: 147;
+
+    /**
+     *
+     */
+    readonly g: 147;
+
+    /**
+     *
+     */
+    readonly b: 147;
+
+    /**
+     *
+     */
+    readonly a: 255;
+  };
+
+  /**
+   *
+   */
+  readonly CONTROL_STEPPER_LABELFONT: 'CourierNewPSMT';
+
+  /**
+   *
+   */
+  readonly AUTOREPEAT_DELTATIME: 0.15;
+
+  /**
+   *
+   */
+  readonly AUTOREPEAT_INCREASETIME_INCREMENT: 12;
+
+  /**
+   *
+   */
+  readonly SHADER_POSITION_TEXTURECOLOR: 'ShaderPositionTextureColor';
+
+  /**
+   *
+   */
+  readonly SHADER_POSITION_TEXTURECOLORALPHATEST: 'ShaderPositionTextureColorAlphaTest';
+
+  /**
+   *
+   */
+  readonly SHADER_POSITION_COLOR: 'ShaderPositionColor';
+
+  /**
+   *
+   */
+  readonly SHADER_POSITION_TEXTURE: 'ShaderPositionTexture';
+
+  /**
+   *
+   */
+  readonly SHADER_POSITION_TEXTURE_UCOLOR: 'ShaderPositionTexture_uColor';
+
+  /**
+   *
+   */
+  readonly SHADER_POSITION_TEXTUREA8COLOR: 'ShaderPositionTextureA8Color';
+
+  /**
+   *
+   */
+  readonly SHADER_POSITION_UCOLOR: 'ShaderPosition_uColor';
+
+  /**
+   *
+   */
+  readonly SHADER_POSITION_LENGTHTEXTURECOLOR: 'ShaderPositionLengthTextureColor';
+
+  /**
+   *
+   */
+  readonly KEY: {
+    /**
+     *
+     */
+    readonly '0': 48;
+
+    /**
+     *
+     */
+    readonly '1': 49;
+
+    /**
+     *
+     */
+    readonly '2': 50;
+
+    /**
+     *
+     */
+    readonly '3': 51;
+
+    /**
+     *
+     */
+    readonly '4': 52;
+
+    /**
+     *
+     */
+    readonly '5': 53;
+
+    /**
+     *
+     */
+    readonly '6': 54;
+
+    /**
+     *
+     */
+    readonly '7': 55;
+
+    /**
+     *
+     */
+    readonly '8': 56;
+
+    /**
+     *
+     */
+    readonly '9': 57;
+
+    /**
+     *
+     */
+    readonly none: 0;
+
+    /**
+     *
+     */
+    readonly back: 6;
+
+    /**
+     *
+     */
+    readonly menu: 18;
+
+    /**
+     *
+     */
+    readonly backspace: 8;
+
+    /**
+     *
+     */
+    readonly tab: 9;
+
+    /**
+     *
+     */
+    readonly enter: 13;
+
+    /**
+     *
+     */
+    readonly shift: 16;
+
+    /**
+     *
+     */
+    readonly ctrl: 17;
+
+    /**
+     *
+     */
+    readonly alt: 18;
+
+    /**
+     *
+     */
+    readonly pause: 19;
+
+    /**
+     *
+     */
+    readonly capslock: 20;
+
+    /**
+     *
+     */
+    readonly escape: 27;
+
+    /**
+     *
+     */
+    readonly space: 32;
+
+    /**
+     *
+     */
+    readonly pageup: 33;
+
+    /**
+     *
+     */
+    readonly pagedown: 34;
+
+    /**
+     *
+     */
+    readonly end: 35;
+
+    /**
+     *
+     */
+    readonly home: 36;
+
+    /**
+     *
+     */
+    readonly left: 37;
+
+    /**
+     *
+     */
+    readonly up: 38;
+
+    /**
+     *
+     */
+    readonly right: 39;
+
+    /**
+     *
+     */
+    readonly down: 40;
+
+    /**
+     *
+     */
+    readonly select: 41;
+
+    /**
+     *
+     */
+    readonly insert: 45;
+
+    /**
+     *
+     */
+    readonly Delete: 46;
+
+    /**
+     *
+     */
+    readonly a: 65;
+
+    /**
+     *
+     */
+    readonly b: 66;
+
+    /**
+     *
+     */
+    readonly c: 67;
+
+    /**
+     *
+     */
+    readonly d: 68;
+
+    /**
+     *
+     */
+    readonly e: 69;
+
+    /**
+     *
+     */
+    readonly f: 70;
+
+    /**
+     *
+     */
+    readonly g: 71;
+
+    /**
+     *
+     */
+    readonly h: 72;
+
+    /**
+     *
+     */
+    readonly i: 73;
+
+    /**
+     *
+     */
+    readonly j: 74;
+
+    /**
+     *
+     */
+    readonly k: 75;
+
+    /**
+     *
+     */
+    readonly l: 76;
+
+    /**
+     *
+     */
+    readonly m: 77;
+
+    /**
+     *
+     */
+    readonly n: 78;
+
+    /**
+     *
+     */
+    readonly o: 79;
+
+    /**
+     *
+     */
+    readonly p: 80;
+
+    /**
+     *
+     */
+    readonly q: 81;
+
+    /**
+     *
+     */
+    readonly r: 82;
+
+    /**
+     *
+     */
+    readonly s: 83;
+
+    /**
+     *
+     */
+    readonly t: 84;
+
+    /**
+     *
+     */
+    readonly u: 85;
+
+    /**
+     *
+     */
+    readonly v: 86;
+
+    /**
+     *
+     */
+    readonly w: 87;
+
+    /**
+     *
+     */
+    readonly x: 88;
+
+    /**
+     *
+     */
+    readonly y: 89;
+
+    /**
+     *
+     */
+    readonly z: 90;
+
+    /**
+     *
+     */
+    readonly num0: 96;
+
+    /**
+     *
+     */
+    readonly num1: 97;
+
+    /**
+     *
+     */
+    readonly num2: 98;
+
+    /**
+     *
+     */
+    readonly num3: 99;
+
+    /**
+     *
+     */
+    readonly num4: 100;
+
+    /**
+     *
+     */
+    readonly num5: 101;
+
+    /**
+     *
+     */
+    readonly num6: 102;
+
+    /**
+     *
+     */
+    readonly num7: 103;
+
+    /**
+     *
+     */
+    readonly num8: 104;
+
+    /**
+     *
+     */
+    readonly num9: 105;
+
+    /**
+     *
+     */
+    readonly '*': 106;
+
+    /**
+     *
+     */
+    readonly '+': 107;
+
+    /**
+     *
+     */
+    readonly '-': 109;
+
+    /**
+     *
+     */
+    readonly numdel: 110;
+
+    /**
+     *
+     */
+    readonly '/': 111;
+
+    /**
+     *
+     */
+    readonly f1: 112;
+
+    /**
+     *
+     */
+    readonly f2: 113;
+
+    /**
+     *
+     */
+    readonly f3: 114;
+
+    /**
+     *
+     */
+    readonly f4: 115;
+
+    /**
+     *
+     */
+    readonly f5: 116;
+
+    /**
+     *
+     */
+    readonly f6: 117;
+
+    /**
+     *
+     */
+    readonly f7: 118;
+
+    /**
+     *
+     */
+    readonly f8: 119;
+
+    /**
+     *
+     */
+    readonly f9: 120;
+
+    /**
+     *
+     */
+    readonly f10: 121;
+
+    /**
+     *
+     */
+    readonly f11: 122;
+
+    /**
+     *
+     */
+    readonly f12: 123;
+
+    /**
+     *
+     */
+    readonly numlock: 144;
+
+    /**
+     *
+     */
+    readonly scrolllock: 145;
+
+    /**
+     *
+     */
+    readonly ';': 186;
+
+    /**
+     *
+     */
+    readonly semicolon: 186;
+
+    /**
+     *
+     */
+    readonly equal: 187;
+
+    /**
+     *
+     */
+    readonly '=': 187;
+
+    /**
+     *
+     */
+    readonly ',': 188;
+
+    /**
+     *
+     */
+    readonly comma: 188;
+
+    /**
+     *
+     */
+    readonly dash: 189;
+
+    /**
+     *
+     */
+    readonly '.': 190;
+
+    /**
+     *
+     */
+    readonly period: 190;
+
+    /**
+     *
+     */
+    readonly forwardslash: 191;
+
+    /**
+     *
+     */
+    readonly grave: 192;
+
+    /**
+     *
+     */
+    readonly '[': 219;
+
+    /**
+     *
+     */
+    readonly openbracket: 219;
+
+    /**
+     *
+     */
+    readonly backslash: 220;
+
+    /**
+     *
+     */
+    readonly ']': 221;
+
+    /**
+     *
+     */
+    readonly closebracket: 221;
+
+    /**
+     *
+     */
+    readonly quote: 222;
+
+    /**
+     *
+     */
+    readonly dpadLeft: 1000;
+
+    /**
+     *
+     */
+    readonly dpadRight: 1001;
+
+    /**
+     *
+     */
+    readonly dpadUp: 1003;
+
+    /**
+     *
+     */
+    readonly dpadDown: 1004;
+
+    /**
+     *
+     */
+    readonly dpadCenter: 1005;
+  };
+
+  readonly CameraFlag: {
+    readonly DEFAULT: 1;
+    readonly USER1: 2;
+    readonly USER2: 4;
+    readonly USER3: 8;
+    readonly USER4: 16;
+    readonly USER5: 32;
+    readonly USER6: 64;
+    readonly USER7: 128;
+    readonly USER8: 256;
+  };
+  readonly LightType: {
+    readonly DIRECTIONAL: 0;
+    readonly POINT: 1;
+    readonly SPOT: 2;
+    readonly AMBIENT: 3;
+  };
+  readonly LightFlag: {
+    readonly LIGHT0: 1;
+    readonly LIGHT1: 2;
+    readonly LIGHT2: 4;
+    readonly LIGHT3: 8;
+    readonly LIGHT4: 16;
+    readonly LIGHT5: 32;
+    readonly LIGHT6: 64;
+    readonly LIGHT7: 128;
+    readonly LIGHT8: 256;
+    readonly LIGHT9: 512;
+    readonly LIGHT10: 1024;
+    readonly LIGHT11: 2048;
+    readonly LIGHT12: 4096;
+    readonly LIGHT13: 8192;
+    readonly LIGHT14: 16384;
+    readonly LIGHT15: 32768;
+  };
+
+  /**
+   *
+   */
+  readonly attributeNames: [
     'a_position',
     'a_color',
     'a_texCoord',
