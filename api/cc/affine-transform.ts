@@ -2,8 +2,12 @@ export type CCAffineTransformNamespace = {
   /**
    * cc.AffineTransform class represent an affine transform matrix.
    *
-   * @param x
-   * @param y
+   * @param a
+   * @param b
+   * @param c
+   * @param d
+   * @param tx
+   * @param ty
    */
   new (a: number, b: number, c: number, d: number, tx: number, ty: number): CCAffineTransform;
 };
