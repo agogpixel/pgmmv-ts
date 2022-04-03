@@ -1,6 +1,4 @@
 export interface CCPathNamespace {
-  normalizeRE: unknown | object;
-
   /**
    * Join strings to be a path.
    *
@@ -53,6 +51,4 @@ export interface CCPathNamespace {
    * @param isSameExt
    */
   changeBasename(pathStr: string, basename: string, isSameExt?: boolean): string;
-
-  _normalize(url: string): string;
 }
