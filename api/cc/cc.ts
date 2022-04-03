@@ -272,21 +272,6 @@ export interface cc {
   DENSITYDPI_LOW: 'low-dpi';
 
   /**
-   * TODO: cc.Director typings missing...
-   */
-  director: {
-    /**
-     *
-     */
-    _actionManager: unknown | CCActionManager;
-
-    /**
-     *
-     */
-    _scheduler: unknown | CCScheduler;
-  };
-
-  /**
    * Disable default GL states:
    *  - GL_TEXTURE_2D
    *  - GL_TEXTURE_COORD_ARRAY
