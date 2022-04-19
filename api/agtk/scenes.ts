@@ -24,12 +24,6 @@ export interface AgtkScenes {
 
   /**
    *
-   * @param arg
-   */
-  getById(arg: number): AgtkScene;
-
-  /**
-   *
    */
   getIdList(): number[];
 

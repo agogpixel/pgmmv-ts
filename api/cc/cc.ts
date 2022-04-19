@@ -6,18 +6,21 @@ import type { CCAsyncPoolNamespace } from './async-pool';
 import type { CCClassNamespace } from './class';
 import type { CCColor, CCColorNamespace } from './color';
 import type { CCComponentNamespace } from './component';
+import type { CCDirector } from './director';
 import type { CCEventNamespace } from './event';
 import type { CCEventListenerNamespace } from './event-listener';
 import type { CCEventManager } from './event-manager';
 import type { CCGameNamespace } from './game';
 import type { CCGLProgramNamespace } from './gl-program';
 import type { CCGridBase, CCGridBaseNamespace } from './grid-base';
+import type { CCLayerNamespace } from './layer';
 import type { CCLoaderNamespace } from './loader';
 import type { CCMathNamespace } from './math';
 import type { CCNode, CCNodeNamespace } from './node';
 import type { CCPathNamespace } from './path';
 import type { CCPoint, CCPointNamespace } from './point';
 import type { CCRect, CCRectNamespace } from './rect';
+import type { CCSceneNamespace } from './scene';
 import type { CCSchedulerNamespace } from './scheduler';
 import type { CCSize, CCSizeNamespace } from './size';
 import type { CCSysNamespace } from './sys';
@@ -280,6 +283,11 @@ export interface cc {
   disableDefaultGLStates(): void;
 
   /**
+   *
+   */
+  director: CCDirector;
+
+  /**
    * Iterate over an object or an array, executing a function for each matched element.
    *
    * @param obj
@@ -432,6 +440,11 @@ export interface cc {
    * @param obj
    */
   isUndefined(obj: unknown): boolean;
+
+  /**
+   *
+   */
+  Layer: CCLayerNamespace;
 
   /**
    * Linear interpolation between 2 numbers, the ratio sets how much it is biased to each end.
@@ -930,6 +943,11 @@ export interface cc {
    *
    */
   s_globalOrderOfArrival: number;
+
+  /**
+   *
+   */
+  Scene: CCSceneNamespace;
 
   /**
    *
