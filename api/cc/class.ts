@@ -1,4 +1,4 @@
-export type CCClassNamespace = {
+export interface CCClassNamespace {
   /**
    * The base Class implementation (does nothing).
    */
@@ -9,9 +9,8 @@ export type CCClassNamespace = {
    *
    * @param props
    */
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  extend(props: Record<string, unknown>): Function;
-};
+  extend<T>(props: Record<string, unknown>): T;
+}
 
 /**
  * The base Class implementation (does nothing).
