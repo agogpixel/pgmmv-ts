@@ -3,6 +3,7 @@ import type { CCActionManagerNamespace } from './action-manager';
 import type { CCAffineTransform, CCAffineTransformNamespace } from './affine-transform';
 import type { CCAsyncNamespace } from './async';
 import type { CCAsyncPoolNamespace } from './async-pool';
+import type { CCBlendFuncNamespace } from './blend-func';
 import type { CCClassNamespace } from './class';
 import type { CCColor, CCColorNamespace } from './color';
 import type { CCComponentNamespace } from './component';
@@ -23,9 +24,18 @@ import type { CCRect, CCRectNamespace } from './rect';
 import type { CCSceneNamespace } from './scene';
 import type { CCSchedulerNamespace } from './scheduler';
 import type { CCSize, CCSizeNamespace } from './size';
+import type { CCSpriteNamespace } from './sprite';
+import type { CCSpriteBatchNodeNamespace } from './sprite-batch-node';
+import type { CCSpriteFrameNamespace } from './sprite-frame';
 import type { CCSysNamespace } from './sys';
+import type { CCTex2FNamespace } from './tex-2f';
 import type { CCTexture2DNamespace } from './texture-2d';
+import type { CCTextureAtlasNamespace } from './texture-atlas';
+import type { CCTextureCache, CCTextureCacheNamespace } from './texture-cache';
 import type { CCTouchNamespace } from './touch';
+import type { CCV3F_C4B_T2FNamespace } from './v3f-c4b-t2f';
+import type { CCV3F_C4B_T2F_QuadNamespace } from './v3f-c4b-t2f-quad';
+import type { CCVertex3FNamespace } from './vertex-3f';
 import type { CCViewNamespace } from './view';
 
 /**
@@ -157,6 +167,11 @@ export interface cc {
    * @param var_args
    */
   base<T>(me: unknown, opt_methodName: string, ...var_args: unknown[]): T;
+
+  /**
+   *
+   */
+  BlendFunc: CCBlendFuncNamespace;
 
   /**
    * Check webgl error.Error will be shown in console if exists.
@@ -1017,6 +1032,21 @@ export interface cc {
   /**
    *
    */
+  Sprite: CCSpriteNamespace;
+
+  /**
+   *
+   */
+  SpriteBatchNode: CCSpriteBatchNodeNamespace;
+
+  /**
+   *
+   */
+  SpriteFrame: CCSpriteFrameNamespace;
+
+  /**
+   *
+   */
   stencilBits: number;
 
   /**
@@ -1039,12 +1069,47 @@ export interface cc {
   /**
    *
    */
+  Tex2F: CCTex2FNamespace;
+
+  /**
+   *
+   */
   Texture2D: CCTexture2DNamespace;
 
   /**
    *
    */
+  TextureAtlas: CCTextureAtlasNamespace;
+
+  /**
+   *
+   */
+  TextureCache: CCTextureCacheNamespace;
+
+  /**
+   *
+   */
+  textureCache: CCTextureCache;
+
+  /**
+   *
+   */
   Touch: CCTouchNamespace;
+
+  /**
+   *
+   */
+  V3F_C4B_T2F: CCV3F_C4B_T2FNamespace;
+
+  /**
+   *
+   */
+  V3F_C4B_T2F_Quad: CCV3F_C4B_T2F_QuadNamespace;
+
+  /**
+   *
+   */
+  Vertex3F: CCVertex3FNamespace;
 
   /**
    *
