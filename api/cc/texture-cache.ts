@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import type { HTMLCanvasElement, HTMLImageElement } from '../types/dom';
 import { CCColor } from './color';
 import type { CCTexture2D } from './texture-2d';
@@ -151,4 +152,35 @@ export interface CCTextureCache {
    * @param textureKeyName
    */
   textureForKey(textureKeyName: string): CCTexture2D | null;
+
+  /**
+   * @param url
+   */
+  handleLoadedTexture(url: string): void;
+
+  /**
+   * Returns a Texture2D object given an file image.
+   * If the file image was not previously loaded, it will create a new Texture2D
+   * object and it will return it. It will use the filename as a key.
+   * Otherwise it will return a reference of a previously loaded image.
+   * Supported image extensions: .png, .jpg, .gif
+   *
+   * ```
+   * //example
+   * cc.textureCache.addImage("hello.png");
+   * ```
+   *
+   * @param url
+   * @param cb
+   * @param target
+   */
+  addImage(url: string, cb?: Function, target?: Record<string, unknown>): CCTexture2D;
+
+  /**
+   *
+   * @param url
+   * @param cb
+   * @param target
+   */
+  addImageAsync(url: string, cb?: Function, target?: Record<string, unknown>): CCTexture2D;
 }
