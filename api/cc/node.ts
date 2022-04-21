@@ -1,3 +1,5 @@
+import type { CanvasRenderingContext2D, WebGLRenderingContext } from '../types/dom';
+
 import type { CCAction } from './action';
 import type { CCActionManager } from './action-manager';
 import type { CCAffineTransform } from './affine-transform';
@@ -352,7 +354,7 @@ export interface CCNode extends CCClass {
    *
    * @param ctx The render context.
    */
-  draw(ctx: unknown): void;
+  draw(ctx: CanvasRenderingContext2D | WebGLRenderingContext): void;
 
   /**
    * Search the children of the receiving node to perform processing for nodes which share a name.
@@ -703,7 +705,7 @@ export interface CCNode extends CCClass {
   /**
    * Initializes the instance of cc.Node.
    */
-  init(): boolean;
+  init(...args: unknown[]): boolean;
 
   /**
    * Returns whether node's color value affect its child nodes.

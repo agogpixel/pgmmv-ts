@@ -15,6 +15,11 @@ export type CCDirectorNamespace = {
   new (): CCDirector;
 
   /**
+   *
+   */
+  getInstance(): CCDirector;
+
+  /**
    * The event after draw of cc.Director.
    *
    * ```
