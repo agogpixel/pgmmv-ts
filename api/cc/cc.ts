@@ -1,4 +1,5 @@
 import type { CCActionNamespace } from './action';
+import type { CCActionInterval, CCActionIntervalNamespace } from './action-interval';
 import type { CCActionManagerNamespace } from './action-manager';
 import type { CCAffineTransform, CCAffineTransformNamespace } from './affine-transform';
 import type { CCAsyncNamespace } from './async';
@@ -7,10 +8,15 @@ import type { CCBlendFuncNamespace } from './blend-func';
 import type { CCClassNamespace } from './class';
 import type { CCColor, CCColorNamespace } from './color';
 import type { CCComponentNamespace } from './component';
-import type { CCDirector } from './director';
+import type { CCDirector, CCDirectorNamespace } from './director';
+import type { CCDrawNodeNamespace } from './draw-node';
 import type { CCEventNamespace } from './event';
 import type { CCEventListenerNamespace } from './event-listener';
-import type { CCEventManager } from './event-manager';
+import type { CCEventManager, CCEventManagerNamespace } from './event-manager';
+import type { CCFadeIn, CCFadeInNamespace } from './fade-in';
+import type { CCFadeOut, CCFadeOutNamespace } from './fade-out';
+import type { CCFadeTo, CCFadeToNamespace } from './fade-to';
+import type { CCFiniteTimeAction, CCFiniteTimeActionNamespace } from './finite-time-action';
 import type { CCGameNamespace } from './game';
 import type { CCGLProgramNamespace } from './gl-program';
 import type { CCGridBase, CCGridBaseNamespace } from './grid-base';
@@ -21,8 +27,10 @@ import type { CCNode, CCNodeNamespace } from './node';
 import type { CCPathNamespace } from './path';
 import type { CCPoint, CCPointNamespace } from './point';
 import type { CCRect, CCRectNamespace } from './rect';
+import type { CCRepeat, CCRepeatNamespace } from './repeat';
 import type { CCSceneNamespace } from './scene';
 import type { CCSchedulerNamespace } from './scheduler';
+import type { CCSequence, CCSequenceNamespace } from './sequence';
 import type { CCSize, CCSizeNamespace } from './size';
 import type { CCSpriteNamespace } from './sprite';
 import type { CCSpriteBatchNodeNamespace } from './sprite-batch-node';
@@ -49,6 +57,22 @@ export interface cc {
    *
    */
   Action: CCActionNamespace;
+
+  /**
+   * An interval action is an action that takes place within a certain period of time.
+   * ```
+   * // example
+   * var actionInterval = cc.actionInterval(3);
+   * ```
+   *
+   * @param d Duration in seconds.
+   */
+  actionInterval(d: number): CCActionInterval;
+
+  /**
+   *
+   */
+  ActionInterval: CCActionIntervalNamespace;
 
   /**
    *
@@ -303,6 +327,16 @@ export interface cc {
   director: CCDirector;
 
   /**
+   *
+   */
+  Director: CCDirectorNamespace;
+
+  /**
+   *
+   */
+  DrawNode: CCDrawNodeNamespace;
+
+  /**
    * Iterate over an object or an array, executing a function for each matched element.
    *
    * @param obj
@@ -346,6 +380,68 @@ export interface cc {
    *
    */
   eventManager: CCEventManager;
+
+  /**
+   *
+   */
+  EventManager: CCEventManagerNamespace;
+
+  /**
+   * Fades In an object that implements the cc.RGBAProtocol protocol.
+   * It modifies the opacity from 0 to 255.
+   * ```
+   * //example
+   * var action = cc.fadeIn(1.0);
+   * ```
+   *
+   * @param duration Duration in seconds.
+   */
+  fadeIn(duration: number): CCFadeIn;
+
+  /**
+   *
+   */
+  FadeIn: CCFadeInNamespace;
+
+  /**
+   * Fades Out an object that implements the cc.RGBAProtocol protocol.
+   * It modifies the opacity from 255 to 0.
+   * ```
+   * // example
+   * var action = cc.fadeOut(1.0);
+   * ```
+   *
+   * @param duration Duration in seconds.
+   */
+  fadeOut(duration: number): CCFadeOut;
+
+  /**
+   *
+   */
+  FadeOut: CCFadeOutNamespace;
+
+  /**
+   * Fades an object that implements the cc.RGBAProtocol protocol.
+   * It modifies the opacity from the current value to a custom one.
+   * ```
+   * // example
+   * var action = cc.fadeTo(1.0, 0);
+   * ```
+   *
+   * @param duration
+   * @param opacity 0-255, 0 is transparent.
+   */
+  fadeTo(duration: number, opacity: number): CCFadeTo;
+
+  /**
+   *
+   */
+  FadeTo: CCFadeToNamespace;
+
+  /**
+   *
+   */
+  FiniteTimeAction: CCFiniteTimeActionNamespace;
 
   /**
    * A string tool to construct a string with format string.
@@ -916,6 +1012,23 @@ export interface cc {
   RectZero(): CCRect;
 
   /**
+   * Creates a Repeat action. Times is an unsigned integer between 1 and pow(2,30).
+   * ```
+   * // example
+   * var rep = cc.repeat(cc.sequence(jump2, jump1), 5);
+   * ```
+   *
+   * @param action
+   * @param times
+   */
+  repeat(action: CCFiniteTimeAction, times: number): CCRepeat;
+
+  /**
+   *
+   */
+  Repeat: CCRepeatNamespace;
+
+  /**
    *
    */
   _reuse_color3b: {
@@ -968,6 +1081,28 @@ export interface cc {
    *
    */
   Scheduler: CCSchedulerNamespace;
+
+  /**
+   * Helper constructor to create an array of sequenceable actions.
+   * ```
+   * // example
+   * // create sequence with actions
+   * var seq = cc.sequence(act1, act2);
+   *
+   * // create sequence with array
+   * var seq = cc.sequence(actArray);
+   * todo: It should be use new
+   * ```
+   *
+   * @param tempArray
+   * @param actionTwo
+   */
+  sequence(tempArray: CCFiniteTimeAction | CCFiniteTimeAction[], actionTwo?: CCFiniteTimeAction): CCSequence;
+
+  /**
+   *
+   */
+  Sequence: CCSequenceNamespace;
 
   /**
    *
