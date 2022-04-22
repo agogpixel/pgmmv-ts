@@ -3,13 +3,13 @@ import type { HTMLCanvasElement, HTMLImageElement } from '../types/dom';
 import { CCBlendFunc } from './blend-func';
 
 import type { CCNode, CCNodeNamespace } from './node';
-import { CCPoint } from './point';
+import type { CCPoint } from './point';
 import type { CCRect } from './rect';
-import { CCSize } from './size';
+import type { CCSize } from './size';
 import type { CCSpriteBatchNode } from './sprite-batch-node';
 import type { CCSpriteFrame } from './sprite-frame';
 import type { CCTexture2D } from './texture-2d';
-import { CCTextureAtlas } from './texture-atlas';
+import type { CCTextureAtlas } from './texture-atlas';
 import type { CCV3F_C4B_T2F_Quad } from './v3f-c4b-t2f-quad';
 
 export type CCSpriteNamespace = {
