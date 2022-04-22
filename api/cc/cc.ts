@@ -17,9 +17,11 @@ import type { CCFadeIn, CCFadeInNamespace } from './fade-in';
 import type { CCFadeOut, CCFadeOutNamespace } from './fade-out';
 import type { CCFadeTo, CCFadeToNamespace } from './fade-to';
 import type { CCFiniteTimeAction, CCFiniteTimeActionNamespace } from './finite-time-action';
+import type { CCFontDefinitionNamespace } from './font-definition';
 import type { CCGameNamespace } from './game';
 import type { CCGLProgramNamespace } from './gl-program';
 import type { CCGridBase, CCGridBaseNamespace } from './grid-base';
+import type { CCLabelTTFNamespace } from './label-ttf';
 import type { CCLayerNamespace } from './layer';
 import type { CCLoaderNamespace } from './loader';
 import type { CCMathNamespace } from './math';
@@ -444,6 +446,11 @@ export interface cc {
   FiniteTimeAction: CCFiniteTimeActionNamespace;
 
   /**
+   *
+   */
+  FontDefinition: CCFontDefinitionNamespace;
+
+  /**
    * A string tool to construct a string with format string.
    * For example:
    *
@@ -551,6 +558,11 @@ export interface cc {
    * @param obj
    */
   isUndefined(obj: unknown): boolean;
+
+  /**
+   *
+   */
+  LabelTTF: CCLabelTTFNamespace;
 
   /**
    *
