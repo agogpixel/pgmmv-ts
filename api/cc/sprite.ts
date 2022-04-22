@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import type { HTMLCanvasElement, HTMLImageElement } from '../types/dom';
-import { CCBlendFunc } from './blend-func';
 
+import type { CCBlendFunc } from './blend-func';
 import type { CCNode, CCNodeNamespace } from './node';
 import type { CCPoint } from './point';
 import type { CCRect } from './rect';
