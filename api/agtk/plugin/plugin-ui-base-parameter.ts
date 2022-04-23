@@ -4,5 +4,5 @@ export interface AgtkPluginUiBaseParameter {
   id: number;
   name: string;
   type: AgtkPluginUiParameterType;
-  defaultValue: unknown;
+  defaultValue?: unknown;
 }
