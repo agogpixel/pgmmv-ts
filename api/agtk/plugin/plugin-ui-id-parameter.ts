@@ -21,4 +21,5 @@ export interface AgtkPluginUiIdParameter extends AgtkPluginUiBaseParameter {
     | AgtkPluginUiParameterType.SwitchVariableObjectId
     | AgtkPluginUiParameterType.DatabaseId;
   defaultValue: number;
+  withNewButton?: boolean;
 }
