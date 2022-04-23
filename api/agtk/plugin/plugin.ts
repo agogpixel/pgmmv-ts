@@ -4,6 +4,11 @@ import type { AgtkPluginInfo } from './plugin-info';
 import type { AgtkPluginInfoCategory } from './plugin-info-category';
 
 export interface AgtkPlugin<I extends JsonValue = JsonValue> {
+  /**
+   * Set by PGMMV engine when plugin is first initialized.
+   */
+  readonly id: number;
+
   setLocale: (locale: string) => void;
 
   getInfo: <C extends AgtkPluginInfoCategory>(category: C) => AgtkPluginInfo<C, I>;
