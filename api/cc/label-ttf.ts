@@ -15,6 +15,7 @@ export type CCLabelTTFNamespace = {
    * @param dimensions Default: cc.size(0,0)
    * @param hAlignment cc.TEXT_ALIGNMENT_LEFT
    * @param vAlignment cc.VERTICAL_TEXT_ALIGNMENT_TOP
+   * @param aliasThreshold
    */
   new (
     text?: string,
@@ -22,7 +23,8 @@ export type CCLabelTTFNamespace = {
     fontSize?: number,
     dimensions?: CCSize,
     hAlignment?: number,
-    vAlignment?: number
+    vAlignment?: number,
+    aliasThreshold?: number
   ): CCLabelTTF;
 
   /**
