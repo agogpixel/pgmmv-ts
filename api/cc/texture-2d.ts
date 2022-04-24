@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import type { HTMLCanvasElement, HTMLImageElement } from 'types';
+import type { HTMLCanvasElement, HTMLImageElement } from '../types/dom';
+
 import type { CCClass, CCClassNamespace } from './class';
 import type { CCGLProgram } from './gl-program';
 import type { CCNode } from './node';
