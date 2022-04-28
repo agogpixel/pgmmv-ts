@@ -2,6 +2,7 @@ import type { JsonValue } from '../../types';
 
 import type { AgtkPluginInfo } from './plugin-info';
 import type { AgtkPluginInfoCategory } from './plugin-info-category';
+import type { AgtkPluginParameterValue } from './plugin-parameter-value';
 
 export interface AgtkPlugin<I extends JsonValue = JsonValue> {
   /**
@@ -21,7 +22,7 @@ export interface AgtkPlugin<I extends JsonValue = JsonValue> {
 
   update?: (delta: number) => void;
 
-  setParamValue: (paramValue: { id: number; value: JsonValue }[]) => void;
+  setParamValue: (paramValue: AgtkPluginParameterValue[]) => void;
 
   setInternal: (data: I) => void;
 }
