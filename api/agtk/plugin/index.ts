@@ -7,6 +7,7 @@ export * from './plugin-auto-tile-parameters';
 export * from './plugin-info';
 export * from './plugin-info-category';
 export * from './plugin-link-condition';
+export * from './plugin-parameter-value';
 export * from './plugin-ui-custom-id-parameter';
 export * from './plugin-ui-custom-id-parameter-param';
 export * from './plugin-ui-embedded-parameter';
