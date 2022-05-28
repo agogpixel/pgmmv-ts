@@ -31,6 +31,8 @@ export * from './path';
 export * from './point';
 export * from './rect';
 export * from './repeat';
+export * from './scale-9-sprite';
+export * from './scene';
 export * from './scheduler';
 export * from './sequence';
 export * from './size';

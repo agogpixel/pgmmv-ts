@@ -30,6 +30,7 @@ import type { CCPathNamespace } from './path';
 import type { CCPoint, CCPointNamespace } from './point';
 import type { CCRect, CCRectNamespace } from './rect';
 import type { CCRepeat, CCRepeatNamespace } from './repeat';
+import type { CCScale9SpriteNamespace } from './scale-9-sprite';
 import type { CCSceneNamespace } from './scene';
 import type { CCSchedulerNamespace } from './scheduler';
 import type { CCSequence, CCSequenceNamespace } from './sequence';
@@ -1083,6 +1084,11 @@ export interface cc {
    *
    */
   s_globalOrderOfArrival: number;
+
+  /**
+   *
+   */
+  Scale9Sprite: CCScale9SpriteNamespace;
 
   /**
    *
