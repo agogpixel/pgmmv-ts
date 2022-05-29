@@ -25,6 +25,15 @@ import type { CCLabelTTFNamespace } from './label-ttf';
 import type { CCLayerNamespace } from './layer';
 import type { CCLoaderNamespace } from './loader';
 import type { CCMathNamespace } from './math';
+import type { CCMenuNamespace } from './menu';
+import type { CCMenuItemNamespace } from './menu-item';
+import type { CCMenuItemAtlasFontNamespace } from './menu-item-atlas-font';
+import type { CCMenuItemFontNamespace } from './menu-item-font';
+import type { CCMenuItemImageNamespace } from './menu-item-image';
+import type { CCMenuItemLabelNamespace } from './menu-item-label';
+import type { CCMenuItemSpriteNamespace } from './menu-item-sprite';
+import type { CCMenuItemToggleNamespace } from './menu-item-toggle';
+import type { CCMenuPassiveNamespace } from './menu-passive';
 import type { CCNode, CCNodeNamespace } from './node';
 import type { CCPathNamespace } from './path';
 import type { CCPoint, CCPointNamespace } from './point';
@@ -33,6 +42,7 @@ import type { CCRepeat, CCRepeatNamespace } from './repeat';
 import type { CCScale9SpriteNamespace } from './scale-9-sprite';
 import type { CCSceneNamespace } from './scene';
 import type { CCSchedulerNamespace } from './scheduler';
+import type { CCScrollViewNamespace } from './scroll-view';
 import type { CCSequence, CCSequenceNamespace } from './sequence';
 import type { CCSize, CCSizeNamespace } from './size';
 import type { CCSpriteNamespace } from './sprite';
@@ -596,6 +606,51 @@ export interface cc {
   /**
    *
    */
+  Menu: CCMenuNamespace;
+
+  /**
+   *
+   */
+  MenuItem: CCMenuItemNamespace;
+
+  /**
+   *
+   */
+  MenuItemAtlasFont: CCMenuItemAtlasFontNamespace;
+
+  /**
+   *
+   */
+  MenuItemFont: CCMenuItemFontNamespace;
+
+  /**
+   *
+   */
+  MenuItemImage: CCMenuItemImageNamespace;
+
+  /**
+   *
+   */
+  MenuItemLabel: CCMenuItemLabelNamespace;
+
+  /**
+   *
+   */
+  MenuItemSprite: CCMenuItemSpriteNamespace;
+
+  /**
+   *
+   */
+  MenuItemToggle: CCMenuItemToggleNamespace;
+
+  /**
+   *
+   */
+  MenuPassive: CCMenuPassiveNamespace;
+
+  /**
+   *
+   */
   Node: CCNodeNamespace;
 
   /**
@@ -1099,6 +1154,11 @@ export interface cc {
    *
    */
   Scheduler: CCSchedulerNamespace;
+
+  /**
+   *
+   */
+  ScrollView: CCScrollViewNamespace;
 
   /**
    * Helper constructor to create an array of sequenceable actions.
