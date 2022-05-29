@@ -28,6 +28,7 @@ import type { CCMathNamespace } from './math';
 import type { CCMenuNamespace } from './menu';
 import type { CCMenuItemNamespace } from './menu-item';
 import type { CCMenuItemAtlasFontNamespace } from './menu-item-atlas-font';
+import type { CCMenuItemFontNamespace } from './menu-item-font';
 import type { CCMenuItemLabelNamespace } from './menu-item-label';
 import type { CCMenuPassiveNamespace } from './menu-passive';
 import type { CCNode, CCNodeNamespace } from './node';
@@ -613,6 +614,11 @@ export interface cc {
    *
    */
   MenuItemAtlasFont: CCMenuItemAtlasFontNamespace;
+
+  /**
+   *
+   */
+  MenuItemFont: CCMenuItemFontNamespace;
 
   /**
    *
