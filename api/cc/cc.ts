@@ -25,6 +25,7 @@ import type { CCLabelTTFNamespace } from './label-ttf';
 import type { CCLayerNamespace } from './layer';
 import type { CCLoaderNamespace } from './loader';
 import type { CCMathNamespace } from './math';
+import type { CCMenuNamespace } from './menu';
 import type { CCMenuItemNamespace } from './menu-item';
 import type { CCNode, CCNodeNamespace } from './node';
 import type { CCPathNamespace } from './path';
@@ -594,6 +595,11 @@ export interface cc {
    *
    */
   math: CCMathNamespace;
+
+  /**
+   *
+   */
+  Menu: CCMenuNamespace;
 
   /**
    *

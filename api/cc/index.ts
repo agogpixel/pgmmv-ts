@@ -26,6 +26,7 @@ export * from './label-ttf';
 export * from './layer';
 export * from './loader';
 export * from './math';
+export * from './menu';
 export * from './menu-item';
 export * from './node';
 export * from './path';
