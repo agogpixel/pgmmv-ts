@@ -32,6 +32,7 @@ import type { CCMenuItemFontNamespace } from './menu-item-font';
 import type { CCMenuItemImageNamespace } from './menu-item-image';
 import type { CCMenuItemLabelNamespace } from './menu-item-label';
 import type { CCMenuItemSpriteNamespace } from './menu-item-sprite';
+import type { CCMenuItemToggleNamespace } from './menu-item-toggle';
 import type { CCMenuPassiveNamespace } from './menu-passive';
 import type { CCNode, CCNodeNamespace } from './node';
 import type { CCPathNamespace } from './path';
@@ -636,6 +637,11 @@ export interface cc {
    *
    */
   MenuItemSprite: CCMenuItemSpriteNamespace;
+
+  /**
+   *
+   */
+  MenuItemToggle: CCMenuItemToggleNamespace;
 
   /**
    *

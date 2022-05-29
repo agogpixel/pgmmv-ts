@@ -33,6 +33,7 @@ export * from './menu-item-font';
 export * from './menu-item-image';
 export * from './menu-item-label';
 export * from './menu-item-sprite';
+export * from './menu-item-toggle';
 export * from './menu-passive';
 export * from './node';
 export * from './path';
