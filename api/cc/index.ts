@@ -34,6 +34,7 @@ export * from './repeat';
 export * from './scale-9-sprite';
 export * from './scene';
 export * from './scheduler';
+export * from './scroll-view';
 export * from './sequence';
 export * from './size';
 export * from './sprite';

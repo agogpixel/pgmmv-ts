@@ -33,6 +33,7 @@ import type { CCRepeat, CCRepeatNamespace } from './repeat';
 import type { CCScale9SpriteNamespace } from './scale-9-sprite';
 import type { CCSceneNamespace } from './scene';
 import type { CCSchedulerNamespace } from './scheduler';
+import type { CCScrollViewNamespace } from './scroll-view';
 import type { CCSequence, CCSequenceNamespace } from './sequence';
 import type { CCSize, CCSizeNamespace } from './size';
 import type { CCSpriteNamespace } from './sprite';
@@ -1099,6 +1100,11 @@ export interface cc {
    *
    */
   Scheduler: CCSchedulerNamespace;
+
+  /**
+   *
+   */
+  ScrollView: CCScrollViewNamespace;
 
   /**
    * Helper constructor to create an array of sequenceable actions.
