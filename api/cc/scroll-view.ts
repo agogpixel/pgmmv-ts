@@ -1,9 +1,9 @@
-import { CCEvent } from './event';
+import type { CCEvent } from './event';
 import type { CCLayer, CCLayerNamespace } from './layer';
-import { CCNode } from './node';
-import { CCPoint } from './point';
-import { CCSize } from './size';
-import { CCTouch } from './touch';
+import type { CCNode } from './node';
+import type { CCPoint } from './point';
+import type { CCSize } from './size';
+import type { CCTouch } from './touch';
 
 export type CCScrollViewNamespace = {
   /**
