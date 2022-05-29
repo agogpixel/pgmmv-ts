@@ -28,6 +28,7 @@ export * from './loader';
 export * from './math';
 export * from './menu';
 export * from './menu-item';
+export * from './menu-item-atlas-font';
 export * from './menu-item-label';
 export * from './menu-passive';
 export * from './node';
