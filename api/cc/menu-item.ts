@@ -10,7 +10,7 @@ export type CCMenuItemNamespace = {
    * @param callback
    * @param target
    */
-  new (callback: Function | string, target: CCNode): CCMenuItem;
+  new (callback?: Function | string, target?: CCNode): CCMenuItem;
 
   /**
    * Creates an empty menu item with target and callback. Not recommended to use
@@ -21,7 +21,7 @@ export type CCMenuItemNamespace = {
    * @deprecated Since v3.0, please use new cc.MenuItem(callback,target)
    * instead.
    */
-  create(callback: Function | string, target: CCNode): CCMenuItem;
+  create(callback?: Function | string, target?: CCNode): CCMenuItem;
 } & CCNodeNamespace;
 
 /**
