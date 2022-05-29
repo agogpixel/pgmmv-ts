@@ -29,6 +29,7 @@ import type { CCMenuNamespace } from './menu';
 import type { CCMenuItemNamespace } from './menu-item';
 import type { CCMenuItemAtlasFontNamespace } from './menu-item-atlas-font';
 import type { CCMenuItemFontNamespace } from './menu-item-font';
+import type { CCMenuItemImageNamespace } from './menu-item-image';
 import type { CCMenuItemLabelNamespace } from './menu-item-label';
 import type { CCMenuItemSpriteNamespace } from './menu-item-sprite';
 import type { CCMenuPassiveNamespace } from './menu-passive';
@@ -620,6 +621,11 @@ export interface cc {
    *
    */
   MenuItemFont: CCMenuItemFontNamespace;
+
+  /**
+   *
+   */
+  MenuItemImage: CCMenuItemImageNamespace;
 
   /**
    *
